@@ -1,5 +1,5 @@
-# 🇲🇾 馬來西亞華人財富階梯與退休金庫互動式教學網站
-**Malaysian Chinese Wealth Ladder & Retirement Cash Vault Interactive Guide (VWRA × EPF × Cash Vault)**
+# 🇲🇾 馬來西亞財富階梯與退休金庫互動式教學網站
+**Malaysian Wealth Ladder & Retirement Cash Vault Interactive Guide (VWRA × EPF × Cash Vault)**
 
 本專案為可直接部署於 **GitHub Pages** 的全端量化理財與退休提領實證互動平台，採用 **「Python 預先渲染 300-DPI 高解析靜態實證數據圖表 + 前端 Chart.js 即時雙核心互動計算機 + MYR/USD 雙幣即時匯率連動系統」** 雙軌架構。
 

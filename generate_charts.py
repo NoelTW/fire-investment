@@ -3,7 +3,7 @@
 """
 generate_charts.py
 Generates 5 high-resolution (300 DPI) dark-fintech empirical charts
-for the Malaysian Chinese Wealth Ladder & Retirement Cash Vault Interactive Guide.
+for the Malaysian Wealth Ladder & Retirement Cash Vault Interactive Guide.
 """
 
 import os
