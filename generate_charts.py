@@ -37,6 +37,7 @@ plt.rcParams["text.parse_math"] = False  # Prevent multiple '$' currency signs f
 # Apple Pro / Linear Obsidian & Champagne Gold Palette
 BG_DARK = "#0a0b0e"       # Pure Obsidian Canvas
 BG_CARD = "#111217"       # Elevated Obsidian Surface
+BG_CARD_L3 = "#1c1912"    # Warm Tinted Obsidian for Level 3 Highlight
 BG_SUBTLE = "#0e0f14"     # Deep Architectural Panel
 GRID_COLOR = "#23252f"    # Subtle Hairline Rule
 TEXT_MAIN = "#f5f5f7"     # Apple Pro Off-White
@@ -95,19 +96,19 @@ def format_usd(x, pos=None):
 # CHART 0: 00_wealth_ladder_staircase.png (Physical Wealth Ladder Architecture)
 # ==============================================================================
 def generate_chart_00():
-    fig, ax = plt.subplots(figsize=(16, 9.4), facecolor=BG_DARK)
-    ax.set_facecolor(BG_DARK)
-    ax.set_xlim(-0.55, 6.25)
-    ax.set_ylim(-0.85, 8.4)
+    fig = plt.figure(figsize=(16, 9.2), dpi=300, facecolor=BG_DARK)
+    ax = fig.add_axes([0, 0, 1, 1], facecolor=BG_DARK)
+    ax.set_xlim(0, 16)
+    ax.set_ylim(0, 9.2)
     ax.axis("off")
 
-    # Header
-    ax.text(0.0, 7.95, "CHAPTER 01 · THE 6 WEALTH LEVELS & THE 0.01% RULE", color=EMERALD_LIGHT, fontsize=11, fontfamily="monospace", fontweight="bold")
-    ax.text(0.0, 7.45, "《The Wealth Ladder》財富六階梯實體階梯圖與萬分之一法則架構", color=TEXT_MAIN, fontsize=18, fontweight="bold")
-    ax.text(0.0, 7.05, "以 10 倍美金數量級躍遷定義 6 個自由階梯 · 結合大馬購買力平價 (PPP) 與大馬 FIRE 雙重黃金交叉轉折點", color=TEXT_MUTED, fontsize=11)
+    # 1. Editorial Header
+    ax.text(0.7, 8.65, "CHAPTER 01 · THE 6 WEALTH LEVELS & THE 0.01% RULE", color=EMERALD_LIGHT, fontsize=11, fontweight="bold")
+    ax.text(0.7, 8.20, "《The Wealth Ladder》財富六階梯實體階梯圖與萬分之一法則實證藍圖", color=TEXT_MAIN, fontsize=19, fontweight="bold")
+    ax.text(0.7, 7.82, "以 10 倍美金數量級躍遷定義 6 個自由階梯 · 結合大馬購買力平價 (PPP) 與大馬 FIRE 雙重黃金交叉轉折點", color=TEXT_MUTED, fontsize=11.5)
 
-    # 6 Steps Definition with properly calibrated heights so all text sits safely inside
-    steps = [
+    # 2. Six Stepped Horizontal Terraces (Grand Ascending Staircase)
+    steps_data = [
         {
             "num": "LEVEL 1",
             "title_zh": "帳單生存階",
@@ -115,59 +116,63 @@ def generate_chart_00():
             "usd": "< $10k USD",
             "myr": "< RM 44k",
             "daily": "< RM 4.40 / 日",
-            "lifestyle": "為基礎水電帳單焦慮\n開銷有心理負擔",
-            "engine": "【通關】本業成長 + 20% 儲蓄\n【禁忌】本金小時天天看盤賭翻倍",
-            "height": 2.35,
-            "highlight": False
+            "lifestyle": "為基礎帳單與房租水電焦慮 · 每筆小開銷皆有心理負擔",
+            "engine": "專注本業職涯晉升 + 20%+ 強制儲蓄",
+            "pitfall": "忌本金小時天天看盤當沖賭翻倍",
+            "y": 0.90, "x_start": 0.70, "width": 9.8,
+            "is_l3": False
         },
         {
             "num": "LEVEL 2",
             "title_zh": "超市茶室加料自由",
             "title_en": "Grocery & Kopitiam",
-            "usd": "$10k – $100k",
+            "usd": "$10k – $100k USD",
             "myr": "RM 44k – 440k",
             "daily": "RM 4.40 – 44.00 / 日",
-            "lifestyle": "超市買菜免看標價\nKopitiam 加料加蛋免糾結",
-            "engine": "【通關】定投 VWRA + EPF 底倉\n【禁忌】沉迷高收益盤與借貸炒股",
-            "height": 3.15,
-            "highlight": False
+            "lifestyle": "超市日常買菜免看標價 · Kopitiam 麵加料加蛋毫不糾結",
+            "engine": "自動化定投愛爾蘭 VWRA + EPF 公積金穩健底倉",
+            "pitfall": "忌沉迷高收益資金盤與借貸炒小盤股",
+            "y": 2.05, "x_start": 1.25, "width": 9.6,
+            "is_l3": False
         },
         {
             "num": "LEVEL 3",
-            "title_zh": "餐廳自由 · 大馬 FIRE",
-            "title_en": "Dining & MY FIRE",
-            "usd": "$100k – $1M",
+            "title_zh": "餐廳自由 · 大馬 FIRE 退休階",
+            "title_en": "Dining Freedom & Malaysian FIRE",
+            "usd": "$100k – $1M USD",
             "myr": "RM 440k – 4.4M",
             "daily": "RM 44 – 440 / 日",
-            "lifestyle": "普通餐廳點餐無壓力\n跨 RM 1.5M 解鎖大馬完全退休",
-            "engine": "【通關】雙黃金交叉 · 核心衛星\n【致命陷阱】過早買豪車豪宅鎖死房貸",
-            "height": 4.05,
-            "highlight": True,
-            "badge": "★ 大馬 FIRE 退休與雙重黃金交叉里程碑 (Structural Crossover)"
+            "lifestyle": "普通餐廳點餐隨心所欲 · 跨越 RM 1.5M 解鎖大馬完全被動退休！",
+            "engine": "★ 達成雙重結構性黃金交叉（投資收益 > 總年薪）· 核心衛星架構",
+            "pitfall": "忌過早買豪車豪宅被巨額長期房貸鎖死",
+            "y": 3.20, "x_start": 1.80, "width": 9.4,
+            "is_l3": True
         },
         {
             "num": "LEVEL 4",
             "title_zh": "跨國商務留學自由",
-            "title_en": "Travel & Global",
-            "usd": "$1M – $10M",
+            "title_en": "Travel & Global Education",
+            "usd": "$1M – $10M USD",
             "myr": "RM 4.4M – 44M",
             "daily": "RM 440 – 4,400 / 日",
-            "lifestyle": "商務艙出國度假旅行\n子女留學免貸款",
-            "engine": "【通關】啟動 3 年現金金庫 (Buffer)\n【致命陷阱】盲目開槓桿、恐慌砍在阿呆谷",
-            "height": 4.90,
-            "highlight": False
+            "lifestyle": "全家商務艙出國度假旅行 · 子女全球頂尖大學留學無需貸款",
+            "engine": "啟動 3 年現金金庫防禦 (Buffer) · 愛爾蘭 UCITS 零遺產稅護盾",
+            "pitfall": "忌盲目開槓桿重押、熊市恐慌砍在阿呆谷",
+            "y": 4.35, "x_start": 2.35, "width": 9.2,
+            "is_l3": False
         },
         {
             "num": "LEVEL 5",
             "title_zh": "全球置產主權階",
-            "title_en": "Global Real Estate",
-            "usd": "$10M – $100M",
+            "title_en": "Global Real Estate & Sovereignty",
+            "usd": "$10M – $100M USD",
             "myr": "RM 44M – 440M",
             "daily": "RM 4.4k – 44k / 日",
-            "lifestyle": "全球核心城市置產\n跨國流動與主權避險",
-            "engine": "【通關】離岸信託、私行家辦架構\n【致命陷阱】盲目投資親友未上市專案爆雷",
-            "height": 5.75,
-            "highlight": False
+            "lifestyle": "全球核心城市置產（倫敦/新加坡/吉隆坡）· 跨國流動與主權避險",
+            "engine": "離岸信託、私行家辦架構 · 跨幣別資產主權配置",
+            "pitfall": "忌盲目投資親友未上市實體專案爆雷",
+            "y": 5.50, "x_start": 2.90, "width": 9.0,
+            "is_l3": False
         },
         {
             "num": "LEVEL 6",
@@ -176,121 +181,144 @@ def generate_chart_00():
             "usd": "> $100M+ USD",
             "myr": "> RM 440M+",
             "daily": "> RM 44k+ / 日",
-            "lifestyle": "個人物質消費邊際效應歸零\n金錢轉化為重塑社會的力量",
-            "engine": "【通關】家族信託與永續慈善基金\n【致命陷阱】缺乏家族憲章導致富不過三代",
-            "height": 6.55,
-            "highlight": False
+            "lifestyle": "個人物質消費邊際效應歸零 · 金錢轉化為重塑社會的永續力量",
+            "engine": "世代家族信託與永續慈善基金會 · 家族憲章治理",
+            "pitfall": "忌缺乏家族憲章導致遺產爭端富不過三代",
+            "y": 6.65, "x_start": 3.45, "width": 8.8,
+            "is_l3": False
         }
     ]
 
-    bar_width = 0.92
+    card_height = 0.98
 
-    for i, s in enumerate(steps):
-        x = i
-        y_top = s["height"]
-        is_hl = s.get("highlight", False)
+    for s in steps_data:
+        x0 = s["x_start"]
+        y0 = s["y"]
+        w = s["width"]
+        is_l3 = s["is_l3"]
 
-        fc = "#1a1811" if is_hl else BG_CARD
-        ec = EMERALD if is_hl else "#282a36"
-        lw = 2.2 if is_hl else 1.0
+        fc = BG_CARD_L3 if is_l3 else BG_CARD
+        ec = EMERALD if is_l3 else "#252836"
+        lw = 2.0 if is_l3 else 1.0
 
         rect = patches.FancyBboxPatch(
-            (x - bar_width/2, 0),
-            bar_width,
-            y_top,
-            boxstyle="round,pad=0.03,rounding_size=0.06",
-            facecolor=fc,
-            edgecolor=ec,
-            linewidth=lw,
-            zorder=2
+            (x0, y0), w, card_height,
+            boxstyle="round,pad=0.03,rounding_size=0.08",
+            facecolor=fc, edgecolor=ec, linewidth=lw, zorder=2
         )
         ax.add_patch(rect)
 
-        if is_hl:
-            top_bar = patches.Rectangle(
-                (x - bar_width/2, y_top - 0.09),
-                bar_width,
-                0.09,
-                facecolor=EMERALD_LIGHT,
-                edgecolor="none",
-                zorder=3
-            )
-            ax.add_patch(top_bar)
+        accent_color = EMERALD_LIGHT if is_l3 else ("#3b4252" if s["num"] == "LEVEL 1" else EMERALD)
+        accent_bar = patches.Rectangle(
+            (x0, y0), 0.12, card_height,
+            facecolor=accent_color, edgecolor="none", zorder=3
+        )
+        ax.add_patch(accent_bar)
 
-        badge_bg = EMERALD_LIGHT if is_hl else "#22242f"
-        badge_fg = "#0a0b0e" if is_hl else TEXT_MAIN
+        badge_bg = EMERALD_LIGHT if is_l3 else "#1f222e"
+        badge_fg = "#0a0b0e" if is_l3 else TEXT_MAIN
         ax.text(
-            x, y_top - 0.28,
-            f"  {s['num']}  ",
-            color=badge_fg,
-            fontsize=10.0,
-            fontweight="bold",
-            fontfamily="monospace",
-            ha="center",
-            va="center",
-            bbox=dict(boxstyle="round,pad=0.22", facecolor=badge_bg, edgecolor="none"),
+            x0 + 0.35, y0 + card_height / 2.0,
+            f" {s['num']} ",
+            color=badge_fg, fontsize=9.5, fontweight="bold",
+            ha="left", va="center",
+            bbox=dict(boxstyle="round,pad=0.25", facecolor=badge_bg, edgecolor="none"),
             zorder=4
         )
 
-        title_color = EMERALD_LIGHT if is_hl else TEXT_MAIN
-        ax.text(x, y_top - 0.62, s["title_zh"], color=title_color, fontsize=11.2, fontweight="bold", ha="center", va="center", zorder=4)
-        ax.text(x, y_top - 0.86, s["title_en"], color=EMERALD if is_hl else TEXT_MUTED, fontsize=8.5, ha="center", va="center", zorder=4)
+        title_fg = EMERALD_LIGHT if is_l3 else TEXT_MAIN
+        ax.text(x0 + 1.45, y0 + card_height * 0.68, s["title_zh"], color=title_fg, fontsize=12.0, fontweight="bold", ha="left", va="center", zorder=4)
+        ax.text(x0 + 1.45, y0 + card_height * 0.32, s["title_en"], color=EMERALD if is_l3 else TEXT_MUTED, fontsize=9.0, ha="left", va="center", zorder=4)
 
-        ax.text(x, y_top - 1.18, s["usd"], color=TEXT_MAIN, fontsize=9.8, fontweight="bold", fontfamily="monospace", ha="center", va="center", zorder=4)
-        ax.text(x, y_top - 1.40, f"({s['myr']})", color=EMERALD_LIGHT if is_hl else CYAN, fontsize=8.8, fontfamily="monospace", ha="center", va="center", zorder=4)
+        nw_x = x0 + 4.5
+        ax.text(nw_x, y0 + card_height * 0.68, s["usd"], color=TEXT_MAIN, fontsize=10.5, fontweight="bold", ha="left", va="center", zorder=4)
+        ax.text(nw_x, y0 + card_height * 0.32, f"({s['myr']})", color=EMERALD_LIGHT if is_l3 else CYAN, fontsize=9.5, ha="left", va="center", zorder=4)
 
-        ax.text(
-            x, y_top - 1.72,
-            f"0.01% 日額:\n{s['daily']}",
-            color=EMERALD_LIGHT if is_hl else TEXT_MUTED,
-            fontsize=8.3,
-            ha="center",
-            va="center",
-            zorder=4
-        )
+        daily_x = x0 + 6.3
+        ax.text(daily_x, y0 + card_height * 0.68, "0.01% 日額消費上限", color=TEXT_MUTED, fontsize=8.5, ha="left", va="center", zorder=4)
+        ax.text(daily_x, y0 + card_height * 0.30, s["daily"], color=EMERALD_LIGHT if is_l3 else TEXT_MAIN, fontsize=11.0, fontweight="bold", ha="left", va="center", zorder=4)
 
-        if y_top >= 3.0:
-            ax.text(x, y_top - 2.22, s["lifestyle"], color="#c5c5d0", fontsize=7.6, ha="center", va="top", zorder=4, linespacing=1.2)
-        if y_top >= 3.8:
-            ax.text(x, 0.25, s["engine"], color=TEXT_MUTED, fontsize=7.0, ha="center", va="bottom", zorder=4, linespacing=1.2)
+        strat_x = x0 + w - 0.25
+        ax.text(strat_x, y0 + card_height * 0.66, s["engine"], color=EMERALD_LIGHT if is_l3 else "#c0c0cb", fontsize=8.2, ha="right", va="center", zorder=4)
+        ax.text(strat_x, y0 + card_height * 0.30, s["lifestyle"], color=TEXT_MUTED, fontsize=7.8, ha="right", va="center", zorder=4)
 
-        if is_hl and "badge" in s:
-            ax.annotate(
-                s["badge"],
-                xy=(x, y_top),
-                xytext=(x, y_top + 0.62),
-                arrowprops=dict(arrowstyle="->", color=EMERALD_LIGHT, lw=1.5),
-                color="#0a0b0e",
-                fontsize=9.2,
-                fontweight="bold",
-                ha="center",
-                va="bottom",
-                bbox=dict(boxstyle="round,pad=0.35", facecolor=EMERALD_LIGHT, edgecolor=EMERALD, lw=1.5),
-                zorder=6
+        if is_l3:
+            crown_box = patches.FancyBboxPatch(
+                (x0 + w - 3.8, y0 + card_height + 0.04), 3.75, 0.28,
+                boxstyle="round,pad=0.02,rounding_size=0.06",
+                facecolor=EMERALD_LIGHT, edgecolor=EMERALD, linewidth=1.2, zorder=5
+            )
+            ax.add_patch(crown_box)
+            ax.text(
+                x0 + w - 1.92, y0 + card_height + 0.18,
+                "★ 大馬 FIRE 退休與雙重黃金交叉里程碑",
+                color="#0a0b0e", fontsize=9.2, fontweight="bold", ha="center", va="center", zorder=6
             )
 
-    # Staircase Ascending Guideline Trail
-    for i in range(len(steps) - 1):
-        x_curr = i
-        x_next = i + 1
-        y_next = steps[i+1]["height"]
-        ax.plot([x_curr + bar_width/2, x_next - bar_width/2], [steps[i]["height"], steps[i]["height"]], color=EMERALD, linestyle=":", lw=1.2, alpha=0.65, zorder=1)
-        ax.plot([x_next - bar_width/2, x_next - bar_width/2], [steps[i]["height"], y_next], color=EMERALD, linestyle=":", lw=1.2, alpha=0.65, zorder=1)
+    # 3. Connecting Staircase Guideline Arrow on Left
+    arrow_pts_x = [s["x_start"] - 0.15 for s in steps_data]
+    arrow_pts_y = [s["y"] + card_height / 2.0 for s in steps_data]
+    for i in range(len(steps_data) - 1):
+        ax.plot(
+            [arrow_pts_x[i], arrow_pts_x[i+1]],
+            [arrow_pts_y[i], arrow_pts_y[i+1]],
+            color=EMERALD, linestyle="--", linewidth=1.8, alpha=0.7, zorder=1
+        )
+        ax.scatter([arrow_pts_x[i]], [arrow_pts_y[i]], color=EMERALD_LIGHT, s=40, zorder=3)
+    ax.scatter([arrow_pts_x[-1]], [arrow_pts_y[-1]], color=EMERALD_LIGHT, s=60, edgecolors="white", linewidth=1.5, zorder=3)
 
-    # Bottom annotation strip safely positioned well below all cards
+    # 4. Right Sidebar: 3 Keynote Architecture Pillar Cards (x=11.6 to 15.4)
+    sb_x = 11.6
+    sb_w = 3.7
+
+    card1 = patches.FancyBboxPatch((sb_x, 5.55), sb_w, 2.05, boxstyle="round,pad=0.03,rounding_size=0.08", facecolor=BG_CARD, edgecolor="#252836", linewidth=1.0, zorder=2)
+    ax.add_patch(card1)
+    ax.text(sb_x + 0.25, 7.30, "RULE 01 · 萬分之一法則", color=EMERALD_LIGHT, fontsize=9.5, fontweight="bold", zorder=3)
+    ax.text(sb_x + 0.25, 6.95, "The 0.01% Daily Spending Rule", color=TEXT_MAIN, fontsize=11.5, fontweight="bold", zorder=3)
     ax.text(
-        0.0, -0.42,
-        "◆ 萬分之一法則 (The 0.01% Rule) ＝ 淨資產 ÷ 10,000 ＝ 每日無腦自由消費上限 (等於 3.65% 安全提領率 SWR 微積分日額版)。\n"
-        "◆ 降一階守富原則 (Spend at Level N-1)：日常微消費（如吃飯、喝茶、買菜）按當前階梯自由花費；大額資本開銷（如買車、買房）嚴格鎖在上一階以內，永不摔回上一階！",
-        color=TEXT_MUTED,
-        fontsize=9.2,
-        ha="left",
-        va="top",
-        linespacing=1.35
+        sb_x + 0.25, 6.60,
+        "淨資產 ÷ 10,000 ＝ 每日無腦自由消費額\n"
+        "• 等同 3.65% 安全提領率 (SWR) 的日額微積分版\n"
+        "• 只要單日非剛性消費低於此限，終生不必記帳、\n"
+        "  永不傷及本金複利曲線！",
+        color=TEXT_MUTED, fontsize=8.6, va="top", linespacing=1.35, zorder=3
+    )
+
+    card2 = patches.FancyBboxPatch((sb_x, 3.25), sb_w, 2.10, boxstyle="round,pad=0.03,rounding_size=0.08", facecolor=BG_CARD, edgecolor=EMERALD, linewidth=1.4, zorder=2)
+    ax.add_patch(card2)
+    ax.text(sb_x + 0.25, 5.05, "RULE 02 · 大馬購買力平價套利", color=EMERALD_LIGHT, fontsize=9.5, fontweight="bold", zorder=3)
+    ax.text(sb_x + 0.25, 4.70, "Purchasing Power Parity Arbitrage", color=TEXT_MAIN, fontsize=11.5, fontweight="bold", zorder=3)
+    ax.text(
+        sb_x + 0.25, 4.35,
+        "賺美金全球資產 · 在大馬低成本消費\n"
+        "• 當組合累積至 Level 3B ($340k USD / RM 1.5M)\n"
+        "• 4% 提領每月可得 RM 5,000~6,000 純被動現金流\n"
+        "• 在吉隆坡的生活品質等同紐約 Level 4 ($1M USD)！",
+        color=TEXT_MUTED, fontsize=8.6, va="top", linespacing=1.35, zorder=3
+    )
+
+    card3 = patches.FancyBboxPatch((sb_x, 0.90), sb_w, 2.15, boxstyle="round,pad=0.03,rounding_size=0.08", facecolor=BG_CARD, edgecolor="#252836", linewidth=1.0, zorder=2)
+    ax.add_patch(card3)
+    ax.text(sb_x + 0.25, 2.75, "RULE 03 · 降一階守富反脆弱鐵律", color=ROSE, fontsize=9.5, fontweight="bold", zorder=3)
+    ax.text(sb_x + 0.25, 2.40, "Spend at Level N-1 Anti-Fragile", color=TEXT_MAIN, fontsize=11.5, fontweight="bold", zorder=3)
+    ax.text(
+        sb_x + 0.25, 2.05,
+        "爬階靠換引擎 · 守階靠降一階消費\n"
+        "• 日常微消費（吃飯喝茶）依當前階梯隨心所欲\n"
+        "• 剛性大額開銷（買車、房貸）嚴格鎖在上一階\n"
+        "• 徹底阻斷高資產族群常見的生活通膨與返貧死穴！",
+        color=TEXT_MUTED, fontsize=8.6, va="top", linespacing=1.35, zorder=3
+    )
+
+    # 5. Bottom Monograph Footer Bar
+    ax.text(
+        0.7, 0.40,
+        "量化架構源自 Nick Maggiulli《The Wealth Ladder》· 結合 2010–2025 大馬實務數據與愛爾蘭 UCITS ETF (VWRA) 雙重稅盾校準",
+        color=TEXT_DIM, fontsize=9.0, ha="left", va="center"
     )
 
     out_path = os.path.join(OUTPUT_DIR, "00_wealth_ladder_staircase.png")
-    fig.savefig(out_path, dpi=300, facecolor=BG_DARK, edgecolor="none", bbox_inches="tight", pad_inches=0.4)
+    fig.savefig(out_path, dpi=300, facecolor=BG_DARK, edgecolor="none")
     plt.close(fig)
     print(f"[OK] Saved {out_path}")
 

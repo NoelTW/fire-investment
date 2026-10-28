@@ -108,8 +108,9 @@ body {
 }
 
 .fintech-card-interactive.active-stage-card {
-  background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(17, 18, 23, 0.98) 100%);
-  border-color: var(--gold-primary);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.15) 0%, rgba(20, 21, 28, 0.98) 100%) !important;
+  border-color: var(--gold-bright) !important;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.20) !important;
 }
 
 /* Top 56px Slim Navigation Links */
