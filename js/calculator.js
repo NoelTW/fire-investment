@@ -11,29 +11,57 @@
   let modBChartInstance = null;
 
   // ============================================================================
-  // 1. SLIDE 1: WEALTH LADDER LOCATOR (我的財富階梯定位儀)
+  // 1. SLIDE 1: WEALTH LADDER LOCATOR (我的財富階梯定位儀 - MULTI-CURRENCY SUPPORT)
   // ============================================================================
   const LadderLocator = {
+    currentCurrency: "MYR",
+
     init() {
+      const fx = window.FXService;
+      if (fx && fx.currentCurrency) {
+        this.currentCurrency = fx.currentCurrency;
+      }
+
       const nwSlider = document.getElementById("locator-nw-slider");
       const nwInput = document.getElementById("locator-nw-input");
       const salSlider = document.getElementById("locator-sal-slider");
       const salInput = document.getElementById("locator-sal-input");
       const savSlider = document.getElementById("locator-sav-slider");
+      const curSelect = document.getElementById("locator-currency-select");
 
       if (!nwSlider || !nwInput) return;
 
+      // Currency Select Change
+      if (curSelect) {
+        curSelect.value = this.currentCurrency;
+        curSelect.addEventListener("change", (e) => {
+          const newCur = e.target.value;
+          const oldCur = this.currentCurrency;
+          if (newCur !== oldCur && fx) {
+            const currentNw = parseFloat(nwInput.value) || 0;
+            const currentSal = parseFloat(salInput.value) || 0;
+            const convertedNw = Math.round(fx.convert(currentNw, oldCur, newCur));
+            const convertedSal = Math.round(fx.convert(currentSal, oldCur, newCur));
+            this.currentCurrency = newCur;
+            fx.setCurrency(newCur);
+            this.updateCurrencyInputs(newCur, convertedNw, convertedSal);
+            this.calculate();
+          }
+        });
+      }
+
       const syncAndCalc = (source) => {
+        const meta = fx ? (fx.meta[this.currentCurrency] || fx.meta.MYR) : { sliderMax: 6000000, salSliderMax: 40000 };
         if (source === "nw-slider") {
           nwInput.value = nwSlider.value;
         } else if (source === "nw-input") {
-          const v = Math.max(0, Math.min(800000000, parseFloat(nwInput.value) || 0));
-          nwSlider.value = Math.min(6000000, v);
+          const v = Math.max(0, Math.min(8000000000, parseFloat(nwInput.value) || 0));
+          nwSlider.value = Math.min(meta.sliderMax, v);
         } else if (source === "sal-slider") {
           salInput.value = salSlider.value;
         } else if (source === "sal-input") {
-          const v = Math.max(1000, Math.min(300000, parseFloat(salInput.value) || 5000));
-          salSlider.value = Math.min(40000, v);
+          const v = Math.max(100, Math.min(5000000, parseFloat(salInput.value) || 1000));
+          salSlider.value = Math.min(meta.salSliderMax, v);
         }
         this.calculate();
       };
@@ -49,52 +77,125 @@
       // Quick stage demo buttons on Slide 1
       document.querySelectorAll("[data-locator-preset]").forEach((btn) => {
         btn.addEventListener("click", () => {
-          const fx = window.FXService;
+          const activeFx = window.FXService;
+          const cur = this.currentCurrency;
           const presetUsd = parseFloat(btn.getAttribute("data-usd"));
-          const nwAttr = parseFloat(btn.getAttribute("data-nw"));
-          const nw = !isNaN(presetUsd) && fx
-            ? Math.round(fx.usdToMyr(presetUsd) / 1000) * 1000
-            : nwAttr;
-          const sal = parseFloat(btn.getAttribute("data-sal"));
+          const presetSalUsd = parseFloat(btn.getAttribute("data-sal-usd") || (presetUsd * 0.08 / 12));
           const sav = parseFloat(btn.getAttribute("data-sav") || "30");
-          nwInput.value = nw;
-          nwSlider.value = Math.min(6000000, nw);
-          salInput.value = sal;
-          salSlider.value = Math.min(40000, sal);
+
+          if (activeFx && !isNaN(presetUsd)) {
+            const meta = activeFx.meta[cur] || activeFx.meta.MYR;
+            const targetCurNw = Math.round(activeFx.fromUSD(presetUsd, cur) / meta.step) * meta.step;
+            const salUsd = isNaN(presetSalUsd) ? (presetUsd * 0.1 / 12) : presetSalUsd;
+            const targetCurSal = Math.round(activeFx.fromUSD(salUsd, cur) / meta.salStep) * meta.salStep;
+
+            nwInput.value = targetCurNw;
+            nwSlider.value = Math.min(meta.sliderMax, targetCurNw);
+            salInput.value = Math.max(100, targetCurSal);
+            salSlider.value = Math.min(meta.salSliderMax, targetCurSal);
+          }
           if (savSlider) savSlider.value = sav;
           this.calculate();
         });
       });
 
-      // Allow clicking on the 6 left-column Level Cards (Level 1 to Level 6) to preview that Level
+      // Allow clicking on the 6 staircase Level Cards (Level 1 to Level 6) to preview that Level
       const levelDemoSpecs = {
-        1: { usd: 5000, sal: 4000, sav: 25 },
-        2: { usd: 40000, sal: 6800, sav: 30 },
-        3: { usd: 420000, sal: 14000, sav: 40 },
-        4: { usd: 2000000, sal: 28000, sav: 45 },
-        5: { usd: 15000000, sal: 65000, sav: 50 },
-        6: { usd: 110000000, sal: 120000, sav: 55 },
+        1: { usd: 5000, salUsd: 900, sav: 25 },
+        2: { usd: 40000, salUsd: 1550, sav: 30 },
+        3: { usd: 420000, salUsd: 3200, sav: 40 },
+        4: { usd: 2000000, salUsd: 6400, sav: 45 },
+        5: { usd: 15000000, salUsd: 15000, sav: 50 },
+        6: { usd: 110000000, salUsd: 28000, sav: 55 },
       };
       for (let i = 1; i <= 6; i++) {
         const card = document.getElementById(`ladder-card-${i}`);
         if (card) {
           card.addEventListener("click", () => {
             const d = levelDemoSpecs[i];
-            const fx = window.FXService;
-            const targetMyr = fx
-              ? Math.round(fx.usdToMyr(d.usd) / 1000) * 1000
-              : d.usd * 4.42;
-            nwInput.value = targetMyr;
-            nwSlider.value = Math.min(6000000, targetMyr);
-            salInput.value = d.sal;
-            salSlider.value = Math.min(40000, d.sal);
-            if (savSlider) savSlider.value = d.sav;
-            this.calculate();
+            const activeFx = window.FXService;
+            const cur = this.currentCurrency;
+            if (activeFx) {
+              const meta = activeFx.meta[cur] || activeFx.meta.MYR;
+              const targetNw = Math.round(activeFx.fromUSD(d.usd, cur) / meta.step) * meta.step;
+              const targetSal = Math.round(activeFx.fromUSD(d.salUsd, cur) / meta.salStep) * meta.salStep;
+
+              nwInput.value = targetNw;
+              nwSlider.value = Math.min(meta.sliderMax, targetNw);
+              salInput.value = targetSal;
+              salSlider.value = Math.min(meta.salSliderMax, targetSal);
+              if (savSlider) savSlider.value = d.sav;
+              this.calculate();
+            }
           });
         }
       }
 
+      // Listen for global currency or rate changes
+      window.addEventListener("fx:updated", (e) => {
+        if (e.detail && e.detail.currency && e.detail.currency !== this.currentCurrency) {
+          const oldCur = this.currentCurrency;
+          const newCur = e.detail.currency;
+          this.currentCurrency = newCur;
+          if (curSelect) curSelect.value = newCur;
+          if (fx) {
+            const currentNw = parseFloat(nwInput.value) || 0;
+            const currentSal = parseFloat(salInput.value) || 0;
+            const convertedNw = Math.round(fx.convert(currentNw, oldCur, newCur));
+            const convertedSal = Math.round(fx.convert(currentSal, oldCur, newCur));
+            this.updateCurrencyInputs(newCur, convertedNw, convertedSal);
+          }
+        }
+        this.calculate();
+      });
+
+      this.updateCurrencyInputs(this.currentCurrency);
       this.calculate();
+    },
+
+    updateCurrencyInputs(cur, targetNw, targetSal) {
+      const fx = window.FXService;
+      const meta = fx ? (fx.meta[cur] || fx.meta.MYR) : { symbol: "RM", step: 5000, salStep: 500, sliderMax: 6000000, salSliderMax: 40000, nwDefault: 180000, salDefault: 6500 };
+
+      const nwLabel = document.getElementById("locator-nw-label");
+      const salLabel = document.getElementById("locator-sal-label");
+      const nwInput = document.getElementById("locator-nw-input");
+      const salInput = document.getElementById("locator-sal-input");
+      const nwSlider = document.getElementById("locator-nw-slider");
+      const salSlider = document.getElementById("locator-sal-slider");
+
+      if (nwLabel) nwLabel.textContent = `1. 淨資產 (Net Worth · ${meta.symbol})`;
+      if (salLabel) salLabel.textContent = `2. 月薪 (Monthly Salary · ${meta.symbol})`;
+
+      if (nwInput) {
+        nwInput.step = meta.step;
+        if (targetNw !== undefined) {
+          nwInput.value = targetNw;
+        } else if (!nwInput.value || parseFloat(nwInput.value) === 180000) {
+          nwInput.value = meta.nwDefault;
+        }
+      }
+
+      if (salInput) {
+        salInput.step = meta.salStep;
+        if (targetSal !== undefined) {
+          salInput.value = targetSal;
+        } else if (!salInput.value || parseFloat(salInput.value) === 6500) {
+          salInput.value = meta.salDefault;
+        }
+      }
+
+      if (nwSlider && nwInput) {
+        nwSlider.max = meta.sliderMax;
+        nwSlider.step = meta.step;
+        nwSlider.value = Math.min(meta.sliderMax, parseFloat(nwInput.value) || 0);
+      }
+
+      if (salSlider && salInput) {
+        salSlider.max = meta.salSliderMax;
+        salSlider.step = meta.salStep;
+        salSlider.value = Math.min(meta.salSliderMax, parseFloat(salInput.value) || 0);
+      }
     },
 
     calculate() {
@@ -103,28 +204,44 @@
       const savSlider = document.getElementById("locator-sav-slider");
       if (!nwInput || !salInput) return;
 
-      const netWorthMYR = Math.max(0, parseFloat(nwInput.value) || 0);
-      const monthlySalaryMYR = Math.max(1000, parseFloat(salInput.value) || 5000);
+      const fx = window.FXService;
+      const cur = this.currentCurrency || (fx ? fx.currentCurrency : "MYR");
+
+      const netWorthInCur = Math.max(0, parseFloat(nwInput.value) || 0);
+      const monthlySalaryInCur = Math.max(100, parseFloat(salInput.value) || 1000);
       const savingsRatePct = savSlider ? parseFloat(savSlider.value) || 30 : 30;
       const vwraCagr = 0.085;
       const salaryGrowth = 0.03;
 
-      const fx = window.FXService;
-      const netWorthUSD = fx.myrToUsd(netWorthMYR);
-      const monthlySalaryUSD = fx.myrToUsd(monthlySalaryMYR);
-      const annualSalaryMYR = monthlySalaryMYR * 12;
-      const annualSavingsMYR = annualSalaryMYR * (savingsRatePct / 100);
-      const currentAnnualReturnMYR = netWorthMYR * vwraCagr;
-      const passiveCoverPct = Math.min(9999, (currentAnnualReturnMYR / annualSalaryMYR) * 100);
+      // Convert to universal base currencies
+      const netWorthUSD = fx ? fx.toUSD(netWorthInCur, cur) : netWorthInCur / 4.42;
+      const monthlySalaryUSD = fx ? fx.toUSD(monthlySalaryInCur, cur) : monthlySalaryInCur / 4.42;
+      const netWorthMYR = fx ? fx.convert(netWorthInCur, cur, "MYR") : netWorthInCur;
+      const monthlySalaryMYR = fx ? fx.convert(monthlySalaryInCur, cur, "MYR") : monthlySalaryInCur;
 
-      // Update USD helper badges
+      const annualSalaryInCur = monthlySalaryInCur * 12;
+      const annualSavingsInCur = annualSalaryInCur * (savingsRatePct / 100);
+      const currentAnnualReturnInCur = netWorthInCur * vwraCagr;
+      const passiveCoverPct = Math.min(9999, (currentAnnualReturnInCur / annualSalaryInCur) * 100);
+
+      // Update USD / secondary helper badges
       const nwUsdEl = document.getElementById("locator-nw-usd");
       const salUsdEl = document.getElementById("locator-sal-usd");
       const savValEl = document.getElementById("locator-sav-val");
-      if (nwUsdEl) nwUsdEl.textContent = `≈ ${fx.formatUSD(netWorthUSD)}`;
-      if (salUsdEl) salUsdEl.textContent = `≈ ${fx.formatUSD(monthlySalaryUSD)} / 月`;
-      if (savValEl) {
-        savValEl.textContent = `${savingsRatePct}% (每月存 ${fx.formatRM(monthlySalaryMYR * (savingsRatePct / 100))})`;
+
+      if (nwUsdEl && fx) {
+        const usdText = fx.formatUSD(netWorthUSD);
+        const secText = cur === "MYR"
+          ? fx.formatCurrency(fx.convert(netWorthInCur, "MYR", "TWD"), "TWD", true)
+          : fx.formatCurrency(netWorthMYR, "MYR", true);
+        nwUsdEl.textContent = `≈ ${usdText} · ${secText}`;
+      }
+      if (salUsdEl && fx) {
+        salUsdEl.textContent = `≈ ${fx.formatUSD(monthlySalaryUSD)} / 月`;
+      }
+      if (savValEl && fx) {
+        const monthlySav = monthlySalaryInCur * (savingsRatePct / 100);
+        savValEl.textContent = `${savingsRatePct}% (每月存 ${fx.formatCurrency(monthlySav, cur)})`;
       }
 
       // Determine Nick Maggiulli's 6 Levels of Wealth (in USD Orders of Magnitude)
@@ -135,7 +252,7 @@
       let lifestyleBadge = "生存與現金流防守期 · 優先建立 6 個月緊急預備金 (Emergency Buffer MMF)";
       let spendBelowRule = "守富鐵律：砍除高息卡債與分期 (BNPL)，儲蓄率推上 20%+";
       let actionText = "專注拉高職場時薪 (Active Income)、清償高息債務、存滿 6 個月預備金 (MMF)";
-      let allocText = "6 個月預備金 (馬幣 MMF 3.6%) + 閒錢 100% 純 Beta (VWRA)";
+      let allocText = "6 個月預備金 (MMF) + 閒錢 100% 純 Beta (VWRA)";
       let tabooText = "嚴禁因本金小而去賭仙股 (Penny Stocks)、期貨合約或高倍槓桿";
 
       if (netWorthUSD >= 100_000_000) {
@@ -180,16 +297,16 @@
           lifestyleBadge = "餐廳點菜自由 + 大馬 PPP 購買力套利提前解鎖準退休自由";
           spendBelowRule = "降一階守富 (Spend at L2)：定常開銷守在茶室/超市，單次犒賞控在 0.01%";
           actionText = "已越過第二黃金交叉！先建 3 年馬幣現金金庫 (Cash Vault)，再撥 ≤8% 追能力圈 Alpha";
-          allocText = "80% 核心 Beta (VWRA) + 12% 馬幣 3 年金庫 + 選配 ≤8% 衛星 Alpha";
+          allocText = "80% 核心 Beta (VWRA) + 12% 3 年金庫 + 選配 ≤8% 衛星 Alpha";
           tabooText = "嚴禁 100% 滿倉不留現金金庫 (遇股災被迫低點賣股將直接返貧)";
         } else {
           levelTitle = "LEVEL 3A · 餐廳自由 × 黃金交叉衝刺段 (Dining Freedom, $100k–$340k USD)";
-          const remTo3B_MYR = Math.max(0, 1_500_000 - netWorthMYR);
-          nextLevelLabel = `L3 進度 ${levelProgressPct.toFixed(0)}% · 距大馬 FIRE 線 (RM 1.5M) 差 ${fx.formatRM(remTo3B_MYR, true)}`;
-          lifestyleBadge = "週末餐廳與點菜不看標價自由 (RM 44–150/日 · Dining Freedom)";
+          const remTo3B_Cur = fx ? fx.fromUSD(340000 - netWorthUSD, cur) : (1500000 - netWorthMYR);
+          nextLevelLabel = `L3 進度 ${levelProgressPct.toFixed(0)}% · 距 FIRE 線 ($340k) 差 ${fx.formatCurrency(Math.max(0, remTo3B_Cur), cur, true)}`;
+          lifestyleBadge = "週末餐廳與點菜不看標價自由 (Dining Freedom)";
           spendBelowRule = "降一階守富 (Spend at L2)：平日維持茶室/超市自由，勿剛破百萬就貸豪車";
-          actionText = "EPF 已是馬幣債券底倉，閒錢 100% 鎖定純 Beta (VWRA) 衝刺 RM 1.5M";
-          allocText = "EPF 防守底倉 + 個人可投資部位 100% 愛爾蘭 VWRA (0% 個股選股)";
+          actionText = "EPF / 債券做穩健底倉，閒錢 100% 鎖定純 Beta (VWRA) 衝刺 FIRE 門檻";
+          allocText = "防守底倉 + 個人可投資部位 100% 愛爾蘭 VWRA (0% 個股選股)";
           tabooText = "嚴禁嫌指數慢而重押個股追 Alpha (一次 -40% 腰斬延後交叉 6 年)";
         }
       } else if (netWorthUSD >= 10_000) {
@@ -198,11 +315,11 @@
         levelProgressPct = Math.min(100, ((netWorthUSD - 10_000) / 90_000) * 100);
         const remUSD = 100_000 - netWorthUSD;
         nextLevelLabel = `L2 進度 ${levelProgressPct.toFixed(0)}% · 距 L3 ($100k USD) 差 ${fx.formatUSD(remUSD, true)}`;
-        lifestyleBadge = "超市採買與茶室加料自由 (買有機食材、Kopi 加料無痛 · Grocery Freedom)";
+        lifestyleBadge = "超市採買與茶室加料自由 (買有機食材、點餐加料無痛 · Grocery Freedom)";
         spendBelowRule = "降一階守富 (Spend at L1)：日常吃喝免糾結，房租車貸從簡、儲蓄率 30%+";
         actionText = "此時選股時薪極低，唯一引擎是「本業升遷跳槽 + 高儲蓄定投 VWRA」";
         allocText = "6 個月預備金 (MMF) + EPF 底倉 + 每月結餘 100% 買入愛爾蘭 VWRA";
-        tabooText = "嚴禁頻繁當沖 (Day Trading)、嚴禁買高內扣費 (1.8%/年) 的傳統 Unit Trust";
+        tabooText = "嚴禁頻繁當沖 (Day Trading)、嚴禁買高內扣費 (1.8%/年) 的傳統基金";
       } else {
         levelNum = 1;
         levelProgressPct = Math.min(100, (netWorthUSD / 10_000) * 100);
@@ -223,10 +340,10 @@
       }
 
       // Simulate years to First Crossover (Return > Annual Savings) and Second Crossover (Return > Annual Salary)
-      let yearsToC1 = currentAnnualReturnMYR >= annualSavingsMYR ? 0 : null;
-      let yearsToC2 = currentAnnualReturnMYR >= annualSalaryMYR ? 0 : null;
-      let simBal = netWorthMYR;
-      let simSal = annualSalaryMYR;
+      let yearsToC1 = currentAnnualReturnInCur >= annualSavingsInCur ? 0 : null;
+      let yearsToC2 = currentAnnualReturnInCur >= annualSalaryInCur ? 0 : null;
+      let simBal = netWorthInCur;
+      let simSal = annualSalaryInCur;
 
       for (let y = 1; y <= 50; y++) {
         const simSav = simSal * (savingsRatePct / 100);
@@ -262,8 +379,8 @@
       if (progLabelEl) {
         progLabelEl.textContent = nextLevelLabel;
       }
-      if (passiveEl) {
-        passiveEl.innerHTML = `<span class="text-[#e6c762] font-semibold font-mono-num">${fx.formatRM(currentAnnualReturnMYR)}/年</span> <span class="text-xs text-zinc-500">(${passiveCoverPct.toFixed(1)}% 年薪替代率)</span>`;
+      if (passiveEl && fx) {
+        passiveEl.innerHTML = `<span class="text-[#e6c762] font-semibold font-mono-num">${fx.formatCurrency(currentAnnualReturnInCur, cur)}/年</span> <span class="text-xs text-zinc-500">(${passiveCoverPct.toFixed(1)}% 年薪替代率)</span>`;
       }
       if (c1El) {
         c1El.innerHTML =
@@ -286,16 +403,20 @@
       if (tabooEl) tabooEl.textContent = tabooText;
 
       // Nick Maggiulli "The Wealth Ladder" 0.01% Daily Rule (萬分之一法則 = Net Worth / 10,000)
-      const dailyFreeSpendMYR = netWorthMYR * 0.0001;
-      const dailyFreeSpendUSD = fx.myrToUsd(dailyFreeSpendMYR);
-      const monthlyFreeSpendMYR = dailyFreeSpendMYR * 30;
-      const annualFreeSpendMYR = dailyFreeSpendMYR * 365; // 3.65% of Net Worth
+      const dailyFreeSpendInCur = netWorthInCur * 0.0001;
+      const dailyFreeSpendUSD = fx ? fx.toUSD(dailyFreeSpendInCur, cur) : dailyFreeSpendInCur / 4.42;
+      const dailyFreeSpendMYR = fx ? fx.convert(dailyFreeSpendInCur, cur, "MYR") : dailyFreeSpendInCur;
+      const monthlyFreeSpendInCur = dailyFreeSpendInCur * 30;
+      const annualFreeSpendInCur = dailyFreeSpendInCur * 365; // 3.65% of Net Worth
       const freeSpendEl = document.getElementById("locator-free-spend");
       const lifestyleEl = document.getElementById("locator-lifestyle-tier");
       const spendBelowEl = document.getElementById("locator-spend-below-rule");
 
-      if (freeSpendEl) {
-        freeSpendEl.innerHTML = `<span class="text-[#e6c762] font-bold font-mono-num">${fx.formatRM(dailyFreeSpendMYR)} / 日</span> <span class="text-xs text-zinc-300 font-mono-num">(≈ ${fx.formatUSD(dailyFreeSpendUSD)} / 日)</span> <span class="text-xs text-zinc-500 font-mono-num">· 月額度 ${fx.formatRM(monthlyFreeSpendMYR)} · 年化 ${fx.formatRM(annualFreeSpendMYR)} (3.65%)</span>`;
+      if (freeSpendEl && fx) {
+        const secSpendText = cur === "MYR"
+          ? `(≈ ${fx.formatCurrency(fx.convert(dailyFreeSpendInCur, "MYR", "TWD"), "TWD")} · ${fx.formatUSD(dailyFreeSpendUSD)}/日)`
+          : `(≈ ${fx.formatRM(dailyFreeSpendMYR)} · ${fx.formatUSD(dailyFreeSpendUSD)}/日)`;
+        freeSpendEl.innerHTML = `<span class="text-[#e6c762] font-bold font-mono-num">${fx.formatCurrency(dailyFreeSpendInCur, cur)} / 日</span> <span class="text-xs text-zinc-300 font-mono-num">${secSpendText}</span> <span class="text-xs text-zinc-500 font-mono-num">· 月額度 ${fx.formatCurrency(monthlyFreeSpendInCur, cur)} · 年化 ${fx.formatCurrency(annualFreeSpendInCur, cur)} (3.65%)</span>`;
       }
       if (lifestyleEl) {
         lifestyleEl.textContent = lifestyleBadge;
@@ -552,9 +673,15 @@
       const monthlyUsdLabel = document.getElementById("modA-monthly-usd-hint");
       const salaryUsdLabel = document.getElementById("modA-salary-usd-hint");
       const yearsBadge = document.getElementById("modA-years-badge");
-      if (initUsdLabel) initUsdLabel.textContent = `≈ ${fx.formatUSD(fx.myrToUsd(initMYR))}`;
-      if (monthlyUsdLabel) monthlyUsdLabel.textContent = `≈ ${fx.formatUSD(fx.myrToUsd(monthlyMYR))}/月`;
-      if (salaryUsdLabel) salaryUsdLabel.textContent = `≈ ${fx.formatUSD(fx.myrToUsd(startSalaryMYR))}/月`;
+      if (initUsdLabel && fx) {
+        initUsdLabel.textContent = `≈ ${fx.formatUSD(fx.myrToUsd(initMYR))} · ${fx.formatCurrency(fx.convert(initMYR, "MYR", "TWD"), "TWD", true)}`;
+      }
+      if (monthlyUsdLabel && fx) {
+        monthlyUsdLabel.textContent = `≈ ${fx.formatUSD(fx.myrToUsd(monthlyMYR))}/月 · ${fx.formatCurrency(fx.convert(monthlyMYR, "MYR", "TWD"), "TWD", true)}/月`;
+      }
+      if (salaryUsdLabel && fx) {
+        salaryUsdLabel.textContent = `≈ ${fx.formatUSD(fx.myrToUsd(startSalaryMYR))}/月 · ${fx.formatCurrency(fx.convert(startSalaryMYR, "MYR", "TWD"), "TWD", true)}/月`;
+      }
       if (yearsBadge) yearsBadge.textContent = `共投入 ${horizonYears} 年 (${startYear} → ${retireYear})`;
 
       // Simulate Year-by-Year with Real Historical Trajectory

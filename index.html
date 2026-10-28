@@ -87,81 +87,93 @@
   <!-- ========================================================================
        ULTRA-SLIM 56PX (h-14) SINGLE-ROW STICKY HEADER (16:9 OPTIMIZED)
        ======================================================================== -->
-  <header class="sticky top-0 z-40 h-14 bg-[#0a0b0e]/95 backdrop-blur-md border-b border-white/[0.08]">
-    <div class="max-w-[1380px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between gap-3">
+  <header class="sticky top-0 z-40 h-14 bg-[#0a0b0e]/95 backdrop-blur-md border-b border-white/[0.08] overflow-hidden">
+    <div class="max-w-[1380px] w-full mx-auto h-full px-3 sm:px-6 flex items-center justify-between gap-2">
       <!-- Brand Identity -->
-      <div class="flex items-center gap-2.5 shrink-0">
+      <div class="flex items-center gap-2 shrink-0">
         <span class="inline-flex items-center justify-center w-6 h-6 rounded bg-[#d4af37]/15 border border-[#d4af37]/50 text-[#e6c762] font-mono text-[11px] font-bold tracking-tighter">
           MY
         </span>
         <span class="text-xs sm:text-sm font-semibold tracking-tight text-[#f5f5f7] whitespace-nowrap">
-          大馬財富階梯實證 <span class="hidden md:inline font-mono text-[11px] text-zinc-400 font-normal">| Wealth Architecture</span>
+          大馬財富階梯 <span class="hidden md:inline font-mono text-[11px] text-zinc-400 font-normal">| Wealth</span>
         </span>
       </div>
 
-      <!-- Center Single-Line Chapter Navigation -->
-      <nav class="hidden lg:flex items-center h-full gap-0.5 xl:gap-1">
-        <button type="button" data-slide-target="1" class="slide-tab-btn active h-full px-1.5 text-xs cursor-pointer">
-          01 階梯 <span class="hidden xl:inline text-[10px] text-zinc-400">(Ladder)</span>
+      <!-- Center Single-Line Chapter Navigation (Scrollable & Responsive, Never Overflow Offscreen) -->
+      <nav class="hidden lg:flex items-center h-full gap-0.5 xl:gap-1 flex-1 min-w-0 overflow-x-auto no-scrollbar mx-1 xl:mx-2">
+        <button type="button" data-slide-target="1" class="slide-tab-btn active h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          01 階梯 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(Ladder)</span>
         </button>
-        <button type="button" data-slide-target="2" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          02 築底 <span class="hidden xl:inline text-[10px] text-zinc-400">(Foundation)</span>
+        <button type="button" data-slide-target="2" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          02 築底 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(Foundation)</span>
         </button>
-        <button type="button" data-slide-target="3" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          03 本土偏誤 <span class="hidden xl:inline text-[10px] text-zinc-400">(Home Bias)</span>
+        <button type="button" data-slide-target="3" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          03 本土偏誤 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(Home Bias)</span>
         </button>
-        <button type="button" data-slide-target="4" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          04 稅務護盾 <span class="hidden xl:inline text-[10px] text-zinc-400">(VWRA Tax)</span>
+        <button type="button" data-slide-target="4" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          04 稅務護盾 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(VWRA Tax)</span>
         </button>
-        <button type="button" data-slide-target="5" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          05 β 與 α <span class="hidden xl:inline text-[10px] text-zinc-400">(Beta &amp; Alpha)</span>
+        <button type="button" data-slide-target="5" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          05 β 與 α <span class="hidden 2xl:inline text-[10px] text-zinc-400">(Beta &amp; Alpha)</span>
         </button>
-        <button type="button" data-slide-target="6" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          06 選股轉折 <span class="hidden xl:inline text-[10px] text-zinc-400">(Stock Pick)</span>
+        <button type="button" data-slide-target="6" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          06 選股轉折 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(Stock Pick)</span>
         </button>
-        <button type="button" data-slide-target="7" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          07 金庫防禦 <span class="hidden xl:inline text-[10px] text-zinc-400">(Cash Vault)</span>
+        <button type="button" data-slide-target="7" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          07 金庫防禦 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(Cash Vault)</span>
         </button>
-        <button type="button" data-slide-target="8" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          08 複利實驗室 <span class="hidden xl:inline text-[10px] text-zinc-400">(DCA Lab)</span>
+        <button type="button" data-slide-target="8" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          08 複利 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(DCA Lab)</span>
         </button>
-        <button type="button" data-slide-target="9" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
-          09 退休壓測 <span class="hidden xl:inline text-[10px] text-zinc-400">(Stress Lab)</span>
+        <button type="button" data-slide-target="9" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer whitespace-nowrap">
+          09 壓測 <span class="hidden 2xl:inline text-[10px] text-zinc-400">(Stress Lab)</span>
         </button>
       </nav>
 
-      <!-- Right Compact FX Bar & Mode Switch -->
-      <div class="flex items-center gap-2 shrink-0">
-        <div class="flex items-center gap-1.5 bg-[#111217] border border-white/10 rounded px-2 py-1">
-          <span class="text-[11px] font-mono text-zinc-400">USD/MYR</span>
+      <!-- Right Compact Multi-Currency FX Bar & Mode Switch -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0 z-10">
+        <div class="flex items-center gap-1 bg-[#111217] border border-white/10 rounded px-1.5 py-1">
+          <!-- Currency Dropdown -->
+          <select
+            id="header-cur-select"
+            aria-label="基礎幣別選擇 (Currency)"
+            class="bg-transparent text-[11px] font-mono font-bold text-[#e6c762] focus:outline-none cursor-pointer pr-0.5"
+          >
+            <option value="MYR" class="bg-[#111217] text-zinc-200">🇲🇾 MYR</option>
+            <option value="TWD" class="bg-[#111217] text-zinc-200">🇹🇼 TWD</option>
+            <option value="USD" class="bg-[#111217] text-zinc-200">🇺🇸 USD</option>
+            <option value="SGD" class="bg-[#111217] text-zinc-200">🇸🇬 SGD</option>
+            <option value="HKD" class="bg-[#111217] text-zinc-200">🇭🇰 HKD</option>
+          </select>
+          <span id="fx-rate-pair-label" class="text-[10px] font-mono text-zinc-500 hidden sm:inline">USD/MYR</span>
           <input
             id="fx-rate-input"
             type="number"
             step="0.01"
-            min="2.0"
-            max="12.0"
+            min="0.5"
+            max="150.0"
             value="4.42"
-            aria-label="USD to MYR Exchange Rate"
+            aria-label="Exchange Rate vs USD"
             class="w-12 bg-transparent text-center font-mono text-xs font-semibold text-[#e6c762] focus:outline-none"
           />
           <button
             id="fx-sync-btn"
             type="button"
-            title="同步最新匯率"
+            title="同步最新即時匯率 (Sync Live FX)"
             class="text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-white/[0.05] hover:bg-white/10 text-zinc-300 transition cursor-pointer"
           >
             SYNC
           </button>
         </div>
-        <span id="fx-status-badge" class="hidden 2xl:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono text-zinc-400 border border-white/10">
+        <span id="fx-status-badge" class="hidden xl:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono text-zinc-400 border border-white/10">
           LIVE
         </span>
         <button
           type="button"
           data-toggle-mode
-          class="hidden sm:inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer"
+          class="hidden sm:inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer whitespace-nowrap"
         >
-          切換簡報模式
+          簡報模式
         </button>
       </div>
     </div>
@@ -483,70 +495,88 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
         <!-- Left 7 Columns: Interactive 6-Level Wealth Ladder & 0.01% Rule Locator -->
         <div class="lg:col-span-7 fintech-card p-4 sm:p-5 space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-white/[0.08]">
+          <div class="flex flex-wrap items-center justify-between gap-2.5 pb-3 border-b border-white/[0.08]">
             <div>
               <div class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">6-LEVEL &amp; 0.01% DIAGNOSTIC</div>
               <h3 class="text-base font-bold text-[#f5f5f7]">我的 6 階財富定位與萬分之一法則計算機</h3>
             </div>
-            <div class="flex flex-wrap items-center gap-1">
-              <button
-                type="button"
-                data-locator-preset
-                data-usd="5000"
-                data-sal="4000"
-                data-sav="25"
-                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+            <!-- Currency Selector Dropdown in Locator -->
+            <div class="flex items-center gap-1.5 bg-[#0a0b0e] border border-white/10 rounded-lg px-2.5 py-1 shadow-inner">
+              <span class="text-[10px] font-mono text-zinc-400">幣別 CURRENCY:</span>
+              <select
+                id="locator-currency-select"
+                aria-label="選取輸入幣別 (Select Input Currency)"
+                class="bg-transparent text-xs font-mono font-bold text-[#e6c762] focus:outline-none cursor-pointer pr-1"
               >
-                L1 新鮮人 (Grad)
-              </button>
-              <button
-                type="button"
-                data-locator-preset
-                data-usd="40000"
-                data-sal="6800"
-                data-sav="30"
-                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
-              >
-                L2 築底白領 (Pro)
-              </button>
-              <button
-                type="button"
-                data-locator-preset
-                data-usd="180000"
-                data-sal="10500"
-                data-sav="35"
-                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
-              >
-                L3A 衝刺 (Sprint)
-              </button>
-              <button
-                type="button"
-                data-locator-preset
-                data-usd="420000"
-                data-sal="15000"
-                data-sav="40"
-                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
-              >
-                L3B 大馬FIRE (Freedom)
-              </button>
-              <button
-                type="button"
-                data-locator-preset
-                data-usd="1500000"
-                data-sal="28000"
-                data-sav="45"
-                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
-              >
-                L4 百萬美金 (HNW)
-              </button>
+                <option value="MYR" class="bg-[#111217] text-zinc-200">🇲🇾 馬幣 MYR (RM)</option>
+                <option value="TWD" class="bg-[#111217] text-zinc-200">🇹🇼 新台幣 TWD (NT$)</option>
+                <option value="USD" class="bg-[#111217] text-zinc-200">🇺🇸 美元 USD ($)</option>
+                <option value="SGD" class="bg-[#111217] text-zinc-200">🇸🇬 新幣 SGD (S$)</option>
+                <option value="HKD" class="bg-[#111217] text-zinc-200">🇭🇰 港幣 HKD (HK$)</option>
+              </select>
             </div>
+          </div>
+
+          <!-- Quick Stage Presets Bar -->
+          <div class="flex flex-wrap items-center gap-1.5 pb-1">
+            <span class="text-[10px] font-mono text-zinc-500 mr-0.5">QUICK PRESETS:</span>
+            <button
+              type="button"
+              data-locator-preset
+              data-usd="5000"
+              data-sal="4000"
+              data-sav="25"
+              class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+            >
+              L1 新鮮人 (Grad)
+            </button>
+            <button
+              type="button"
+              data-locator-preset
+              data-usd="40000"
+              data-sal="6800"
+              data-sav="30"
+              class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+            >
+              L2 築底白領 (Pro)
+            </button>
+            <button
+              type="button"
+              data-locator-preset
+              data-usd="180000"
+              data-sal="10500"
+              data-sav="35"
+              class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+            >
+              L3A 衝刺 (Sprint)
+            </button>
+            <button
+              type="button"
+              data-locator-preset
+              data-usd="420000"
+              data-sal="15000"
+              data-sav="40"
+              class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+            >
+              L3B 大馬FIRE (Freedom)
+            </button>
+            <button
+              type="button"
+              data-locator-preset
+              data-usd="1500000"
+              data-sal="28000"
+              data-sav="45"
+              class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+            >
+              L4 百萬美金 (HNW)
+            </button>
           </div>
 
           <!-- 3-Column Compact Sliders Strip -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
             <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1">
               <div class="flex items-center justify-between text-[11px]">
-                <label for="locator-nw-input" class="text-zinc-400">1. 淨資產 (Net Worth)</label>
+                <label for="locator-nw-input" id="locator-nw-label" class="text-zinc-400">1. 淨資產 (Net Worth)</label>
                 <span id="locator-nw-usd" class="font-mono-num text-[#e6c762]">≈ $40,724</span>
               </div>
               <input
@@ -571,7 +601,7 @@
 
             <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1">
               <div class="flex items-center justify-between text-[11px]">
-                <label for="locator-sal-input" class="text-zinc-400">2. 月薪 (Monthly Salary)</label>
+                <label for="locator-sal-input" id="locator-sal-label" class="text-zinc-400">2. 月薪 (Monthly Salary)</label>
                 <span id="locator-sal-usd" class="font-mono-num text-zinc-500">≈ $1,470</span>
               </div>
               <input
@@ -1240,8 +1270,8 @@
          ====================================================================== -->
     <section class="slide-panel space-y-6 pt-8 border-t border-white/[0.08]" data-slide-num="5" id="slide-5">
       <!-- Top Editorial Header + Formula Strip -->
-      <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-4 pb-5 border-b border-white/[0.08]">
-        <div class="shrink-0">
+      <div class="flex flex-col 2xl:flex-row 2xl:items-end justify-between gap-4 pb-5 border-b border-white/[0.08]">
+        <div class="min-w-0 max-w-2xl">
           <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-1.5">
             CHAPTER 05 · FIRST-PRINCIPLES ANATOMY · WHAT ARE BETA (β) &amp; ALPHA (α)?
           </div>
@@ -1253,7 +1283,7 @@
           </h2>
         </div>
         <!-- Clean Single-Line Equation Pill -->
-        <div class="fintech-card px-3.5 py-2 flex flex-wrap items-center gap-1.5 text-[11px] font-mono shrink-0">
+        <div class="fintech-card px-3.5 py-2 flex flex-wrap items-center gap-1.5 text-[11px] font-mono max-w-full overflow-x-auto no-scrollbar">
           <span class="text-[#f5f5f7] font-bold">總報酬 (Total Return R)</span>
           <span class="text-zinc-500">=</span>
           <span class="px-2 py-0.5 rounded bg-white/[0.05] text-zinc-300">無風險 Rf (~3.6%)</span>
