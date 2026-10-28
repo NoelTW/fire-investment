@@ -18,7 +18,8 @@ fire-investment/
 │   ├── calculator.js           # 財富階梯定位儀、模組 A (黃金交叉與退休模擬)、模組 B (4% 金庫 30 年壓力測試)
 │   └── app.js                  # 簡報分頁切換、鍵盤快捷鍵、全頁總覽切換與 300-DPI 圖表放大燈箱
 ├── assets/
-│   └── charts/                 # 由 generate_charts.py 自動生成的 6 張 300-DPI 實證圖表
+│   └── charts/                 # 由 generate_charts.py 自動生成的 7 張 300-DPI 實證圖表
+│       ├── 00_wealth_ladder_staircase.png
 │       ├── 01_bursa_epf_vs_world_myr.png
 │       ├── 02_vwra_vs_vwrd_vs_vt.png
 │       ├── 03_crossover_point.png
@@ -30,9 +31,9 @@ fire-investment/
 
 ---
 
-## 📊 Step 1: 如何重新執行 Python 腳本更新 6 張實證圖表
+## 📊 Step 1: 如何重新執行 Python 腳本更新 7 張實證圖表
 
-當你想調整歷史數據序列、模擬假設或視覺配色時，只需執行 `generate_charts.py` 即可重新生成 `./assets/charts/` 下的 6 張 300-DPI 圖表：
+當你想調整歷史數據序列、模擬假設或視覺配色時，只需執行 `generate_charts.py` 即可重新生成 `./assets/charts/` 下的 7 張 300-DPI 圖表：
 
 ### 1. 建立並啟用虛擬環境（首次執行）
 ```bash
@@ -47,6 +48,7 @@ python3 generate_charts.py
 ```
 
 執行成功後，終端機會顯示以下輸出，並將高清 PNG 圖表寫入 `./assets/charts/`：
+- `assets/charts/00_wealth_ladder_staircase.png`：《The Wealth Ladder》財富六階梯實體階梯圖與萬分之一法則實證架構（10 倍美金數量級躍遷、大馬 FIRE 雙重黃金交叉里程碑與階梯日額消費指標）
 - `assets/charts/01_bursa_epf_vs_world_myr.png`：馬來西亞人的本土偏誤代價（2010–2025 Bursa KLCI vs EPF vs FTSE All-World MYR 總報酬與匯率走勢）
 - `assets/charts/02_vwra_vs_vwrd_vs_vt.png`：為什麼首推 VWRA？25 年真實稅務（15% vs 30% + 40% 美國遺產稅風險）與股息再投入摩擦差距
 - `assets/charts/03_crossover_point.png`：財富階梯雙黃金交叉圖（第一黃金交叉：獲利 > 年儲蓄；第二黃金交叉：獲利 > 全年工作總年薪）

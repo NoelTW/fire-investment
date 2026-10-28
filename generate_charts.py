@@ -17,6 +17,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import matplotlib.patches as patches
 import numpy as np
 
 # Configure CJK-capable font stack for macOS / Linux / Windows
@@ -88,6 +89,210 @@ def format_usd(x, pos=None):
     elif abs(x) >= 1_000:
         return f"${x/1_000:.0f}k"
     return f"${x:.0f}"
+
+
+# ==============================================================================
+# CHART 0: 00_wealth_ladder_staircase.png (Physical Wealth Ladder Architecture)
+# ==============================================================================
+def generate_chart_00():
+    fig, ax = plt.subplots(figsize=(16, 9), facecolor=BG_DARK)
+    ax.set_facecolor(BG_DARK)
+    ax.set_xlim(-0.5, 6.2)
+    ax.set_ylim(-0.3, 7.3)
+    ax.axis("off")
+
+    # Header
+    ax.text(0.0, 6.9, "CHAPTER 01 · THE 6 WEALTH LEVELS & THE 0.01% RULE", color=EMERALD_LIGHT, fontsize=11, fontfamily="monospace", fontweight="bold")
+    ax.text(0.0, 6.45, "《The Wealth Ladder》財富六階梯實體階梯圖與萬分之一法則架構", color=TEXT_MAIN, fontsize=18, fontweight="bold")
+    ax.text(0.0, 6.10, "以 10 倍美金數量級躍遷定義 6 個自由階梯 · 結合大馬購買力平價 (PPP) 與大馬 FIRE 雙重黃金交叉轉折點", color=TEXT_MUTED, fontsize=11)
+
+    # 6 Steps Definition
+    steps = [
+        {
+            "num": "LEVEL 1",
+            "title_zh": "帳單生存階",
+            "title_en": "Survival Stage",
+            "usd": "< $10k USD",
+            "myr": "< RM 44k",
+            "daily": "< RM 4.40 / 日",
+            "lifestyle": "為基礎水電與日常帳單焦慮\n每一筆小開銷都有心理負擔",
+            "engine": "【通關引擎】\n專注本業職涯晉升 + 20%+ 儲蓄\n【致命陷阱】\n本金過小時天天盯盤選股拼翻倍",
+            "height": 1.25,
+            "highlight": False
+        },
+        {
+            "num": "LEVEL 2",
+            "title_zh": "超市茶室加料自由",
+            "title_en": "Grocery & Kopitiam",
+            "usd": "$10k – $100k",
+            "myr": "RM 44k – 440k",
+            "daily": "RM 4.40 – 44.00 / 日",
+            "lifestyle": "超市日常買菜免看標價\nKopitiam 麵加料加蛋免糾結",
+            "engine": "【通關引擎】\n自動化定投 VWRA + EPF 穩健底倉\n【致命陷阱】\n沉迷高收益資金盤與借貸炒小盤股",
+            "height": 2.05,
+            "highlight": False
+        },
+        {
+            "num": "LEVEL 3",
+            "title_zh": "餐廳自由 · 大馬 FIRE",
+            "title_en": "Dining & MY FIRE",
+            "usd": "$100k – $1M",
+            "myr": "RM 440k – 4.4M",
+            "daily": "RM 44 – 440 / 日",
+            "lifestyle": "任何普通餐廳點餐無壓力\n跨過 RM 1.5M 解鎖大馬完全自由",
+            "engine": "【通關引擎】\n達成雙重黃金交叉 · 核心衛星框架\n【致命陷阱】\n過早買豪車豪宅被巨額房貸鎖死",
+            "height": 2.95,
+            "highlight": True,
+            "badge": "★ 大馬 FIRE 退休與雙重黃金交叉里程碑 (Structural Crossover)"
+        },
+        {
+            "num": "LEVEL 4",
+            "title_zh": "跨國商務留學自由",
+            "title_en": "Travel & Global",
+            "usd": "$1M – $10M",
+            "myr": "RM 4.4M – 44M",
+            "daily": "RM 440 – 4,400 / 日",
+            "lifestyle": "全家商務艙出國度假旅行\n子女全球頂尖大學留學免貸款",
+            "engine": "【通關引擎】\n啟動 3 年現金金庫防禦 (Buffer)\n【致命陷阱】\n盲目開槓桿、熊市恐慌殺跌被斷頭",
+            "height": 3.85,
+            "highlight": False
+        },
+        {
+            "num": "LEVEL 5",
+            "title_zh": "全球置產主權階",
+            "title_en": "Global Real Estate",
+            "usd": "$10M – $100M",
+            "myr": "RM 44M – 440M",
+            "daily": "RM 4.4k – 44k / 日",
+            "lifestyle": "全球核心城市置產（倫敦/新/馬）\n跨國流動性與主權風險對沖",
+            "engine": "【通關引擎】\n離岸信託、私行家辦與稅務籌劃\n【致命陷阱】\n盲目投資親友未上市實體專案爆雷",
+            "height": 4.75,
+            "highlight": False
+        },
+        {
+            "num": "LEVEL 6",
+            "title_zh": "社會影響傳承階",
+            "title_en": "Legacy & Philanthropy",
+            "usd": "> $100M+ USD",
+            "myr": "> RM 440M+",
+            "daily": "> RM 44k+ / 日",
+            "lifestyle": "物質消費完全邊際效益遞減\n金錢轉化為重塑社會的力量",
+            "engine": "【通關引擎】\n世代家族信託與永續慈善基金會\n【致命陷阱】\n缺乏家族憲章導致遺產爭端富不過三代",
+            "height": 5.65,
+            "highlight": False
+        }
+    ]
+
+    bar_width = 0.92
+
+    for i, s in enumerate(steps):
+        x = i
+        y_top = s["height"]
+        is_hl = s.get("highlight", False)
+
+        fc = "#1a1811" if is_hl else BG_CARD
+        ec = EMERALD if is_hl else "#282a36"
+        lw = 2.0 if is_hl else 1.0
+
+        rect = patches.FancyBboxPatch(
+            (x - bar_width/2, 0),
+            bar_width,
+            y_top,
+            boxstyle="round,pad=0.03,rounding_size=0.06",
+            facecolor=fc,
+            edgecolor=ec,
+            linewidth=lw,
+            zorder=2
+        )
+        ax.add_patch(rect)
+
+        if is_hl:
+            top_bar = patches.Rectangle(
+                (x - bar_width/2, y_top - 0.08),
+                bar_width,
+                0.08,
+                facecolor=EMERALD_LIGHT,
+                edgecolor="none",
+                zorder=3
+            )
+            ax.add_patch(top_bar)
+
+        badge_bg = EMERALD_LIGHT if is_hl else "#22242f"
+        badge_fg = "#0a0b0e" if is_hl else TEXT_MAIN
+        ax.text(
+            x, y_top - 0.28,
+            f"  {s['num']}  ",
+            color=badge_fg,
+            fontsize=10.5,
+            fontweight="bold",
+            fontfamily="monospace",
+            ha="center",
+            va="center",
+            bbox=dict(boxstyle="round,pad=0.25", facecolor=badge_bg, edgecolor="none"),
+            zorder=4
+        )
+
+        title_color = EMERALD_LIGHT if is_hl else TEXT_MAIN
+        ax.text(x, y_top - 0.65, s["title_zh"], color=title_color, fontsize=11.5, fontweight="bold", ha="center", va="center", zorder=4)
+        ax.text(x, y_top - 0.90, s["title_en"], color=EMERALD if is_hl else TEXT_MUTED, fontsize=8.5, ha="center", va="center", zorder=4)
+
+        ax.text(x, y_top - 1.25, s["usd"], color=TEXT_MAIN, fontsize=10, fontweight="bold", fontfamily="monospace", ha="center", va="center", zorder=4)
+        ax.text(x, y_top - 1.48, f"({s['myr']})", color=EMERALD_LIGHT if is_hl else CYAN, fontsize=9, fontfamily="monospace", ha="center", va="center", zorder=4)
+
+        ax.text(
+            x, y_top - 1.82,
+            f"0.01% 日額:\n{s['daily']}",
+            color=EMERALD_LIGHT if is_hl else TEXT_MUTED,
+            fontsize=8.5,
+            ha="center",
+            va="center",
+            zorder=4
+        )
+
+        if y_top >= 2.8:
+            ax.text(x, y_top - 2.25, s["lifestyle"], color="#c5c5d0", fontsize=7.8, ha="center", va="top", zorder=4, linespacing=1.2)
+        if y_top >= 3.6:
+            ax.text(x, 0.35, s["engine"], color=TEXT_MUTED, fontsize=7.2, ha="center", va="bottom", zorder=4, linespacing=1.2)
+
+        if is_hl and "badge" in s:
+            ax.annotate(
+                s["badge"],
+                xy=(x, y_top),
+                xytext=(x, y_top + 0.65),
+                arrowprops=dict(arrowstyle="->", color=EMERALD_LIGHT, lw=1.5),
+                color="#0a0b0e",
+                fontsize=9.5,
+                fontweight="bold",
+                ha="center",
+                va="bottom",
+                bbox=dict(boxstyle="round,pad=0.35", facecolor=EMERALD_LIGHT, edgecolor=EMERALD, lw=1.5),
+                zorder=6
+            )
+
+    # Staircase Ascending Guideline Trail
+    for i in range(len(steps) - 1):
+        x_curr = i
+        x_next = i + 1
+        y_next = steps[i+1]["height"]
+        ax.plot([x_curr + bar_width/2, x_next - bar_width/2], [steps[i]["height"], steps[i]["height"]], color=EMERALD, linestyle=":", lw=1.2, alpha=0.65, zorder=1)
+        ax.plot([x_next - bar_width/2, x_next - bar_width/2], [steps[i]["height"], y_next], color=EMERALD, linestyle=":", lw=1.2, alpha=0.65, zorder=1)
+
+    # Bottom annotation strip
+    ax.text(
+        0.0, -0.05,
+        "◆ 萬分之一法則 (The 0.01% Rule) ＝ 淨資產 ÷ 10,000 ＝ 每日無腦自由消費上限 (等於 3.65% 安全提領率 SWR 微積分日額版)。\n"
+        "◆ 降一階守富原則 (Spend at Level N-1)：日常微消費（如吃飯、喝茶、買菜）按當前階梯自由花費；大額資本開銷（如買車、買房）嚴格鎖在上一階以內，永不摔回上一階！",
+        color=TEXT_MUTED,
+        fontsize=9.5,
+        ha="left",
+        va="top",
+        linespacing=1.4
+    )
+
+    out_path = os.path.join(OUTPUT_DIR, "00_wealth_ladder_staircase.png")
+    fig.savefig(out_path, dpi=300, facecolor=BG_DARK, edgecolor="none", bbox_inches="tight", pad_inches=0.4)
+    plt.close(fig)
+    print(f"[OK] Saved {out_path}")
 
 
 # ==============================================================================
@@ -963,11 +1168,12 @@ def generate_chart_06():
 
 
 if __name__ == "__main__":
-    print("Generating 6 empirical financial charts (300 DPI, Dark Fintech Theme)...")
+    print("Generating 7 empirical financial charts (300 DPI, Dark Fintech Theme)...")
+    generate_chart_00()
     generate_chart_01()
     generate_chart_02()
     generate_chart_03()
     generate_chart_04()
     generate_chart_05()
     generate_chart_06()
-    print("All 6 charts generated successfully in ./assets/charts/")
+    print("All 7 charts generated successfully in ./assets/charts/")
