@@ -253,12 +253,13 @@
 
       if (!modal || !modalImg) return;
 
-      document.querySelectorAll("[data-zoom-chart]").forEach((frame) => {
+      document.querySelectorAll("[data-zoom-chart], [data-chart-expand]").forEach((frame) => {
         frame.addEventListener("click", () => {
           const img = frame.querySelector("img");
-          const caption = frame.getAttribute("data-zoom-caption") || "";
-          if (img) {
-            modalImg.src = img.getAttribute("src");
+          const caption = frame.getAttribute("data-zoom-caption") || frame.getAttribute("title") || "";
+          const imgSrc = frame.getAttribute("data-chart-expand") || (img ? img.getAttribute("src") : "");
+          if (imgSrc) {
+            modalImg.src = imgSrc;
             if (modalCap) modalCap.textContent = caption;
             modal.classList.remove("hidden");
             modal.classList.add("flex");
