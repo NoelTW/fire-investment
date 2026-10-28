@@ -95,18 +95,18 @@ def format_usd(x, pos=None):
 # CHART 0: 00_wealth_ladder_staircase.png (Physical Wealth Ladder Architecture)
 # ==============================================================================
 def generate_chart_00():
-    fig, ax = plt.subplots(figsize=(16, 9), facecolor=BG_DARK)
+    fig, ax = plt.subplots(figsize=(16, 9.4), facecolor=BG_DARK)
     ax.set_facecolor(BG_DARK)
-    ax.set_xlim(-0.5, 6.2)
-    ax.set_ylim(-0.3, 7.3)
+    ax.set_xlim(-0.55, 6.25)
+    ax.set_ylim(-0.85, 8.4)
     ax.axis("off")
 
     # Header
-    ax.text(0.0, 6.9, "CHAPTER 01 · THE 6 WEALTH LEVELS & THE 0.01% RULE", color=EMERALD_LIGHT, fontsize=11, fontfamily="monospace", fontweight="bold")
-    ax.text(0.0, 6.45, "《The Wealth Ladder》財富六階梯實體階梯圖與萬分之一法則架構", color=TEXT_MAIN, fontsize=18, fontweight="bold")
-    ax.text(0.0, 6.10, "以 10 倍美金數量級躍遷定義 6 個自由階梯 · 結合大馬購買力平價 (PPP) 與大馬 FIRE 雙重黃金交叉轉折點", color=TEXT_MUTED, fontsize=11)
+    ax.text(0.0, 7.95, "CHAPTER 01 · THE 6 WEALTH LEVELS & THE 0.01% RULE", color=EMERALD_LIGHT, fontsize=11, fontfamily="monospace", fontweight="bold")
+    ax.text(0.0, 7.45, "《The Wealth Ladder》財富六階梯實體階梯圖與萬分之一法則架構", color=TEXT_MAIN, fontsize=18, fontweight="bold")
+    ax.text(0.0, 7.05, "以 10 倍美金數量級躍遷定義 6 個自由階梯 · 結合大馬購買力平價 (PPP) 與大馬 FIRE 雙重黃金交叉轉折點", color=TEXT_MUTED, fontsize=11)
 
-    # 6 Steps Definition
+    # 6 Steps Definition with properly calibrated heights so all text sits safely inside
     steps = [
         {
             "num": "LEVEL 1",
@@ -115,9 +115,9 @@ def generate_chart_00():
             "usd": "< $10k USD",
             "myr": "< RM 44k",
             "daily": "< RM 4.40 / 日",
-            "lifestyle": "為基礎水電與日常帳單焦慮\n每一筆小開銷都有心理負擔",
-            "engine": "【通關引擎】\n專注本業職涯晉升 + 20%+ 儲蓄\n【致命陷阱】\n本金過小時天天盯盤選股拼翻倍",
-            "height": 1.25,
+            "lifestyle": "為基礎水電帳單焦慮\n開銷有心理負擔",
+            "engine": "【通關】本業成長 + 20% 儲蓄\n【禁忌】本金小時天天看盤賭翻倍",
+            "height": 2.35,
             "highlight": False
         },
         {
@@ -127,9 +127,9 @@ def generate_chart_00():
             "usd": "$10k – $100k",
             "myr": "RM 44k – 440k",
             "daily": "RM 4.40 – 44.00 / 日",
-            "lifestyle": "超市日常買菜免看標價\nKopitiam 麵加料加蛋免糾結",
-            "engine": "【通關引擎】\n自動化定投 VWRA + EPF 穩健底倉\n【致命陷阱】\n沉迷高收益資金盤與借貸炒小盤股",
-            "height": 2.05,
+            "lifestyle": "超市買菜免看標價\nKopitiam 加料加蛋免糾結",
+            "engine": "【通關】定投 VWRA + EPF 底倉\n【禁忌】沉迷高收益盤與借貸炒股",
+            "height": 3.15,
             "highlight": False
         },
         {
@@ -139,9 +139,9 @@ def generate_chart_00():
             "usd": "$100k – $1M",
             "myr": "RM 440k – 4.4M",
             "daily": "RM 44 – 440 / 日",
-            "lifestyle": "任何普通餐廳點餐無壓力\n跨過 RM 1.5M 解鎖大馬完全自由",
-            "engine": "【通關引擎】\n達成雙重黃金交叉 · 核心衛星框架\n【致命陷阱】\n過早買豪車豪宅被巨額房貸鎖死",
-            "height": 2.95,
+            "lifestyle": "普通餐廳點餐無壓力\n跨 RM 1.5M 解鎖大馬完全退休",
+            "engine": "【通關】雙黃金交叉 · 核心衛星\n【致命陷阱】過早買豪車豪宅鎖死房貸",
+            "height": 4.05,
             "highlight": True,
             "badge": "★ 大馬 FIRE 退休與雙重黃金交叉里程碑 (Structural Crossover)"
         },
@@ -152,9 +152,9 @@ def generate_chart_00():
             "usd": "$1M – $10M",
             "myr": "RM 4.4M – 44M",
             "daily": "RM 440 – 4,400 / 日",
-            "lifestyle": "全家商務艙出國度假旅行\n子女全球頂尖大學留學免貸款",
-            "engine": "【通關引擎】\n啟動 3 年現金金庫防禦 (Buffer)\n【致命陷阱】\n盲目開槓桿、熊市恐慌殺跌被斷頭",
-            "height": 3.85,
+            "lifestyle": "商務艙出國度假旅行\n子女留學免貸款",
+            "engine": "【通關】啟動 3 年現金金庫 (Buffer)\n【致命陷阱】盲目開槓桿、恐慌砍在阿呆谷",
+            "height": 4.90,
             "highlight": False
         },
         {
@@ -164,9 +164,9 @@ def generate_chart_00():
             "usd": "$10M – $100M",
             "myr": "RM 44M – 440M",
             "daily": "RM 4.4k – 44k / 日",
-            "lifestyle": "全球核心城市置產（倫敦/新/馬）\n跨國流動性與主權風險對沖",
-            "engine": "【通關引擎】\n離岸信託、私行家辦與稅務籌劃\n【致命陷阱】\n盲目投資親友未上市實體專案爆雷",
-            "height": 4.75,
+            "lifestyle": "全球核心城市置產\n跨國流動與主權避險",
+            "engine": "【通關】離岸信託、私行家辦架構\n【致命陷阱】盲目投資親友未上市專案爆雷",
+            "height": 5.75,
             "highlight": False
         },
         {
@@ -176,9 +176,9 @@ def generate_chart_00():
             "usd": "> $100M+ USD",
             "myr": "> RM 440M+",
             "daily": "> RM 44k+ / 日",
-            "lifestyle": "物質消費完全邊際效益遞減\n金錢轉化為重塑社會的力量",
-            "engine": "【通關引擎】\n世代家族信託與永續慈善基金會\n【致命陷阱】\n缺乏家族憲章導致遺產爭端富不過三代",
-            "height": 5.65,
+            "lifestyle": "個人物質消費邊際效應歸零\n金錢轉化為重塑社會的力量",
+            "engine": "【通關】家族信託與永續慈善基金\n【致命陷阱】缺乏家族憲章導致富不過三代",
+            "height": 6.55,
             "highlight": False
         }
     ]
@@ -192,7 +192,7 @@ def generate_chart_00():
 
         fc = "#1a1811" if is_hl else BG_CARD
         ec = EMERALD if is_hl else "#282a36"
-        lw = 2.0 if is_hl else 1.0
+        lw = 2.2 if is_hl else 1.0
 
         rect = patches.FancyBboxPatch(
             (x - bar_width/2, 0),
@@ -208,9 +208,9 @@ def generate_chart_00():
 
         if is_hl:
             top_bar = patches.Rectangle(
-                (x - bar_width/2, y_top - 0.08),
+                (x - bar_width/2, y_top - 0.09),
                 bar_width,
-                0.08,
+                0.09,
                 facecolor=EMERALD_LIGHT,
                 edgecolor="none",
                 zorder=3
@@ -223,45 +223,45 @@ def generate_chart_00():
             x, y_top - 0.28,
             f"  {s['num']}  ",
             color=badge_fg,
-            fontsize=10.5,
+            fontsize=10.0,
             fontweight="bold",
             fontfamily="monospace",
             ha="center",
             va="center",
-            bbox=dict(boxstyle="round,pad=0.25", facecolor=badge_bg, edgecolor="none"),
+            bbox=dict(boxstyle="round,pad=0.22", facecolor=badge_bg, edgecolor="none"),
             zorder=4
         )
 
         title_color = EMERALD_LIGHT if is_hl else TEXT_MAIN
-        ax.text(x, y_top - 0.65, s["title_zh"], color=title_color, fontsize=11.5, fontweight="bold", ha="center", va="center", zorder=4)
-        ax.text(x, y_top - 0.90, s["title_en"], color=EMERALD if is_hl else TEXT_MUTED, fontsize=8.5, ha="center", va="center", zorder=4)
+        ax.text(x, y_top - 0.62, s["title_zh"], color=title_color, fontsize=11.2, fontweight="bold", ha="center", va="center", zorder=4)
+        ax.text(x, y_top - 0.86, s["title_en"], color=EMERALD if is_hl else TEXT_MUTED, fontsize=8.5, ha="center", va="center", zorder=4)
 
-        ax.text(x, y_top - 1.25, s["usd"], color=TEXT_MAIN, fontsize=10, fontweight="bold", fontfamily="monospace", ha="center", va="center", zorder=4)
-        ax.text(x, y_top - 1.48, f"({s['myr']})", color=EMERALD_LIGHT if is_hl else CYAN, fontsize=9, fontfamily="monospace", ha="center", va="center", zorder=4)
+        ax.text(x, y_top - 1.18, s["usd"], color=TEXT_MAIN, fontsize=9.8, fontweight="bold", fontfamily="monospace", ha="center", va="center", zorder=4)
+        ax.text(x, y_top - 1.40, f"({s['myr']})", color=EMERALD_LIGHT if is_hl else CYAN, fontsize=8.8, fontfamily="monospace", ha="center", va="center", zorder=4)
 
         ax.text(
-            x, y_top - 1.82,
+            x, y_top - 1.72,
             f"0.01% 日額:\n{s['daily']}",
             color=EMERALD_LIGHT if is_hl else TEXT_MUTED,
-            fontsize=8.5,
+            fontsize=8.3,
             ha="center",
             va="center",
             zorder=4
         )
 
-        if y_top >= 2.8:
-            ax.text(x, y_top - 2.25, s["lifestyle"], color="#c5c5d0", fontsize=7.8, ha="center", va="top", zorder=4, linespacing=1.2)
-        if y_top >= 3.6:
-            ax.text(x, 0.35, s["engine"], color=TEXT_MUTED, fontsize=7.2, ha="center", va="bottom", zorder=4, linespacing=1.2)
+        if y_top >= 3.0:
+            ax.text(x, y_top - 2.22, s["lifestyle"], color="#c5c5d0", fontsize=7.6, ha="center", va="top", zorder=4, linespacing=1.2)
+        if y_top >= 3.8:
+            ax.text(x, 0.25, s["engine"], color=TEXT_MUTED, fontsize=7.0, ha="center", va="bottom", zorder=4, linespacing=1.2)
 
         if is_hl and "badge" in s:
             ax.annotate(
                 s["badge"],
                 xy=(x, y_top),
-                xytext=(x, y_top + 0.65),
+                xytext=(x, y_top + 0.62),
                 arrowprops=dict(arrowstyle="->", color=EMERALD_LIGHT, lw=1.5),
                 color="#0a0b0e",
-                fontsize=9.5,
+                fontsize=9.2,
                 fontweight="bold",
                 ha="center",
                 va="bottom",
@@ -277,16 +277,16 @@ def generate_chart_00():
         ax.plot([x_curr + bar_width/2, x_next - bar_width/2], [steps[i]["height"], steps[i]["height"]], color=EMERALD, linestyle=":", lw=1.2, alpha=0.65, zorder=1)
         ax.plot([x_next - bar_width/2, x_next - bar_width/2], [steps[i]["height"], y_next], color=EMERALD, linestyle=":", lw=1.2, alpha=0.65, zorder=1)
 
-    # Bottom annotation strip
+    # Bottom annotation strip safely positioned well below all cards
     ax.text(
-        0.0, -0.05,
+        0.0, -0.42,
         "◆ 萬分之一法則 (The 0.01% Rule) ＝ 淨資產 ÷ 10,000 ＝ 每日無腦自由消費上限 (等於 3.65% 安全提領率 SWR 微積分日額版)。\n"
         "◆ 降一階守富原則 (Spend at Level N-1)：日常微消費（如吃飯、喝茶、買菜）按當前階梯自由花費；大額資本開銷（如買車、買房）嚴格鎖在上一階以內，永不摔回上一階！",
         color=TEXT_MUTED,
-        fontsize=9.5,
+        fontsize=9.2,
         ha="left",
         va="top",
-        linespacing=1.4
+        linespacing=1.35
     )
 
     out_path = os.path.join(OUTPUT_DIR, "00_wealth_ladder_staircase.png")
@@ -386,7 +386,7 @@ def generate_chart_01():
             va="center",
         )
 
-    # Callout box highlighting the cost of home bias
+    # Callout box highlighting the cost of home bias (positioned in empty space above curves)
     gap_rm = c_world[-1] - c_klci_tr[-1]
     ax1.annotate(
         f"★ 只買馬股與定存，錯失全球 AI 與科技紅利的代價！\n"
@@ -394,11 +394,11 @@ def generate_chart_01():
         f"• 全球股市受惠美股科技巨頭成長 + 美金升值雙重引擎\n"
         f"• 本土偏誤讓資金困在低成長馬股與單一弱勢馬幣",
         xy=(2021, c_world[11]),
-        xytext=(2015.0, 295_000),
-        arrowprops=dict(arrowstyle="->", color=EMERALD_LIGHT, lw=1.8, connectionstyle="arc3,rad=-0.15"),
-        bbox=dict(boxstyle="round,pad=0.6", facecolor="#161820", edgecolor=EMERALD, lw=1.2, alpha=0.96),
+        xytext=(2011.8, 335_000),
+        arrowprops=dict(arrowstyle="->", color=EMERALD_LIGHT, lw=1.8, connectionstyle="arc3,rad=-0.12"),
+        bbox=dict(boxstyle="round,pad=0.55", facecolor="#161820", edgecolor=EMERALD, lw=1.2, alpha=0.96),
         color=TEXT_MAIN,
-        fontsize=9.5,
+        fontsize=9.2,
         fontweight="bold",
         zorder=6,
     )
@@ -524,9 +524,9 @@ def generate_chart_02():
     # US Estate Tax threshold line ($60,000 USD)
     ax1.axhline(60_000, color=ROSE, linestyle="--", linewidth=1.2, alpha=0.75)
     ax1.text(
-        1.0, 72_000,
-        "[警訊] $60,000 USD 美國遺產稅警戒線（買 VT 超過此線，身故最高課徵 40% 遺產稅！）",
-        color=TEXT_MAIN, fontsize=8.6, fontweight="bold",
+        0.35, 63_500,
+        "[警訊] $60k USD 美國遺產稅警戒線（持有 VT 超過此線身故課 40%）",
+        color=TEXT_MAIN, fontsize=8.4, fontweight="bold",
         bbox=dict(boxstyle="round,pad=0.25", facecolor="#161820", edgecolor=ROSE, alpha=0.92)
     )
 
@@ -926,9 +926,9 @@ def generate_chart_05():
     # Stage 2 Threshold Line (RM 100,000)
     ax1.axhline(100_000, color=AMBER, linestyle="--", linewidth=1.4, alpha=0.85)
     ax1.text(
-        0.15, 103_500,
+        2.65, 103_500,
         "★ Stage 2 晉級門檻：RM 100,000（第 4.2 年成功跨越！）",
-        color=AMBER, fontsize=9.2, fontweight="bold"
+        color=AMBER, fontsize=9.0, fontweight="bold"
     )
 
     ax1.annotate(
@@ -936,10 +936,10 @@ def generate_chart_05():
         f"專注本業組：RM {curve_work_save[-1]:,.0f}\n"
         f"20% 股神組：僅 RM {curve_speculate[-1]:,.0f}",
         xy=(5.0, curve_work_save[-1]),
-        xytext=(2.0, 74_000),
+        xytext=(2.2, 58_000),
         arrowprops=dict(arrowstyle="->", color=EMERALD_LIGHT, lw=1.8),
-        bbox=dict(boxstyle="round,pad=0.5", facecolor="#161820", edgecolor=EMERALD, lw=1.2),
-        color=TEXT_MAIN, fontsize=9.5, fontweight="bold"
+        bbox=dict(boxstyle="round,pad=0.45", facecolor="#161820", edgecolor=EMERALD, lw=1.2),
+        color=TEXT_MAIN, fontsize=9.2, fontweight="bold"
     )
 
     ax1.set_xlim(0, 5.2)

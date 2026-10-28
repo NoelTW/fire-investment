@@ -139,6 +139,11 @@ body {
   background-color: var(--gold-primary);
 }
 
+/* Details / Accordion Polyfill for Tailwind Preflight */
+details:not([open]) > :not(summary) {
+  display: none !important;
+}
+
 /* 16:9 Widescreen Section Rhythm */
 .slide-panel {
   scroll-margin-top: 4.5rem; /* Matches slim 56px header + breathing room */
