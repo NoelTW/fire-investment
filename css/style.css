@@ -1,0 +1,301 @@
+/* ==========================================================================
+   css/style.css
+   Apple Pro / Linear Minimalist Obsidian & Champagne Gold Design System
+   Engineered for 16:9 Widescreen Editorial Gallery (1440x810 / 1920x1080)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-obsidian: #0a0b0e;
+  --bg-surface: #111217;
+  --bg-elevated: #161820;
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --gold-primary: #d4af37;
+  --gold-bright: #e6c762;
+  --gold-muted: rgba(212, 175, 55, 0.16);
+  --gold-border: rgba(212, 175, 55, 0.45);
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #63636e;
+  --risk-coral: #e06c75;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-obsidian);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-obsidian);
+  overflow-x: hidden;
+  selection-background-color: rgba(212, 175, 55, 0.25);
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.25);
+  color: #ffffff;
+}
+
+.font-editorial {
+  font-family: 'Noto Serif TC', Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+.font-mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Top 2px Reading Progress Bar (Champagne Gold) */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #8a6d1b 0%, #d4af37 60%, #f3dfa2 100%);
+  z-index: 60;
+  transition: width 0.08s linear;
+}
+
+/* Custom Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0b0e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #23252f;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Architectural Surfaces (Zero Neon Glow, Hairline Precision) */
+.fintech-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.fintech-card-gold {
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, rgba(17, 18, 23, 0.98) 100%);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+}
+
+.fintech-card-interactive {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fintech-card-interactive:hover {
+  background: var(--bg-elevated);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.fintech-card-interactive.active-stage-card {
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(17, 18, 23, 0.98) 100%);
+  border-color: var(--gold-primary);
+}
+
+/* Top 56px Slim Navigation Links */
+.slide-tab-btn {
+  position: relative;
+  color: var(--text-secondary);
+  transition: color 0.18s ease;
+  white-space: nowrap;
+}
+
+.slide-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.slide-tab-btn.active {
+  color: var(--gold-bright);
+  font-weight: 600;
+}
+
+.slide-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: -1px;
+  height: 2px;
+  background-color: var(--gold-primary);
+}
+
+/* 16:9 Widescreen Section Rhythm */
+.slide-panel {
+  scroll-margin-top: 4.5rem; /* Matches slim 56px header + breathing room */
+  position: relative;
+}
+
+body.one-page-mode .slide-panel {
+  display: block;
+  opacity: 1;
+}
+
+body.spotlight-mode #hero-showcase {
+  display: none;
+}
+
+body.spotlight-mode .slide-panel {
+  display: none;
+  animation: slideFadeIn 0.24s ease-out forwards;
+}
+
+body.spotlight-mode .slide-panel.active {
+  display: block;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating Right-Side TOC Rail (Desktop XL) */
+#floating-toc {
+  position: fixed;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 45;
+}
+
+.toc-dot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  cursor: pointer;
+}
+
+.toc-dot-label {
+  opacity: 0;
+  transform: translateX(6px);
+  transition: all 0.18s ease;
+  pointer-events: none;
+  background: #111217;
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.toc-dot-btn:hover .toc-dot-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toc-dot-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.22s ease;
+}
+
+.toc-dot-btn.active .toc-dot-indicator {
+  height: 20px;
+  background: var(--gold-primary);
+}
+
+/* Custom Range Sliders (Champagne Gold Precision) */
+input[type="range"].fintech-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #23252f;
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].fintech-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  border: 2px solid #0a0b0e;
+  box-shadow: 0 0 0 1px var(--gold-primary);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"].fintech-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+
+input[type="range"].fintech-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  border: 2px solid #0a0b0e;
+  cursor: pointer;
+}
+
+/* 300-DPI Empirical Chart Gallery Frame */
+.chart-img-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--border-hairline);
+  background: #0a0b0e;
+  cursor: zoom-in;
+  transition: border-color 0.2s ease;
+}
+
+.chart-img-frame:hover {
+  border-color: var(--gold-border);
+}
+
+/* Sticky Header Scrollable Table */
+.table-scroll-container {
+  max-height: 380px;
+  overflow-y: auto;
+  border: 1px solid var(--border-hairline);
+  border-radius: 8px;
+}
+
+.table-scroll-container thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #111217;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Editorial Key Metric Value */
+.stat-hero-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}

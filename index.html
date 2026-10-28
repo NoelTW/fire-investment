@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>馬來西亞華人財富階梯與退休金庫實證指南 | Malaysian Chinese Wealth Architecture</title>
+  <meta
+    name="description"
+    content="專為馬來西亞華人打造的財富四階梯與退休現金金庫量化實證白皮書。結合愛爾蘭累積型 ETF (VWRA)、EPF 公積金底倉、Beta vs Alpha 階段轉折與雙幣連動試算。"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0a0b0e',
+            surface: '#111217',
+            elevated: '#161820',
+            gold: {
+              DEFAULT: '#d4af37',
+              bright: '#e6c762',
+              dim: '#8a6d1b',
+            },
+            coral: '#e06c75',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Custom Apple Pro / Linear Obsidian Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="min-h-screen bg-[#0a0b0e] text-[#f5f5f7] antialiased one-page-mode">
+
+  <!-- Top 2px Champagne Gold Reading Progress Bar -->
+  <div id="scroll-progress-bar"></div>
+
+  <!-- Right-Edge Floating Chapter Rail (Desktop XL) -->
+  <aside id="floating-toc" class="hidden 2xl:flex flex-col gap-1.5" aria-label="Chapter Quick Navigation">
+    <button type="button" data-slide-target="1" class="toc-dot-btn active">
+      <span class="toc-dot-label font-mono-num">01 · 財富六階梯 (The 6 Wealth Levels)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="2" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">02 · 築底實證 (Foundation Stage)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="3" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">03 · 本土偏誤 (Home Bias &amp; Crossover)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="4" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">04 · VWRA 稅務 (UCITS Tax Shield)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="5" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">05 · Beta 與 Alpha (Market vs Active)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="6" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">06 · 選股轉折 (Stock Picking Inflection)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="7" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">07 · 金庫防禦 (Cash Vault &amp; Traps)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="8" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">08 · 實驗室 A (DCA &amp; Compounding)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+    <button type="button" data-slide-target="9" class="toc-dot-btn">
+      <span class="toc-dot-label font-mono-num">09 · 實驗室 B (4% SWR &amp; Stress Test)</span>
+      <span class="toc-dot-indicator"></span>
+    </button>
+  </aside>
+
+  <!-- ========================================================================
+       ULTRA-SLIM 56PX (h-14) SINGLE-ROW STICKY HEADER (16:9 OPTIMIZED)
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 h-14 bg-[#0a0b0e]/95 backdrop-blur-md border-b border-white/[0.08]">
+    <div class="max-w-[1380px] mx-auto h-full px-4 sm:px-6 flex items-center justify-between gap-3">
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded bg-[#d4af37]/15 border border-[#d4af37]/50 text-[#e6c762] font-mono text-[11px] font-bold tracking-tighter">
+          MY
+        </span>
+        <span class="text-xs sm:text-sm font-semibold tracking-tight text-[#f5f5f7] whitespace-nowrap">
+          大馬華人財富階梯實證 <span class="hidden md:inline font-mono text-[11px] text-zinc-400 font-normal">| Wealth Architecture</span>
+        </span>
+      </div>
+
+      <!-- Center Single-Line Chapter Navigation -->
+      <nav class="hidden lg:flex items-center h-full gap-0.5 xl:gap-1">
+        <button type="button" data-slide-target="1" class="slide-tab-btn active h-full px-1.5 text-xs cursor-pointer">
+          01 階梯 <span class="hidden xl:inline text-[10px] text-zinc-400">(Ladder)</span>
+        </button>
+        <button type="button" data-slide-target="2" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          02 築底 <span class="hidden xl:inline text-[10px] text-zinc-400">(Foundation)</span>
+        </button>
+        <button type="button" data-slide-target="3" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          03 本土偏誤 <span class="hidden xl:inline text-[10px] text-zinc-400">(Home Bias)</span>
+        </button>
+        <button type="button" data-slide-target="4" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          04 稅務護盾 <span class="hidden xl:inline text-[10px] text-zinc-400">(VWRA Tax)</span>
+        </button>
+        <button type="button" data-slide-target="5" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          05 β 與 α <span class="hidden xl:inline text-[10px] text-zinc-400">(Beta &amp; Alpha)</span>
+        </button>
+        <button type="button" data-slide-target="6" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          06 選股轉折 <span class="hidden xl:inline text-[10px] text-zinc-400">(Stock Pick)</span>
+        </button>
+        <button type="button" data-slide-target="7" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          07 金庫防禦 <span class="hidden xl:inline text-[10px] text-zinc-400">(Cash Vault)</span>
+        </button>
+        <button type="button" data-slide-target="8" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          08 複利實驗室 <span class="hidden xl:inline text-[10px] text-zinc-400">(DCA Lab)</span>
+        </button>
+        <button type="button" data-slide-target="9" class="slide-tab-btn h-full px-1.5 text-xs cursor-pointer">
+          09 退休壓測 <span class="hidden xl:inline text-[10px] text-zinc-400">(Stress Lab)</span>
+        </button>
+      </nav>
+
+      <!-- Right Compact FX Bar & Mode Switch -->
+      <div class="flex items-center gap-2 shrink-0">
+        <div class="flex items-center gap-1.5 bg-[#111217] border border-white/10 rounded px-2 py-1">
+          <span class="text-[11px] font-mono text-zinc-400">USD/MYR</span>
+          <input
+            id="fx-rate-input"
+            type="number"
+            step="0.01"
+            min="2.0"
+            max="12.0"
+            value="4.42"
+            aria-label="USD to MYR Exchange Rate"
+            class="w-12 bg-transparent text-center font-mono text-xs font-semibold text-[#e6c762] focus:outline-none"
+          />
+          <button
+            id="fx-sync-btn"
+            type="button"
+            title="同步最新匯率"
+            class="text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-white/[0.05] hover:bg-white/10 text-zinc-300 transition cursor-pointer"
+          >
+            SYNC
+          </button>
+        </div>
+        <span id="fx-status-badge" class="hidden 2xl:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono text-zinc-400 border border-white/10">
+          LIVE
+        </span>
+        <button
+          type="button"
+          data-toggle-mode
+          class="hidden sm:inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer"
+        >
+          切換簡報模式
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN 16:9 WIDESCREEN GALLERY CONTAINER
+       ======================================================================== -->
+  <main class="max-w-[1380px] mx-auto px-4 sm:px-8 py-10 space-y-24">
+
+    <!-- ======================================================================
+         HERO SHOWCASE (16:9 WIDESCREEN EDITORIAL COVER)
+         ====================================================================== -->
+    <section id="hero-showcase" class="pt-4 pb-8 border-b border-white/[0.08]">
+      <div class="max-w-4xl space-y-6">
+        <div class="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.2em] text-[#e6c762]">
+          <span>MALAYSIAN CHINESE WEALTH ARCHITECTURE</span>
+          <span class="text-zinc-600">/</span>
+          <span class="text-zinc-400">EMPIRICAL MONOGRAPH 2010–2025</span>
+        </div>
+
+        <h1 class="font-editorial text-3xl sm:text-5xl lg:text-[52px] font-bold text-[#f5f5f7] leading-[1.18] tracking-tight">
+          從十萬馬幣築底、雙重黃金交叉，<br class="hidden sm:inline" />
+          到<span class="text-[#e6c762]">永不破產的退休現金金庫</span>
+        </h1>
+
+        <p class="text-zinc-400 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl">
+          結合 2010–2025 大馬真實數據、《The Wealth Ladder》6 階理論與愛爾蘭 VWRA 稅務優勢，建構從築底到傳承的量化藍圖。
+        </p>
+
+        <!-- Clean Action Bar -->
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <button
+            type="button"
+            data-slide-target="1"
+            class="px-5 py-2.5 rounded text-xs sm:text-sm font-semibold bg-[#d4af37] hover:bg-[#e6c762] text-[#0a0b0e] transition cursor-pointer"
+          >
+            01 · 定位財富階梯與萬分之一法則 (The 6 Wealth Levels &amp; 0.01% Rule)
+          </button>
+          <button
+            type="button"
+            data-slide-target="5"
+            class="px-4 py-2.5 rounded text-xs sm:text-sm font-medium bg-[#111217] hover:bg-[#161820] text-[#e6c762] border border-[#d4af37]/40 transition cursor-pointer"
+          >
+            05 · 什麼是 Beta (β) 與 Alpha (α)
+          </button>
+          <button
+            type="button"
+            data-slide-target="8"
+            class="px-4 py-2.5 rounded text-xs sm:text-sm font-medium bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer"
+          >
+            08 · DCA 複利實驗室 (DCA Lab)
+          </button>
+          <button
+            type="button"
+            data-slide-target="9"
+            class="px-4 py-2.5 rounded text-xs sm:text-sm font-medium bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer"
+          >
+            09 · 4% 金庫 30 年壓測 (Stress Lab)
+          </button>
+        </div>
+      </div>
+
+      <!-- 5-Column Architectural Macro Strip (Hairline Divided, Zero Neon Boxes) -->
+      <div class="mt-12 pt-8 border-t border-white/[0.08] grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:divide-x lg:divide-white/[0.08]">
+        <div class="lg:pr-4">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-500">01 · 馬幣兌美金貶幅 (USD/MYR)</div>
+          <div class="stat-hero-value text-2xl sm:text-3xl font-bold text-[#e06c75] mt-1.5">-25.4%</div>
+          <div class="text-xs text-zinc-500 mt-1">3.05 (2013) ➔ <span data-fx-rate-display class="text-zinc-300 font-mono-num">4.42</span> MYR</div>
+        </div>
+        <div class="lg:px-6">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-500">02 · 馬股 15 年年化 (KLCI CAGR)</div>
+          <div class="stat-hero-value text-2xl sm:text-3xl font-bold text-zinc-200 mt-1.5">+0.53%<span class="text-sm font-normal text-zinc-500">/yr</span></div>
+          <div class="text-xs text-zinc-500 mt-1">2010–2025 價格原地踏步</div>
+        </div>
+        <div class="lg:px-6">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-500">03 · 全球股市年化 (VWRA CAGR)</div>
+          <div class="stat-hero-value text-2xl sm:text-3xl font-bold text-[#e6c762] mt-1.5">+11.1%<span class="text-sm font-normal text-zinc-500">/yr</span></div>
+          <div class="text-xs text-zinc-500 mt-1">15 年 RM 100k ➔ RM 527k</div>
+        </div>
+        <div class="lg:px-6">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-500">04 · 愛爾蘭稅盾 (UCITS Tax Shield)</div>
+          <div class="stat-hero-value text-2xl sm:text-3xl font-bold text-[#f5f5f7] mt-1.5">0% <span class="text-base font-normal text-zinc-400">遺產稅 (Estate Tax)</span></div>
+          <div class="text-xs text-zinc-500 mt-1">股息預扣稅 WHT 15% (省半 vs VT 30%)</div>
+        </div>
+        <div class="lg:pl-6">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-zinc-500">05 · 選股主動基金 (SPIVA 15Y)</div>
+          <div class="stat-hero-value text-2xl sm:text-3xl font-bold text-zinc-200 mt-1.5">88% <span class="text-base font-normal text-zinc-400">輸大盤 (Underperform)</span></div>
+          <div class="text-xs text-zinc-500 mt-1">Stage 3 前追 Alpha 為負期望值</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 01: 《THE WEALTH LADDER》財富六階梯 & 萬分之一法則 (0.01% RULE)
+         16:9 WIDESCREEN SPLIT: Left 6 Cols (6 Level Cards) × Right 6 Cols (Locator)
+         + Dedicated Architectural Sub-Band: 3 Original Malaysian Insights & 6-Level Matrix
+         ====================================================================== -->
+    <section class="slide-panel active space-y-6" data-slide-num="1" id="slide-1">
+      <!-- Clean Typographic Chapter Header (Compact for 16:9 Full-Frame Fit) -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-3 pb-3 border-b border-white/[0.08]">
+        <div>
+          <div class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-1">
+            CHAPTER 01 · THE 6 WEALTH LEVELS (USD / MYR) &amp; THE 0.01% RULE
+          </div>
+          <h2 class="font-editorial text-xl sm:text-2xl lg:text-[26px] font-bold text-[#f5f5f7] leading-tight">
+            《The Wealth Ladder》財富六階梯與萬分之一法則 — 美金（馬幣）定義與大馬降維優勢
+          </h2>
+        </div>
+        <p class="text-xs text-zinc-400 max-w-lg leading-relaxed">
+          以 10 倍美金數量級定義 6 個財富等級與「萬分之一法則（淨資產 ÷ 10,000 ＝ 每日無腦消費額）」，結合大馬購買力平價（PPP）打造實戰框架。
+        </p>
+      </div>
+
+      <!-- Primary 16:9 Widescreen Grid (Left 6 Cols: 6 Single-Line Level Bars × Right 6 Cols: Interactive Locator) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Left 6 Columns: 6 Minimalist Single-Line Wealth Level Bars (Zero Clutter) -->
+        <div class="lg:col-span-6 flex flex-col justify-between space-y-2">
+          <div class="flex items-center justify-between text-[11px] text-zinc-500 px-1">
+            <span class="font-mono uppercase tracking-wider">CLICK ANY LEVEL TO SIMULATE</span>
+            <span class="text-[#e6c762] font-mono">美金定義 (馬幣) · 萬分之一日額</span>
+          </div>
+
+          <!-- Level 1: < $10k USD -->
+          <div id="ladder-card-1" class="fintech-card fintech-card-interactive px-4 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-xs font-bold text-zinc-500 w-16 shrink-0">LEVEL 1</span>
+              <span class="text-sm font-bold text-[#f5f5f7] truncate">帳單生存階 <span class="text-xs text-zinc-400 font-normal">(Survival)</span></span>
+            </div>
+            <div class="text-right font-mono-num shrink-0">
+              <div class="text-xs font-semibold text-zinc-300">
+                &lt; $10k <span class="text-zinc-500">(<span data-usd-to-myr="10000" data-compact="true" data-prefix="&lt; ">&lt; RM 44k</span>)</span>
+              </div>
+              <div class="text-[11px] text-zinc-500">
+                0.01%：&lt; $1/日 (<span data-usd-to-myr="1" data-prefix="&lt; ">&lt; RM 4.4</span>)
+              </div>
+            </div>
+          </div>
+
+          <!-- Level 2: $10k – $100k USD -->
+          <div id="ladder-card-2" class="fintech-card fintech-card-interactive active-stage-card px-4 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-xs font-bold text-[#e6c762] w-16 shrink-0">LEVEL 2</span>
+              <span class="text-sm font-bold text-[#f5f5f7] truncate">超市茶室自由 <span class="text-xs text-zinc-400 font-normal">(Grocery Freedom)</span></span>
+            </div>
+            <div class="text-right font-mono-num shrink-0">
+              <div class="text-xs font-semibold text-[#e6c762]">
+                $10k–$100k <span class="text-zinc-400">(<span data-usd-range-to-myr="10000,100000" data-compact="true" data-prefix="">RM 44k–442k</span>)</span>
+              </div>
+              <div class="text-[11px] text-[#e6c762]/80">
+                0.01%：$1–$10/日 (<span data-usd-range-to-myr="1,10" data-prefix="">RM 4.4–44</span>)
+              </div>
+            </div>
+          </div>
+
+          <!-- Level 3: $100k – $1M USD -->
+          <div id="ladder-card-3" class="fintech-card fintech-card-interactive px-4 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-xs font-bold text-[#e6c762] w-16 shrink-0">LEVEL 3</span>
+              <span class="text-sm font-bold text-[#f5f5f7] truncate">餐廳自由·大馬FIRE <span class="text-xs text-[#e6c762] font-normal">(Dining &amp; FIRE)</span></span>
+            </div>
+            <div class="text-right font-mono-num shrink-0">
+              <div class="text-xs font-semibold text-zinc-200">
+                $100k–$1M <span class="text-zinc-500">(<span data-usd-range-to-myr="100000,1000000" data-compact="true" data-prefix="">RM 442k–4.42M</span>)</span>
+              </div>
+              <div class="text-[11px] text-zinc-400">
+                0.01%：$10–$100/日 (<span data-usd-range-to-myr="10,100" data-prefix="">RM 44–442</span>)
+              </div>
+            </div>
+          </div>
+
+          <!-- Level 4: $1M – $10M USD -->
+          <div id="ladder-card-4" class="fintech-card fintech-card-interactive px-4 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-xs font-bold text-zinc-400 w-16 shrink-0">LEVEL 4</span>
+              <span class="text-sm font-bold text-[#f5f5f7] truncate">跨國商務留學 <span class="text-xs text-zinc-400 font-normal">(Travel &amp; Global)</span></span>
+            </div>
+            <div class="text-right font-mono-num shrink-0">
+              <div class="text-xs font-semibold text-zinc-300">
+                $1M–$10M <span class="text-zinc-500">(<span data-usd-range-to-myr="1000000,10000000" data-compact="true" data-prefix="">RM 4.42M–44.2M</span>)</span>
+              </div>
+              <div class="text-[11px] text-zinc-500">
+                0.01%：$100–$1k/日 (<span data-usd-range-to-myr="100,1000" data-prefix="">RM 442–4.4k</span>)
+              </div>
+            </div>
+          </div>
+
+          <!-- Level 5: $10M – $100M USD -->
+          <div id="ladder-card-5" class="fintech-card fintech-card-interactive px-4 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-xs font-bold text-zinc-500 w-16 shrink-0">LEVEL 5</span>
+              <span class="text-sm font-bold text-[#f5f5f7] truncate">全球置產主權 <span class="text-xs text-zinc-400 font-normal">(Global Real Estate)</span></span>
+            </div>
+            <div class="text-right font-mono-num shrink-0">
+              <div class="text-xs font-semibold text-zinc-300">
+                $10M–$100M <span class="text-zinc-500">(<span data-usd-range-to-myr="10000000,100000000" data-compact="true" data-prefix="">RM 44.2M–442M</span>)</span>
+              </div>
+              <div class="text-[11px] text-zinc-500">
+                0.01%：$1k–$10k/日 (<span data-usd-range-to-myr="1000,10000" data-compact="true" data-prefix="">RM 4.4k–44k</span>)
+              </div>
+            </div>
+          </div>
+
+          <!-- Level 6: > $100M+ USD -->
+          <div id="ladder-card-6" class="fintech-card fintech-card-interactive px-4 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="font-mono text-xs font-bold text-zinc-500 w-16 shrink-0">LEVEL 6</span>
+              <span class="text-sm font-bold text-[#f5f5f7] truncate">社會影響傳承 <span class="text-xs text-zinc-400 font-normal">(Legacy &amp; Impact)</span></span>
+            </div>
+            <div class="text-right font-mono-num shrink-0">
+              <div class="text-xs font-semibold text-zinc-300">
+                &gt; $100M+ <span class="text-zinc-500">(<span data-usd-to-myr="100000000" data-compact="true" data-prefix="&gt; " data-suffix="+">&gt; RM 442M+</span>)</span>
+              </div>
+              <div class="text-[11px] text-zinc-500">
+                0.01%：&gt; $10k+/日 (<span data-usd-to-myr="10000" data-compact="true" data-prefix="&gt; " data-suffix="+">&gt; RM 44k+</span>)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 6 Columns: Interactive 6-Level Wealth Ladder & 0.01% Rule Locator -->
+        <div class="lg:col-span-6 fintech-card p-4 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-white/[0.08]">
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">6-LEVEL &amp; 0.01% DIAGNOSTIC</div>
+              <h3 class="text-base font-bold text-[#f5f5f7]">我的 6 階財富定位與萬分之一法則計算機</h3>
+            </div>
+            <div class="flex flex-wrap items-center gap-1">
+              <button
+                type="button"
+                data-locator-preset
+                data-usd="5000"
+                data-sal="4000"
+                data-sav="25"
+                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+              >
+                L1 新鮮人 (Grad)
+              </button>
+              <button
+                type="button"
+                data-locator-preset
+                data-usd="40000"
+                data-sal="6800"
+                data-sav="30"
+                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+              >
+                L2 築底白領 (Pro)
+              </button>
+              <button
+                type="button"
+                data-locator-preset
+                data-usd="180000"
+                data-sal="10500"
+                data-sav="35"
+                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+              >
+                L3A 衝刺 (Sprint)
+              </button>
+              <button
+                type="button"
+                data-locator-preset
+                data-usd="420000"
+                data-sal="15000"
+                data-sav="40"
+                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+              >
+                L3B 大馬FIRE (Freedom)
+              </button>
+              <button
+                type="button"
+                data-locator-preset
+                data-usd="1500000"
+                data-sal="28000"
+                data-sav="45"
+                class="px-2 py-0.5 rounded text-[11px] bg-white/[0.04] hover:bg-white/[0.08] text-zinc-300 border border-white/10 transition cursor-pointer"
+              >
+                L4 百萬美金 (HNW)
+              </button>
+            </div>
+          </div>
+
+          <!-- 3-Column Compact Sliders Strip -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1">
+              <div class="flex items-center justify-between text-[11px]">
+                <label for="locator-nw-input" class="text-zinc-400">1. 淨資產 (Net Worth)</label>
+                <span id="locator-nw-usd" class="font-mono-num text-[#e6c762]">≈ $40,724</span>
+              </div>
+              <input
+                id="locator-nw-input"
+                type="number"
+                step="5000"
+                min="0"
+                max="800000000"
+                value="180000"
+                class="w-full bg-[#111217] border border-white/10 rounded px-2 py-0.5 text-xs font-mono-num font-bold text-[#f5f5f7] focus:outline-none focus:border-[#d4af37]"
+              />
+              <input
+                id="locator-nw-slider"
+                type="range"
+                min="0"
+                max="6000000"
+                step="10000"
+                value="180000"
+                class="fintech-slider"
+              />
+            </div>
+
+            <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1">
+              <div class="flex items-center justify-between text-[11px]">
+                <label for="locator-sal-input" class="text-zinc-400">2. 月薪 (Monthly Salary)</label>
+                <span id="locator-sal-usd" class="font-mono-num text-zinc-500">≈ $1,470</span>
+              </div>
+              <input
+                id="locator-sal-input"
+                type="number"
+                step="500"
+                min="1000"
+                max="300000"
+                value="6500"
+                class="w-full bg-[#111217] border border-white/10 rounded px-2 py-0.5 text-xs font-mono-num font-bold text-[#f5f5f7] focus:outline-none focus:border-[#d4af37]"
+              />
+              <input
+                id="locator-sal-slider"
+                type="range"
+                min="2000"
+                max="40000"
+                step="500"
+                value="6500"
+                class="fintech-slider"
+              />
+            </div>
+
+            <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] flex flex-col justify-between space-y-1">
+              <div class="text-[11px] text-zinc-400">3. 儲蓄率 (Savings Rate)</div>
+              <div id="locator-sav-val" class="font-mono-num text-xs font-semibold text-[#e6c762]">30% (RM 1,950/月)</div>
+              <input
+                id="locator-sav-slider"
+                type="range"
+                min="5"
+                max="70"
+                step="5"
+                value="30"
+                class="fintech-slider"
+              />
+            </div>
+          </div>
+
+          <!-- Diagnostic Output -->
+          <div class="space-y-2.5">
+            <!-- Current Level Badge + 10x Level Progress Bar -->
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center justify-between gap-1">
+                <div id="locator-stage-badge" class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono uppercase tracking-wider text-[#e6c762] border border-[#d4af37]/40 bg-[#d4af37]/10">
+                  CURRENT POSITION · LEVEL 2
+                </div>
+                <span id="locator-level-progress-label" class="text-[10px] font-mono text-zinc-400"></span>
+              </div>
+              <div class="w-full h-1 bg-[#0a0b0e] rounded-full overflow-hidden border border-white/[0.07]">
+                <div id="locator-level-progress-bar" class="h-full bg-[#d4af37] transition-all duration-300" style="width: 34%"></div>
+              </div>
+            </div>
+
+            <!-- 0.01% Rule Box (萬分之一法則 + Spend One Level Below) -->
+            <div class="p-3 rounded-lg bg-[#0a0b0e] border border-[#d4af37]/35 space-y-1">
+              <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-zinc-400">
+                <span>萬分之一法則 (The 0.01% Rule ＝ Net Worth ÷ 10,000)</span>
+                <span class="text-[#e6c762]">3.65% SWR 微積分版</span>
+              </div>
+              <div id="locator-free-spend" class="text-sm font-bold text-[#e6c762] font-mono-num">
+                RM 18 / 日
+              </div>
+              <div id="locator-lifestyle-tier" class="text-[11px] text-[#f5f5f7] font-medium">
+                LEVEL 2 · 超市採買與茶室加料自由
+              </div>
+              <div id="locator-spend-below-rule" class="text-[11px] text-zinc-400 pt-1 border-t border-white/[0.06]">
+                降一階守富原則（Spend at Level 1）：日常吃喝免糾結，但房租與車貸嚴格從簡。
+              </div>
+            </div>
+
+            <!-- Key Metrics Hairline Grid -->
+            <div class="grid grid-cols-3 gap-2 p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] text-[11px]">
+              <div>
+                <div class="text-zinc-500">預估年增值 (Passive Gain 8.5%)</div>
+                <div id="locator-passive-ratio" class="mt-0.5 font-mono-num"></div>
+              </div>
+              <div class="border-l border-white/[0.07] pl-2">
+                <div class="text-zinc-500">第一交叉 (&gt;年儲蓄 / 1st Crossover)</div>
+                <div id="locator-c1-years" class="mt-0.5 font-mono-num"></div>
+              </div>
+              <div class="border-l border-white/[0.07] pl-2">
+                <div class="text-zinc-500">第二交叉 (&gt;總年薪 / 2nd Crossover)</div>
+                <div id="locator-c2-years" class="mt-0.5 font-mono-num"></div>
+              </div>
+            </div>
+
+            <!-- Action / Allocation / Taboo Hairline List -->
+            <div class="divide-y divide-white/[0.07] text-[11px] leading-snug border-t border-white/[0.07]">
+              <div class="py-1.5">
+                <span class="font-mono uppercase tracking-wider text-[#e6c762] mr-1.5">01 通關引擎 (Key Engine)</span>
+                <span id="locator-action-text" class="text-zinc-300"></span>
+              </div>
+              <div class="py-1.5">
+                <span class="font-mono uppercase tracking-wider text-zinc-400 mr-1.5">02 建議配置 (Allocation)</span>
+                <span id="locator-alloc-text" class="text-zinc-300"></span>
+              </div>
+              <div class="py-1.5">
+                <span class="font-mono uppercase tracking-wider text-[#e06c75] mr-1.5">03 致命陷阱 (Key Pitfall)</span>
+                <span id="locator-taboo-text" class="text-zinc-400"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           ARCHITECTURAL SUB-BAND: BEYOND THE BOOK (3 KEYNOTE STAT CARDS + COLLAPSIBLE MATRIX)
+           ==================================================================== -->
+      <div class="pt-6 border-t border-white/[0.08] space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Insight 1: Minimalist Stat Card -->
+          <div class="fintech-card p-5 space-y-2">
+            <div class="flex items-baseline justify-between">
+              <span class="font-mono text-2xl font-bold text-[#e6c762]">3.65%<span class="text-xs font-normal text-zinc-500"> / 年</span></span>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-500">01 · 0.01% × 365 DAYS</span>
+            </div>
+            <h4 class="text-sm font-bold text-[#f5f5f7]">
+              萬分之一法則 ＝ 4% 退休提領率的「每日微積分版」
+            </h4>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              低於淨資產萬分之一的單次升級（加菜、買書、升等）由股市自然增值買單，核心價值在於<strong class="text-[#e6c762]">消滅小錢內耗、保護大腦決策頻寬</strong>。
+            </p>
+          </div>
+
+          <!-- Insight 2: Minimalist Stat Card -->
+          <div class="fintech-card p-5 space-y-2">
+            <div class="flex items-baseline justify-between">
+              <span class="font-mono text-2xl font-bold text-[#e6c762]">2.3x<span class="text-xs font-normal text-zinc-500"> PPP 槓桿</span></span>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-500">02 · MALAYSIAN ARBITRAGE</span>
+            </div>
+            <h4 class="text-sm font-bold text-[#f5f5f7]">
+              大馬跨階套利：為何美國人要到 L4 才自由，大馬人 L3B 就破關？
+            </h4>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              透過 VWRA 賺美元指數、花馬幣物價，當資產達 <strong class="text-[#e6c762]">Level 3B ($340k USD / RM 1.5M)</strong> 時，在大馬的生活自由度已等同紐約客的 Level 4 ($1M USD)。
+            </p>
+          </div>
+
+          <!-- Insight 3: Minimalist Stat Card -->
+          <div class="fintech-card p-5 space-y-2">
+            <div class="flex items-baseline justify-between">
+              <span class="font-mono text-2xl font-bold text-[#f5f5f7]">Level N-1</span>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[#e06c75]">03 · ANTI-FRAGILE RULE</span>
+            </div>
+            <h4 class="text-sm font-bold text-[#f5f5f7]">
+              爬階靠「換引擎」，守階靠「降一階定常消費」
+            </h4>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              中產返貧皆因把萬分之一單次額度變成剛性車貸房貸。鐵律：<strong class="text-[#f5f5f7]">資產在 Level N，固定開銷鎖死在 Level N-1</strong>，單次犒賞才用 0.01%。
+            </p>
+          </div>
+        </div>
+
+        <!-- Collapsible Full 6-Level Quantitative Matrix Table (Hidden by default to keep screen ultra-clean) -->
+        <details class="fintech-card group">
+          <summary class="px-5 py-3.5 cursor-pointer list-none flex items-center justify-between text-xs font-mono text-zinc-300 hover:text-[#e6c762] transition">
+            <span>TABLE 01 · 展開《The Wealth Ladder》6 個財富等級 × 萬分之一法則 × 大馬實戰完整對照表 (The 6 Wealth Levels Matrix)</span>
+            <span class="text-[#e6c762] group-open:rotate-180 transition-transform">▼ EXPAND MATRIX</span>
+          </summary>
+          <div class="px-5 pb-5 pt-2 border-t border-white/[0.08] overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="border-b border-white/10 text-zinc-500 font-mono uppercase">
+                  <th class="py-2 pr-3">階梯 (Level)</th>
+                  <th class="py-2 px-3">美金數量級 (USD)</th>
+                  <th class="py-2 px-3">馬幣對照 (MYR)</th>
+                  <th class="py-2 px-3">0.01% 日額 (Daily)</th>
+                  <th class="py-2 px-3">消費自由 (Lifestyle)</th>
+                  <th class="py-2 pl-3">破局引擎 &amp; 致命陷阱 (Strategy &amp; Pitfalls)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/[0.06] text-zinc-300">
+                <tr>
+                  <td class="py-2 pr-3 font-mono font-bold text-zinc-400">Level 1</td>
+                  <td class="py-2 px-3 font-mono-num">&lt; $10,000</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-400" data-usd-to-myr="10000" data-compact="true" data-prefix="&lt; ">&lt; RM 44k</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-400">&lt; $1/日 (<span data-usd-to-myr="1" data-prefix="&lt; ">&lt; RM 4.4</span>)</td>
+                  <td class="py-2 px-3">帳單生存期 (Survival)</td>
+                  <td class="py-2 pl-3 text-zinc-400">清償卡債 + 6 個月預備金 (MMF)｜忌賭仙股 (Penny Stocks) 與高倍槓桿</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-3 font-mono font-bold text-[#e6c762]">Level 2</td>
+                  <td class="py-2 px-3 font-mono-num">$10k – $100k</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-200" data-usd-range-to-myr="10000,100000" data-compact="true" data-prefix="">RM 44k–442k</td>
+                  <td class="py-2 px-3 font-mono-num text-[#e6c762]">$1–$10/日 (<span data-usd-range-to-myr="1,10" data-prefix="">RM 4.4–44</span>)</td>
+                  <td class="py-2 px-3"><strong class="text-[#f5f5f7]">超市與茶室加料 (Grocery)</strong></td>
+                  <td class="py-2 pl-3 text-zinc-300">本業升遷拉高儲蓄 + 100% VWRA｜忌天天盯盤當沖 (Day Trading)</td>
+                </tr>
+                <tr class="bg-[#d4af37]/[0.06]">
+                  <td class="py-2 pr-3 font-mono font-bold text-[#e6c762]">Level 3 ★</td>
+                  <td class="py-2 px-3 font-mono-num font-semibold text-[#e6c762]">$100k – $1M</td>
+                  <td class="py-2 px-3 font-mono-num font-semibold text-[#e6c762]" data-usd-range-to-myr="100000,1000000" data-compact="true" data-prefix="">RM 442k–4.42M</td>
+                  <td class="py-2 px-3 font-mono-num font-semibold text-[#e6c762]">$10–$100/日 (<span data-usd-range-to-myr="10,100" data-prefix="">RM 44–442</span>)</td>
+                  <td class="py-2 px-3"><strong class="text-[#e6c762]">餐廳自由 × 大馬 FIRE 區</strong></td>
+                  <td class="py-2 pl-3 text-zinc-200">3A 純 Beta；3B 建 3 年金庫 (Cash Vault) + ≤8% Alpha｜忌只買馬股</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-3 font-mono font-bold text-zinc-200">Level 4</td>
+                  <td class="py-2 px-3 font-mono-num">$1M – $10M</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-200" data-usd-range-to-myr="1000000,10000000" data-compact="true" data-prefix="">RM 4.42M–44.2M</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-300">$100–$1k/日 (<span data-usd-range-to-myr="100,1000" data-prefix="">RM 442–4.4k</span>)</td>
+                  <td class="py-2 px-3"><strong class="text-[#f5f5f7]">跨國商務艙與留學 (Travel)</strong></td>
+                  <td class="py-2 pl-3 text-zinc-300">愛爾蘭 UCITS 避開 40% 美股遺產稅 (Estate Tax)｜忌重金跨界創業</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-3 font-mono font-bold text-zinc-400">Level 5</td>
+                  <td class="py-2 px-3 font-mono-num">$10M – $100M</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-400" data-usd-range-to-myr="10000000,100000000" data-compact="true" data-prefix="">RM 44.2M–442M</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-400">$1k–$10k/日 (<span data-usd-range-to-myr="1000,10000" data-compact="true" data-prefix="">RM 4.4k–44k</span>)</td>
+                  <td class="py-2 px-3">全球置產主權 (Real Estate)</td>
+                  <td class="py-2 pl-3 text-zinc-400">離岸家族信託 (Offshore Trust) 與多幣別配置｜忌負現金流虛榮資產</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-3 font-mono font-bold text-zinc-400">Level 6</td>
+                  <td class="py-2 px-3 font-mono-num">&gt; $100M+</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-400" data-usd-to-myr="100000000" data-compact="true" data-prefix="&gt; " data-suffix="+">&gt; RM 442M+</td>
+                  <td class="py-2 px-3 font-mono-num text-zinc-400">&gt; $10k+/日 (<span data-usd-to-myr="10000" data-compact="true" data-prefix="&gt; " data-suffix="+">&gt; RM 44k+</span>)</td>
+                  <td class="py-2 px-3">社會影響力 (Philanthropy)</td>
+                  <td class="py-2 pl-3 text-zinc-400">單一家族辦公室 (SFO) 治理｜忌家族爭產與企業連帶擔保</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 02: 第一階段（築底期 < RM 100k）
+         16:9 WIDESCREEN GALLERY: Left 4 Cols Thesis × Right 8 Cols Chart 05
+         ====================================================================== -->
+    <section class="slide-panel space-y-8 pt-8 border-t border-white/[0.08]" data-slide-num="2" id="slide-2">
+      <!-- Primary 16:9 Frame: Left 4 Cols + Right 8 Cols -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left 4 Columns: Editorial Thesis & Hairline Spec List -->
+        <div class="lg:col-span-4 space-y-5">
+          <div>
+            <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-2">
+              CHAPTER 02 · LEVEL 1–2 FOUNDATION (&lt; $100k USD / RM 100k)
+            </div>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7] leading-snug">
+              築底期 (Foundation) — 為什麼本金少時，你不該天天看盤選股？
+            </h2>
+            <p class="mt-2.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              本金僅 <span data-dual-myr="10000">RM 10,000</span> 時，決定財富速度的從來不是選股報酬率，而是<strong class="text-[#f5f5f7]">本業職涯現金流與儲蓄率 (Active Career Income Alpha)</strong>。
+            </p>
+          </div>
+
+          <div class="divide-y divide-white/[0.08] border-y border-white/[0.08] text-xs leading-relaxed">
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e06c75] uppercase tracking-wider">01 · THE 20% ILLUSION (散戶幻覺)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">本金 1 萬拼 20% 年化，月賺僅 RM 166 (Active Stock Picking)</div>
+              <p class="text-zinc-400">
+                每天盯盤 3 小時就算打出巴菲特級 20% 報酬，一年也僅多賺 <span data-dual-myr="2000">RM 2,000</span>。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">02 · CAREER ALPHA LEVERAGE (本業槓桿)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">每月多存 RM 1,500 ＝ 首年 +180% 確定回報 (Guaranteed Alpha)</div>
+              <p class="text-zinc-400">
+                精進本業每月多存 <span data-dual-myr="1500">RM 1,500</span> 買入 VWRA，5 年資產達 <span data-dual-myr="124110">RM 124,110</span>（散戶組 5 倍）。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">03 · EXECUTION PROTOCOL (執行標準程序)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">唯一行動：6 個月預備金 (MMF) + 自動定投 VWRA (Automated DCA)</div>
+              <p class="text-zinc-400">
+                預備金放 Versa / GO+ 貨幣基金享 ~3.6% 收益，閒錢設定自動扣款後即可關掉看盤軟體。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 8 Columns: Full Widescreen Gallery Chart 05 -->
+        <div class="lg:col-span-8 space-y-3">
+          <div
+            class="chart-img-frame"
+            data-zoom-chart
+            data-zoom-caption="圖表 5：第一階段殘酷真相 — 本金 RM 10,000 時，「拼年化 20% 股神報酬」vs「專注本業每月多存 RM 1,500（年化 8%）」5 年資產累積差距圖"
+          >
+            <img
+              src="assets/charts/05_stage1_work_vs_invest.png"
+              alt="第一階段本業儲蓄 vs 投資報酬 5 年實證對比圖"
+              class="w-full h-auto block"
+            />
+            <div class="bg-[#111217] px-4 py-2 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="text-zinc-400 font-mono">
+                FIG 05 · STAGE 1 CAPITAL ACCUMULATION (60 MONTHS)
+              </span>
+              <span class="text-[#e6c762] font-mono text-[11px]">CLICK TO ENLARGE 300-DPI</span>
+            </div>
+          </div>
+
+          <!-- Collapsible Comparison Table -->
+          <details class="fintech-card group">
+            <summary class="px-4 py-2.5 cursor-pointer list-none flex items-center justify-between text-xs font-mono text-zinc-400 hover:text-[#e6c762] transition">
+              <span>TABLE 02 · 展開 5 年期末資產量化對照表 (起始本金 RM 10,000 · 5-Year Capital Model)</span>
+              <span class="text-[#e6c762] group-open:rotate-180 transition-transform">▼ EXPAND DATA</span>
+            </summary>
+            <div class="px-4 pb-4 pt-2 border-t border-white/[0.08] overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="border-b border-white/10 text-zinc-500 font-mono uppercase">
+                    <th class="py-2 pr-3">策略路徑 (Strategy)</th>
+                    <th class="py-2 px-3">每月定投 (Monthly DCA)</th>
+                    <th class="py-2 px-3">年化報酬 (CAGR)</th>
+                    <th class="py-2 px-3">第 1 年新增 (Y1 Gain)</th>
+                    <th class="py-2 pl-3">5 年後總資產 (Ending Wealth)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/[0.06] text-zinc-300 font-mono-num">
+                  <tr>
+                    <td class="py-2 pr-3 text-[#e06c75]">散戶盯盤拼仙股 (Active Stock Picking)</td>
+                    <td class="py-2 px-3">RM 0</td>
+                    <td class="py-2 px-3 text-[#e06c75]">20.0%</td>
+                    <td class="py-2 px-3">+RM 2,000</td>
+                    <td class="py-2 pl-3" data-dual-myr="24883">RM 24,883</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 pr-3 text-zinc-300">微薄儲蓄 (Low Savings Rate)</td>
+                    <td class="py-2 px-3">RM 300 / 月</td>
+                    <td class="py-2 px-3">8.0% (VWRA)</td>
+                    <td class="py-2 px-3">+RM 4,536</td>
+                    <td class="py-2 pl-3" data-dual-myr="36577">RM 36,577</td>
+                  </tr>
+                  <tr class="bg-[#d4af37]/[0.06]">
+                    <td class="py-2 pr-3 font-semibold text-[#e6c762]">專注本業 + 指數 (Career Alpha + Beta)</td>
+                    <td class="py-2 px-3 font-semibold text-[#e6c762]">RM 1,500 / 月</td>
+                    <td class="py-2 px-3 text-[#e6c762]">8.0% (VWRA)</td>
+                    <td class="py-2 px-3 text-[#e6c762]">+RM 19,440</td>
+                    <td class="py-2 pl-3 font-bold text-[#e6c762]" data-dual-myr="124110">RM 124,110</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 03: 第二階段上篇（大馬人痛點與黃金交叉）
+         16:9 WIDESCREEN GALLERY: Left 4 Cols Thesis × Right 8 Cols Chart 01 / 03
+         ====================================================================== -->
+    <section class="slide-panel space-y-8 pt-8 border-t border-white/[0.08]" data-slide-num="3" id="slide-3">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left 4 Columns -->
+        <div class="lg:col-span-4 space-y-5">
+          <div>
+            <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-2">
+              CHAPTER 03 · LEVEL 2–3A ACCELERATION ($25k–$340k USD / RM 100k–1.5M)
+            </div>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7] leading-snug">
+              放大期上篇 — 本土偏誤代價與「雙黃金交叉」轉折點 (Home Bias &amp; Crossover)
+            </h2>
+            <p class="mt-2.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              跨越十萬馬幣後，若只買馬股與定存，資產將被匯率貶值與低成長雙重吞噬。
+            </p>
+          </div>
+
+          <div class="divide-y divide-white/[0.08] border-y border-white/[0.08] text-xs leading-relaxed">
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e06c75] uppercase tracking-wider">01 · PURCHASING POWER EROSION (購買力實質縮水)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">馬幣 12 年貶幅逾 25% (USD/MYR Currency Drag)</div>
+              <p class="text-zinc-400">
+                匯率由 3.05 貶至 4.10–4.70 區間，進口商品、科技與海外留學成本全面飆升。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">02 · BURSA 15-YEAR STAGNATION (馬股原地踏步)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">馬股 KLCI 價格年化 +0.5% vs 全球股市 +11.1%</div>
+              <p class="text-zinc-400">
+                2010–2025 年間，RM 100k 投入全球股市成長至 RM 527k，是馬股與 EPF 的兩倍以上。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">03 · EPF FLOOR &amp; DUAL CROSSOVER (公積金底倉與雙重黃金交叉)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">EPF 當馬幣底倉，閒錢 100% 衝刺雙黃金交叉</div>
+              <p class="text-zinc-400">
+                第 7 年達成「第一交叉 (Return &gt; Annual Savings)」；第 18 年達成「第二交叉 (Return &gt; Annual Salary)」。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 8 Columns: Sub-Tab Chart Switcher + Full Widescreen Chart -->
+        <div class="lg:col-span-8 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-white/[0.08]">
+            <div class="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                data-slide3-chart="01"
+                class="px-3 py-1.5 rounded text-xs font-semibold bg-[#d4af37]/15 text-[#e6c762] border border-[#d4af37]/50 transition-all cursor-pointer"
+              >
+                FIG 01 · 大馬本土偏誤代價 (Home Bias Penalty)
+              </button>
+              <button
+                type="button"
+                data-slide3-chart="03"
+                class="px-3 py-1.5 rounded text-xs font-medium bg-white/[0.03] text-zinc-400 border border-white/10 hover:text-white transition-all cursor-pointer"
+              >
+                FIG 03 · 雙黃金交叉轉折點 (Dual Crossovers)
+              </button>
+              <button
+                type="button"
+                data-slide3-chart="both"
+                class="px-3 py-1.5 rounded text-xs font-medium bg-white/[0.03] text-zinc-400 border border-white/10 hover:text-white transition-all cursor-pointer"
+              >
+                同時展開雙圖 (Both Charts)
+              </button>
+            </div>
+            <span class="text-[11px] font-mono text-zinc-500">SELECT EMPIRICAL VIEW</span>
+          </div>
+
+          <!-- Chart 01 Container -->
+          <div id="slide3-chart-panel-01">
+            <div
+              class="chart-img-frame"
+              data-zoom-chart
+              data-zoom-caption="圖表 1：馬來西亞人的本土偏誤代價（2010–2025 真實歷史數據對比，以 RM 100,000 起始本金計算）"
+            >
+              <img
+                src="assets/charts/01_bursa_epf_vs_world_myr.png"
+                alt="馬來西亞本土偏誤代價：全球股市 vs EPF vs Bursa KLCI"
+                class="w-full h-auto block"
+              />
+              <div class="bg-[#111217] px-4 py-2.5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span class="text-zinc-400 font-mono">
+                  FIG 01 · RM 100,000 IN FTSE ALL-WORLD (MYR) GREW TO RM 527,350 VS EPF (RM 239,844)
+                </span>
+                <span class="text-[#e6c762] font-mono text-[11px]">CLICK TO ENLARGE 300-DPI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart 03 Container -->
+          <div id="slide3-chart-panel-03" class="hidden">
+            <div
+              class="chart-img-frame"
+              data-zoom-chart
+              data-zoom-caption="圖表 3：財富階梯的轉折點 — 什麼時候「資產收益」會正式超越「工作收入」？（雙黃金交叉圖）"
+            >
+              <img
+                src="assets/charts/03_crossover_point.png"
+                alt="財富階梯雙黃金交叉圖"
+                class="w-full h-auto block"
+              />
+              <div class="bg-[#111217] px-4 py-2.5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span class="text-zinc-400 font-mono">
+                  FIG 03 · CROSSOVER I (YEAR 7: RETURN &gt; SAVINGS) &amp; CROSSOVER II (YEAR 18: RETURN &gt; SALARY)
+                </span>
+                <span class="text-[#e6c762] font-mono text-[11px]">CLICK TO ENLARGE 300-DPI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 04: 第二階段下篇（為什麼首推愛爾蘭 VWRA？）
+         16:9 WIDESCREEN GALLERY:
+           Row 1: Left 4 Cols Thesis × Right 8 Cols Chart 02
+           Row 2: Left 5 Cols US Estate Tax Live Sim × Right 7 Cols ETF Spec Table
+         ====================================================================== -->
+    <section class="slide-panel space-y-8 pt-8 border-t border-white/[0.08]" data-slide-num="4" id="slide-4">
+      <!-- Row 1: Primary 16:9 Gallery Frame -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left 4 Columns -->
+        <div class="lg:col-span-4 space-y-5">
+          <div>
+            <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-2">
+              CHAPTER 04 · LEVEL 2–4 TAX ARCHITECTURE · VWRA VS VWRD VS VT
+            </div>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7] leading-snug">
+              放大期下篇 — 為什麼首推愛爾蘭 VWRA？ (Ireland UCITS Tax Shield)
+            </h2>
+            <p class="mt-2.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              選錯 ETF 註冊地，25 年將少賺 25%–35% 退休金，並暴露於 <strong class="text-[#e06c75]">40% 美國遺產稅 (US Estate Tax)</strong>。
+            </p>
+          </div>
+
+          <div class="divide-y divide-white/[0.08] border-y border-white/[0.08] text-xs leading-relaxed">
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e06c75] uppercase tracking-wider">01 · DIVIDEND WITHHOLDING TAX (30% ➔ 15%)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">愛爾蘭 UCITS 協定，美股股息預扣稅 (WHT) 直接砍半</div>
+              <p class="text-zinc-400">
+                大馬人買美股 VT 預扣 30% 股息稅；改買倫敦上市愛爾蘭註冊 VWRA 僅扣 15%。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e06c75] uppercase tracking-wider">02 · 40% US ESTATE TAX SHIELD (美國遺產稅護盾)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">非美籍持美股逾 $60k 課 40% 遺產稅；VWRA 享 0% 豁免</div>
+              <p class="text-zinc-400">
+                直接持有 VT / VOO 超過 $60,000 USD（<span data-usd-to-myr="60000">≈ RM 265,200</span>）身故最高課 40%。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">03 · AUTO-ACCUMULATING (累積型自動再投資)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">累積型自動再投入，25 年比配息型 VWRD 多賺 $128k USD</div>
+              <p class="text-zinc-400">
+                消滅手動買回手續費、匯差與人性花掉股息的漏損，終值多出 <span data-dual-usd="128613">$128,613 USD</span>。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 8 Columns: Chart 02 -->
+        <div class="lg:col-span-8">
+          <div
+            class="chart-img-frame"
+            data-zoom-chart
+            data-zoom-caption="圖表 2：為什麼首推 VWRA？「VWRA（累積型）vs VWRD（配息型）vs 美股 VT」25 年真實摩擦成本與複利差距"
+          >
+            <img
+              src="assets/charts/02_vwra_vs_vwrd_vs_vt.png"
+              alt="VWRA vs VWRD vs VT 25 年複利差距實證圖"
+              class="w-full h-auto block"
+            />
+            <div class="bg-[#111217] px-4 py-2.5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="text-zinc-400 font-mono">
+                FIG 02 · 25-YEAR DCA ($10K INIT + $500/MO) — VWRA REACHES $580,973 USD (<span data-usd-to-myr="580973">≈ RM 2.57M</span>)
+              </span>
+              <span class="text-[#e6c762] font-mono text-[11px]">CLICK TO ENLARGE 300-DPI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Architectural Sub-Band (Left 5 Cols Estate Tax Sim × Right 7 Cols ETF Spec Sheet) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-6 border-t border-white/[0.07]">
+        <!-- Left 5 Cols: Interactive US Estate Tax Micro-Simulator -->
+        <div class="lg:col-span-5 fintech-card p-5 flex flex-col justify-between space-y-4">
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">INTERACTIVE TAX SIMULATOR</span>
+              <span class="text-[10px] font-mono text-zinc-500">NRA THRESHOLD: $60,000 USD</span>
+            </div>
+            <h3 class="text-base font-bold text-[#f5f5f7]">
+              美股 40% 遺產稅與股息稅漏損試算 (US Tax Drag Simulator)
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              拖曳滑桿比較當海外組合長大時，持有美股註冊 ETF（VT / VOO）與愛爾蘭註冊 VWRA 的稅務曝險差距：
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-zinc-400">海外組合規模 (Portfolio USD)</span>
+              <span id="micro-estate-port-val" class="font-mono-num font-bold text-[#f5f5f7]">$350,000 USD</span>
+            </div>
+            <input
+              id="micro-estate-usd-slider"
+              type="range"
+              min="50000"
+              max="1500000"
+              step="25000"
+              value="350000"
+              class="fintech-slider"
+            />
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>$50k</span>
+              <span class="text-[#e06c75]">$60k 免稅線 (NRA Line)</span>
+              <span>$750k</span>
+              <span>$1.5M USD</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
+            <div class="p-3 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1">
+              <div class="text-[11px] text-zinc-400">美股 VT / VOO 遺產稅曝險 (Estate Tax)</div>
+              <div id="micro-estate-vt-tax" class="text-sm font-mono-num font-bold text-[#e06c75]"></div>
+              <div class="text-[11px] text-zinc-500">超過 $60k USD 部分課徵 40%</div>
+            </div>
+            <div class="p-3 rounded-lg bg-[#0a0b0e] border border-[#d4af37]/35 space-y-1">
+              <div class="text-[11px] text-[#e6c762]">愛爾蘭 VWRA 遺產稅 (UCITS Shield)</div>
+              <div id="micro-estate-vwra-tax" class="text-sm font-mono-num font-bold text-[#e6c762]"></div>
+              <div class="text-[11px] text-zinc-400">
+                每年省股息稅 (WHT Savings)：<span id="micro-estate-div-save" class="font-mono-num"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: ETF Specification Table -->
+        <div class="lg:col-span-7 fintech-card p-5 overflow-x-auto flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-bold text-[#f5f5f7]">全球股票 ETF 終極規格對照表 (ETF Specification Matrix)</h3>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-zinc-500">TAX RESIDENCY PERSPECTIVE</span>
+          </div>
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-white/10 text-zinc-500 font-mono uppercase">
+                <th class="py-2 pr-2">評估維度 (Feature)</th>
+                <th class="py-2 px-2 text-[#e6c762]">VWRA (首選 · Accumulating)</th>
+                <th class="py-2 px-2 text-zinc-300">VWRD (配息 · Distributing)</th>
+                <th class="py-2 pl-2 text-[#e06c75]">VT / VOO (美股 · US Domiciled)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/[0.06] text-zinc-300">
+              <tr>
+                <td class="py-2.5 pr-2 text-zinc-500">註冊地與交易所 (Domicile)</td>
+                <td class="py-2.5 px-2 font-semibold text-[#f5f5f7]">愛爾蘭 UCITS (倫敦 LSE)</td>
+                <td class="py-2.5 px-2">愛爾蘭 UCITS (倫敦 LSE)</td>
+                <td class="py-2.5 pl-2">美國註冊 (NYSE / NASDAQ)</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 pr-2 text-zinc-500">美股股息預扣稅 (WHT)</td>
+                <td class="py-2.5 px-2 font-semibold text-[#e6c762] font-mono-num">15% (省下一半股息稅)</td>
+                <td class="py-2.5 px-2 font-mono-num">15%</td>
+                <td class="py-2.5 pl-2 text-[#e06c75] font-mono-num">30% (每年損失 ~0.30% 總回報)</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 pr-2 text-zinc-500">美國遺產稅 (Estate Tax)</td>
+                <td class="py-2.5 px-2 font-semibold text-[#e6c762] font-mono-num">0% 免徵 (完全豁免 Shield)</td>
+                <td class="py-2.5 px-2 font-mono-num">0% 免徵</td>
+                <td class="py-2.5 pl-2 text-[#e06c75] font-mono-num">&gt;$60k USD 最高課徵 40%</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 pr-2 text-zinc-500">股息再投入摩擦 (Reinvestment)</td>
+                <td class="py-2.5 px-2 text-[#f5f5f7]">基金內部自動買回・0 摩擦</td>
+                <td class="py-2.5 px-2 text-zinc-400">需手動買回・付佣金+現金拖累</td>
+                <td class="py-2.5 pl-2 text-zinc-400">扣 30% 稅後需手動或 DRIP</td>
+              </tr>
+              <tr class="bg-[#d4af37]/[0.06] font-mono-num">
+                <td class="py-2.5 pr-2 font-semibold text-[#f5f5f7]">25 年實質淨年化 / 終值 (CAGR)</td>
+                <td class="py-2.5 px-2 font-bold text-[#e6c762]">
+                  8.65% ➔ <span data-dual-usd="580973" data-compact="true">$581k USD</span>
+                </td>
+                <td class="py-2.5 px-2 text-zinc-300">
+                  8.15% / 領息花掉僅 <span data-dual-usd="452359" data-compact="true">$452k</span>
+                </td>
+                <td class="py-2.5 pl-2 text-[#e06c75]">
+                  8.35% ➔ <span data-dual-usd="553378" data-compact="true">$553k</span> (含遺產稅險)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 05: 基礎科普 — 到底什麼叫做 Beta (β) 與 Alpha (α)？
+         16:9 WIDESCREEN KEYNOTE ANATOMY (SINGLE-FRAME ZERO-CLUTTER)
+         ====================================================================== -->
+    <section class="slide-panel space-y-6 pt-8 border-t border-white/[0.08]" data-slide-num="5" id="slide-5">
+      <!-- Top Editorial Header + Formula Strip -->
+      <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-4 pb-5 border-b border-white/[0.08]">
+        <div class="shrink-0">
+          <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-1.5">
+            CHAPTER 05 · FIRST-PRINCIPLES ANATOMY · WHAT ARE BETA (β) &amp; ALPHA (α)?
+          </div>
+          <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7] leading-tight">
+            核心觀念 — 到底什麼叫做 Beta (β) 與 Alpha (α)？
+          </h2>
+        </div>
+        <!-- Clean Single-Line Equation Pill -->
+        <div class="fintech-card px-3.5 py-2 flex flex-wrap items-center gap-1.5 text-[11px] font-mono shrink-0">
+          <span class="text-[#f5f5f7] font-bold">總報酬 (Total Return R)</span>
+          <span class="text-zinc-500">=</span>
+          <span class="px-2 py-0.5 rounded bg-white/[0.05] text-zinc-300">無風險 Rf (~3.6%)</span>
+          <span class="text-zinc-500">+</span>
+          <span class="px-2 py-0.5 rounded bg-[#d4af37]/15 text-[#e6c762] border border-[#d4af37]/40 font-semibold">β · 市場大盤紅利 (Market Beta ~8.5%)</span>
+          <span class="text-zinc-500">+</span>
+          <span class="px-2 py-0.5 rounded bg-[#e06c75]/15 text-[#e06c75] border border-[#e06c75]/40 font-semibold">α · 個人超額 (Active Alpha 零和)</span>
+        </div>
+      </div>
+
+      <!-- Main 16:9 Split Showdown: Left 6 Cols BETA (β) vs Right 6 Cols ALPHA (α) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Left 6 Cols: BETA (β) -->
+        <div class="lg:col-span-6 fintech-card-gold p-6 flex flex-col justify-between space-y-5">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#d4af37] text-[#0a0b0e]">
+                MARKET BETA (β) · 市場系統性報酬
+              </span>
+              <span class="text-xs font-mono text-[#e6c762]">正和遊戲 (POSITIVE-SUM)</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-[#f5f5f7] pt-1">
+              「搭上往上的手扶梯」— 水漲船高的時代紅利 <span class="text-sm font-normal text-[#e6c762]">(Riding the Escalator)</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-zinc-300">
+              不猜哪家公司會贏，直接買下全球前 3,700 家企業。只要人類生產力與科技持續進步，大盤漲多少你就賺多少。
+            </p>
+          </div>
+
+          <!-- 3 Hero Metrics inside Beta -->
+          <div class="grid grid-cols-3 gap-3 p-3.5 rounded-lg bg-[#0a0b0e]/90 border border-[#d4af37]/30 font-mono-num">
+            <div>
+              <div class="text-[10px] text-zinc-500 uppercase">長期年化 (CAGR)</div>
+              <div class="text-base sm:text-lg font-bold text-[#e6c762] mt-0.5">8.5% – 10%</div>
+            </div>
+            <div class="border-x border-white/[0.08] px-3">
+              <div class="text-[10px] text-zinc-500 uppercase">勝率 (Win Rate)</div>
+              <div class="text-base sm:text-lg font-bold text-[#f5f5f7] mt-0.5">100% 確定</div>
+            </div>
+            <div class="pl-1">
+              <div class="text-[10px] text-zinc-500 uppercase">每年時間 (Time)</div>
+              <div class="text-base sm:text-lg font-bold text-[#e6c762] mt-0.5">10 分鐘/年</div>
+            </div>
+          </div>
+
+          <!-- 3 Single-Line Spec Rows -->
+          <div class="divide-y divide-white/[0.08] border-t border-white/[0.08] pt-1 text-xs">
+            <div class="py-2.5 flex items-center justify-between gap-2">
+              <span class="text-zinc-400 font-mono">01 · 數學定義 (Math)</span>
+              <span class="text-[#f5f5f7] font-medium text-right">跟隨大盤波動之系統性收益（指數 ETF 之 β ≡ 1.0）</span>
+            </div>
+            <div class="py-2.5 flex items-center justify-between gap-2">
+              <span class="text-zinc-400 font-mono">02 · 代表工具 (Vehicles)</span>
+              <span class="text-[#e6c762] font-semibold text-right">愛爾蘭 VWRA（全球股市 β）＋ EPF（馬幣保底）</span>
+            </div>
+            <div class="py-2.5 flex items-center justify-between gap-2">
+              <span class="text-zinc-400 font-mono">03 · 為什麼穩贏？ (Edge)</span>
+              <span class="text-zinc-300 text-right">指數自動淘汰衰退企業、納入新霸主 (Self-Cleansing Index)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: ALPHA (α) -->
+        <div class="lg:col-span-6 fintech-card p-6 flex flex-col justify-between space-y-5 border border-[#e06c75]/35">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#e06c75]/20 text-[#e06c75] border border-[#e06c75]/40">
+                ACTIVE ALPHA (α) · 主動超額報酬
+              </span>
+              <span class="text-xs font-mono text-[#e06c75]">零和博弈 (ZERO-SUM GAME)</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-[#f5f5f7] pt-1">
+              「在手扶梯上蒙眼跨欄」— 擊敗大盤的個人神力 <span class="text-sm font-normal text-[#e06c75]">(Blindfolded Hurdles)</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-zinc-300">
+              扣除大盤漲幅後，試圖靠「選股、波段擇時、財報預測」比市場多賺的報酬。你多賺的每一塊錢，都必須來自對手的虧損。
+            </p>
+          </div>
+
+          <!-- 3 Hero Metrics inside Alpha -->
+          <div class="grid grid-cols-3 gap-3 p-3.5 rounded-lg bg-[#0a0b0e]/90 border border-[#e06c75]/30 font-mono-num">
+            <div>
+              <div class="text-[10px] text-zinc-500 uppercase">15年輸大盤 (SPIVA)</div>
+              <div class="text-base sm:text-lg font-bold text-[#e06c75] mt-0.5">88% – 92%</div>
+            </div>
+            <div class="border-x border-white/[0.08] px-3">
+              <div class="text-[10px] text-zinc-500 uppercase">散戶實質 (Net)</div>
+              <div class="text-base sm:text-lg font-bold text-[#e06c75] mt-0.5">負 α (-4%/年)</div>
+            </div>
+            <div class="pl-1">
+              <div class="text-[10px] text-zinc-500 uppercase">每年時間 (Time)</div>
+              <div class="text-base sm:text-lg font-bold text-zinc-200 mt-0.5">500+ 小時/年</div>
+            </div>
+          </div>
+
+          <!-- 3 Single-Line Spec Rows -->
+          <div class="divide-y divide-white/[0.08] border-t border-white/[0.08] pt-1 text-xs">
+            <div class="py-2.5 flex items-center justify-between gap-2">
+              <span class="text-zinc-400 font-mono">01 · 數學定義 (Math)</span>
+              <span class="text-[#f5f5f7] font-medium text-right">α = 投資組合報酬 − 大盤基準 (Portfolio − Benchmark)</span>
+            </div>
+            <div class="py-2.5 flex items-center justify-between gap-2">
+              <span class="text-zinc-400 font-mono">02 · 對手盤 (Counterparties)</span>
+              <span class="text-[#e06c75] font-semibold text-right">華爾街千億量化基金與 AI 算法 (Quants &amp; AI)</span>
+            </div>
+            <div class="py-2.5 flex items-center justify-between gap-2">
+              <span class="text-zinc-400 font-mono">03 · 散戶盲點 (Blindspot)</span>
+              <span class="text-zinc-300 text-right">牛市賺 15% 誤當股神，大盤實漲 20%（實為負 Alpha）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom 3-Column Breakthrough Bar: The Two Alphas (Career Alpha vs Stock Alpha) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+        <div class="fintech-card p-4 border-l-2 border-l-[#d4af37] space-y-1">
+          <div class="flex items-center justify-between text-[11px] font-mono">
+            <span class="text-[#e6c762] font-bold">ENGINE 01 · 職涯與本業 Alpha (Career α)</span>
+            <span class="text-zinc-400">Level 1–3 主力</span>
+          </div>
+          <div class="text-sm font-bold text-[#f5f5f7]">唯一沒有華爾街對手盤、100% 正和的超額報酬</div>
+          <p class="text-xs text-zinc-400">
+            升遷跳槽、外商遠端、賺新幣/美金與拉高儲蓄率。本金小於 RM 1.5M 時，把精力投在本業 α 的回報是選股的 10 倍。
+          </p>
+        </div>
+
+        <div class="fintech-card p-4 border-l-2 border-l-[#d4af37] space-y-1">
+          <div class="flex items-center justify-between text-[11px] font-mono">
+            <span class="text-[#e6c762] font-bold">ENGINE 02 · 全球股市 Beta (Market β)</span>
+            <span class="text-zinc-400">Level 1–6 底盤</span>
+          </div>
+          <div class="text-sm font-bold text-[#f5f5f7]">用「本業 α」存下的錢，100% 買進「全球股市 β」</div>
+          <p class="text-xs text-zinc-400">
+            將每月結餘自動買入 VWRA，零看盤時間成本，安穩享受 ~8.5% 複利，直衝雙黃金交叉。
+          </p>
+        </div>
+
+        <div class="fintech-card p-4 border-l-2 border-l-[#e06c75] space-y-1">
+          <div class="flex items-center justify-between text-[11px] font-mono">
+            <span class="text-[#e06c75] font-bold">ENGINE 03 · 股市選股 Alpha (Stock α)</span>
+            <span class="text-[#e06c75]">Level 3B+ 才解鎖</span>
+          </div>
+          <div class="text-sm font-bold text-[#f5f5f7]">跨越 RM 1.5M ($340k USD) 前，嚴禁在股市追逐 α</div>
+          <p class="text-xs text-zinc-400">
+            為什麼本金不到 RM 1.5M 去選股是「拿退休金賭命」？下一章（Chapter 06）用四個數學實證算給你看。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 06: 關鍵轉折：為什麼跨越 RM 1.5M 才考慮追求股市 Alpha？
+         16:9 WIDESCREEN GALLERY:
+           Row 1: Left 4 Cols Core Thesis × Right 8 Cols Chart 06
+           Row 2: Left 5 Cols Alpha Hourly Wage Sim + Matrix × Right 7 Cols 4 Mathematical Proofs
+         ====================================================================== -->
+    <section class="slide-panel space-y-8 pt-8 border-t border-white/[0.08]" data-slide-num="6" id="slide-6">
+      <!-- Row 1: Primary 16:9 Gallery Frame -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left 4 Columns -->
+        <div class="lg:col-span-4 space-y-5">
+          <div>
+            <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-2">
+              CHAPTER 06 · LEVEL 3B–4+ TRANSITION · BETA (β) VS ALPHA (α)
+            </div>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7] leading-snug">
+              關鍵轉折 — 為什麼跨越 RM 1.5M 才考慮追求 Alpha？ (Stock Picking Inflection)
+            </h2>
+            <p class="mt-2.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              在突破 <span data-dual-myr="1500000">RM 1,500,000</span>（Level 3B）前，主動選股是「研究時薪極低、卻拿黃金交叉賭命」的負期望值遊戲。
+            </p>
+          </div>
+
+          <div class="divide-y divide-white/[0.08] border-y border-white/[0.08] text-xs leading-relaxed">
+            <div class="py-3.5 space-y-1">
+              <div class="flex items-center justify-between font-mono text-[11px]">
+                <span class="text-[#e6c762] uppercase tracking-wider">01 · MARKET BETA (β)</span>
+                <span class="text-zinc-400">~8.5% CAGR</span>
+              </div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">市場系統性報酬（全球大盤紅利 · Market Beta）</div>
+              <p class="text-zinc-400">
+                買入全球指數 VWRA，每年僅花 10 分鐘，100% 獲取全球 3,700 家企業生產力複利。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="flex items-center justify-between font-mono text-[11px]">
+                <span class="text-[#e06c75] uppercase tracking-wider">02 · ACTIVE ALPHA (α)</span>
+                <span class="text-[#e06c75]">88% 輸大盤 (SPIVA)</span>
+              </div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">主動選股超額報酬（S&amp;P SPIVA 15 年統計實證）</div>
+              <p class="text-zinc-400">
+                高達 88%–92% 主動基金與散戶長期跑輸大盤，實質創造負 Alpha。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">03 · CORE-SATELLITE (核心衛星框架)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">前兩階衝「本業 α + 股市 β」，L3B 才解鎖「衛星 α」</div>
+              <p class="text-zinc-400">
+                跨過 RM 1.5M 並鎖上 3 年現金金庫後，才撥出 ≤8%–10% 衛星倉位追求能力圈 Alpha。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 8 Columns: Full Widescreen Chart 06 -->
+        <div class="lg:col-span-8">
+          <div
+            class="chart-img-frame"
+            data-zoom-chart
+            data-zoom-caption="圖表 6：Beta vs Alpha 財富階梯實證（左圖：不同資產規模下花 500 小時研究選股創造 +4% Alpha 的換算時薪；右圖：Stage 2 過早追 Alpha 翻車 vs Stage 3 解鎖核心+衛星配置之 20 年差距）"
+          >
+            <img
+              src="assets/charts/06_alpha_vs_beta_stages.png"
+              alt="Beta vs Alpha 研究時薪與財富階梯 20 年軌跡實證圖"
+              class="w-full h-auto block"
+            />
+            <div class="bg-[#111217] px-4 py-2.5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="text-zinc-400 font-mono">
+                FIG 06 · ALPHA RESEARCH HOURLY WAGE (RM 4/HR AT S1 VS RM 120+/HR AT S3) &amp; 20-YR TRAJECTORY
+              </span>
+              <span class="text-[#e6c762] font-mono text-[11px]">CLICK TO ENLARGE 300-DPI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Architectural Sub-Band (Left 5 Cols Alpha ROI Sim + Matrix × Right 7 Cols 4 Mathematical Proofs) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-6 border-t border-white/[0.07]">
+        <!-- Left 5 Columns: Interactive Alpha Research Hourly Wage Simulator + Stage Matrix -->
+        <div class="lg:col-span-5 space-y-5 flex flex-col justify-between">
+          <div class="fintech-card p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">ALPHA HOURLY ROI SIMULATOR</span>
+              <span class="text-[10px] font-mono text-zinc-500">ASSUMING +4% EXCESS ALPHA</span>
+            </div>
+            <h3 class="text-base font-bold text-[#f5f5f7]">
+              互動試算：你的「主動選股研究時薪」划算嗎？ (Time ROI)
+            </h3>
+
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-zinc-400">當前可投資本金 (Investable Capital)</span>
+                  <span id="micro-alpha-cap-val" class="font-mono-num font-bold text-[#f5f5f7]">RM 250,000</span>
+                </div>
+                <input
+                  id="micro-alpha-cap-slider"
+                  type="range"
+                  min="50000"
+                  max="4000000"
+                  step="50000"
+                  value="250000"
+                  class="fintech-slider"
+                />
+                <div class="flex justify-between text-[10px] font-mono text-zinc-500 mt-1">
+                  <span>RM 50k (S1)</span>
+                  <span>RM 250k (S2)</span>
+                  <span class="text-[#e6c762]">RM 1.5M (S3 門檻)</span>
+                  <span>RM 4.0M</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-zinc-400">每週投入研究選股 / 盯盤時數 (Hours/Wk)</span>
+                  <span id="micro-alpha-hrs-val" class="font-mono-num font-semibold text-zinc-300">每週 10 小時 (每年 500 小時)</span>
+                </div>
+                <input
+                  id="micro-alpha-hrs-slider"
+                  type="range"
+                  min="2"
+                  max="25"
+                  step="1"
+                  value="10"
+                  class="fintech-slider"
+                />
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-lg bg-[#0a0b0e] border border-white/[0.08] space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-zinc-400">換算研究選股實質時薪 (Implied Wage)：</span>
+                <span id="micro-alpha-hourly-out" class="font-mono-num font-bold text-[#e6c762]">RM 20 / 小時</span>
+              </div>
+              <div id="micro-alpha-verdict"></div>
+            </div>
+          </div>
+
+          <!-- Compact Stage Allocation Matrix -->
+          <div class="fintech-card p-4 overflow-x-auto">
+            <div class="text-xs font-semibold text-[#f5f5f7] mb-2">四階段 Beta (β) vs Alpha (α) 配置矩陣 (Allocation Matrix)</div>
+            <table class="w-full text-left text-xs font-mono-num">
+              <thead>
+                <tr class="border-b border-white/10 text-zinc-500">
+                  <th class="py-1.5 pr-2">階段 (Stage)</th>
+                  <th class="py-1.5 px-2">股市 Beta (VWRA)</th>
+                  <th class="py-1.5 px-2">安全金庫 (Vault)</th>
+                  <th class="py-1.5 pl-2">股市 Alpha (Satellite)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/[0.06] text-zinc-300">
+                <tr>
+                  <td class="py-2 pr-2 text-zinc-400">Stage 1 (&lt;100k)</td>
+                  <td class="py-2 px-2">100% VWRA</td>
+                  <td class="py-2 px-2">6 個月預備金</td>
+                  <td class="py-2 pl-2 text-[#e06c75]">0% (衝本業 α)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-2 text-zinc-400">Stage 2 (100k–1.5M)</td>
+                  <td class="py-2 px-2">100% VWRA</td>
+                  <td class="py-2 px-2">EPF 底倉</td>
+                  <td class="py-2 pl-2 text-[#e06c75]">0% (嚴禁選股)</td>
+                </tr>
+                <tr class="bg-[#d4af37]/[0.06]">
+                  <td class="py-2 pr-2 font-bold text-[#e6c762]">Stage 3 (1.5M–5M)</td>
+                  <td class="py-2 px-2 text-[#e6c762]">80% VWRA</td>
+                  <td class="py-2 px-2 text-[#e6c762]">12% (3年金庫)</td>
+                  <td class="py-2 pl-2 font-bold text-[#e6c762]">解鎖 ≤8%–10%</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-2 text-zinc-400">Stage 4 (&gt;5M+)</td>
+                  <td class="py-2 px-2">75%–85% VWRA</td>
+                  <td class="py-2 px-2">12%–15% 金庫</td>
+                  <td class="py-2 pl-2">≤10% 嚴守上限</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right 7 Columns: 4 Hard Mathematical Proofs (2x2 Architectural Grid) -->
+        <div class="lg:col-span-7 fintech-card p-6 flex flex-col justify-between space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">FIRST-PRINCIPLES PROOF</div>
+              <h3 class="text-lg font-bold text-[#f5f5f7] mt-0.5">
+                四大數學實證：為什麼必須等到「第三階段」才考慮 Alpha？
+              </h3>
+            </div>
+            <span class="font-mono text-xs text-zinc-500">THRESHOLD: RM 1,500,000</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
+            <div class="space-y-1.5 pb-4 border-b border-white/[0.07]">
+              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">PROOF 01 · TIME ROI (時間投報率)</div>
+              <div class="text-sm font-bold text-[#f5f5f7]">1. 研究時薪在 RM 1.5M 前不具規模經濟</div>
+              <p class="text-zinc-400">
+                年花 500 小時跑贏大盤 +4%：本金 RM 50k 時薪僅 RM 4/hr；突破 RM 1.5M 時薪達 RM 120+/hr 才划算。
+              </p>
+            </div>
+
+            <div class="space-y-1.5 pb-4 border-b border-white/[0.07]">
+              <div class="font-mono text-[11px] text-[#e06c75] uppercase tracking-wider">PROOF 02 · ASYMMETRIC RISK (不對稱風險)</div>
+              <div class="text-sm font-bold text-[#f5f5f7]">2. 衝刺期翻車一次，黃金交叉延後 6 年</div>
+              <p class="text-zinc-400">
+                在 RM 400k 階段重押個股若遇 -42% 腰斬（需漲 +72% 回本），複利鏈斷裂將延後退休 5–7 年。
+              </p>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">PROOF 03 · SAFETY FLOOR (防守安全底線)</div>
+              <div class="text-sm font-bold text-[#f5f5f7]">3. 鎖定「80% 核心 + 12% 金庫」才有容錯邊際</div>
+              <p class="text-zinc-400">
+                RM 1.5M 後以 92% 資產鎖定退休底線，拿 ≤8% 衛星倉位追 Alpha，即便腰斬僅影響總資產 4%。
+              </p>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">PROOF 04 · DOMAIN EDGE (能力圈護城河)</div>
+              <div class="text-sm font-bold text-[#f5f5f7]">4. 真 Alpha 來自深耕十年的產業能力圈</div>
+              <p class="text-zinc-400">
+                初期散戶僅能看二手新聞炒股；累積至第三階段具備十餘年產業人脈與洞見，方能捕捉真實超額報酬。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 07: 第三與第四階段（金庫防禦與為什麼富人會摔回底層？）
+         16:9 WIDESCREEN GALLERY: Left 4 Cols Defense × Right 8 Cols Chart 04
+         ====================================================================== -->
+    <section class="slide-panel space-y-8 pt-8 border-t border-white/[0.08]" data-slide-num="7" id="slide-7">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left 4 Columns -->
+        <div class="lg:col-span-4 space-y-5">
+          <div>
+            <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-2">
+              CHAPTER 07 · LEVEL 3B–5 DEFENSE (RM 1.5M – RM 5M+)
+            </div>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7] leading-snug">
+              守成與傳承 — 3 年現金金庫與高資產返貧陷阱 (Cash Vault &amp; 4 HNW Traps)
+            </h2>
+            <p class="mt-2.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              突破 <span data-dual-myr="1500000">RM 1,500,000</span> 後，進攻已經贏了；接下來的核心命題是<strong class="text-[#f5f5f7]">「永不摔回上一階 (Capital Preservation)」</strong>。
+            </p>
+          </div>
+
+          <div class="divide-y divide-white/[0.08] border-y border-white/[0.08] text-xs leading-relaxed">
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">01 · 3-YEAR CASH VAULT (3年防禦金庫)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">80% VWRA + 12% 3年馬幣金庫 (Buffer) + ≤8% Alpha</div>
+              <p class="text-zinc-400">
+                預留 3 年生活費於 MMF/EPF3 (~3.6%)。遇崩盤年全面停賣 VWRA，改由金庫提領，消滅報酬順序風險 (Sequence Risk)。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-[#e06c75] uppercase tracking-wider">02 · LEVERAGE &amp; PANIC SELLING 65% (槓桿與恐慌殺跌)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">能力圈幻覺開槓桿 (38%) 與無金庫底部砍倉 (27%)</div>
+              <p class="text-zinc-400">
+                誤把時代 Beta 當個人神力而融資重押賠光；或無現金金庫在股災底部被迫賤賣股票 (Forced Selling at Lows)。
+              </p>
+            </div>
+
+            <div class="py-3.5 space-y-1">
+              <div class="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">03 · ILLIQUID PROPERTY &amp; CREEP 35% (房產與消費膨脹)</div>
+              <div class="font-semibold text-sm text-[#f5f5f7]">滯銷房產資金盤 (20%) 與生活通膨失控 (15%)</div>
+              <p class="text-zinc-400">
+                重押高空置率 Condo 遭房貸吸乾現金流、誤信高息資金盤，或生活方式通膨 (Lifestyle Creep) 致提領率破 8%。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 8 Columns: Full Widescreen Chart 04 -->
+        <div class="lg:col-span-8">
+          <div
+            class="chart-img-frame"
+            data-zoom-chart
+            data-zoom-caption="圖表 4：為什麼許多人爬上高階梯後會摔回底層？（左圖：2000 科技泡沫 + 2008 金融海嘯雙重打擊下，有無現金金庫之生死分野；右圖：高資產返貧四大主因佔比）"
+          >
+            <img
+              src="assets/charts/04_why_people_fall_back.png"
+              alt="報酬順序風險與高資產摔回底層四大主因實證圖"
+              class="w-full h-auto block"
+            />
+            <div class="bg-[#111217] px-4 py-2.5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="text-zinc-400 font-mono">
+                FIG 04 · SEQUENCE OF RETURNS RISK (2000 DOT-COM + 2008 GFC) &amp; HNW FALLBACK CAUSES
+              </span>
+              <span class="text-[#e6c762] font-mono text-[11px]">CLICK TO ENLARGE 300-DPI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 08: 互動實驗室（模組 A）— 黃金交叉與退休複利模擬器
+         ====================================================================== -->
+    <section class="slide-panel space-y-3 pt-4 border-t border-white/[0.08]" data-slide-num="8" id="slide-8">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2 pb-2.5 border-b border-white/[0.08]">
+        <div>
+          <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-0.5">
+            CHAPTER 08 · REAL MARKET DATA LAB · MODULE A (DCA &amp; COMPOUNDING)
+          </div>
+          <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7]">
+            互動實驗室（模組 A）— 投資年限、黃金交叉與真實歷史波段實證
+          </h2>
+        </div>
+
+        <!-- Persona Presets -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-[11px] font-mono text-zinc-500">PRESETS:</span>
+          <button
+            type="button"
+            data-modA-preset="early25"
+            class="px-2.5 py-1 rounded text-xs font-medium bg-[#111217] hover:bg-[#161820] text-zinc-200 border border-white/10 transition cursor-pointer"
+          >
+            25歲起步 (DCA 1.5k · 25年)
+          </button>
+          <button
+            type="button"
+            data-modA-preset="manager35"
+            class="px-2.5 py-1 rounded text-xs font-medium bg-[#111217] hover:bg-[#161820] text-zinc-200 border border-white/10 transition cursor-pointer"
+          >
+            35歲主管 (150k + DCA 4.5k · 15年)
+          </button>
+          <button
+            type="button"
+            data-modA-preset="sprint40"
+            class="px-2.5 py-1 rounded text-xs font-medium bg-[#111217] hover:bg-[#161820] text-zinc-200 border border-white/10 transition cursor-pointer"
+          >
+            40歲衝刺 (400k + DCA 9k · 10年)
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+        <!-- Left 4 Columns: Input Controls -->
+        <div class="lg:col-span-4 fintech-card p-3.5 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between border-b border-white/[0.08] pb-1.5">
+              <h3 class="text-xs font-bold text-[#f5f5f7]">定投與複利參數設定 (DCA &amp; Compounding)</h3>
+              <span id="modA-years-badge" class="text-[11px] font-mono text-[#e6c762]">
+                共投入 25 年
+              </span>
+            </div>
+
+            <!-- Dual Target Inputs -->
+            <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1.5">
+              <div class="text-[11px] text-zinc-400">1. 目標退休總資產 (Target Net Worth)</div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label for="modA-target-myr" class="block text-[10px] font-mono text-zinc-500 mb-0.5">目標馬幣 (MYR)</label>
+                  <input
+                    id="modA-target-myr"
+                    type="number"
+                    step="50000"
+                    min="100000"
+                    max="50000000"
+                    value="2000000"
+                    class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#e6c762] focus:outline-none focus:border-[#d4af37]"
+                  />
+                </div>
+                <div>
+                  <label for="modA-target-usd" class="block text-[10px] font-mono text-zinc-500 mb-0.5">目標美金 (USD)</label>
+                  <input
+                    id="modA-target-usd"
+                    type="number"
+                    step="10000"
+                    min="20000"
+                    max="15000000"
+                    value="452489"
+                    class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#f5f5f7] focus:outline-none focus:border-[#d4af37]"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Horizon Years -->
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+                <label for="modA-start-year" class="block text-[11px] text-zinc-400 mb-0.5">2. 開始年份 (Start Year)</label>
+                <input
+                  id="modA-start-year"
+                  type="number"
+                  min="2020"
+                  max="2045"
+                  value="2026"
+                  class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#f5f5f7] focus:outline-none"
+                />
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+                <label for="modA-retire-year" class="block text-[11px] text-zinc-400 mb-0.5">3. 退休年份 (Retirement)</label>
+                <input
+                  id="modA-retire-year"
+                  type="number"
+                  min="2027"
+                  max="2075"
+                  value="2051"
+                  class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#e6c762] focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <!-- Initial Capital & Monthly DCA -->
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+                <label for="modA-init-myr" class="block text-[11px] text-zinc-400 mb-0.5">4. 起始本金 (Initial RM)</label>
+                <input
+                  id="modA-init-myr"
+                  type="number"
+                  step="5000"
+                  min="0"
+                  value="50000"
+                  class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#f5f5f7] focus:outline-none"
+                />
+                <div id="modA-init-usd-hint" class="text-[10px] font-mono-num text-zinc-500 mt-0.5">≈ $11,312 USD</div>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+                <label for="modA-monthly-myr" class="block text-[11px] text-zinc-400 mb-0.5">5. 每月定投 (Monthly DCA)</label>
+                <input
+                  id="modA-monthly-myr"
+                  type="number"
+                  step="250"
+                  min="0"
+                  value="2500"
+                  class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#e6c762] focus:outline-none"
+                />
+                <div id="modA-monthly-usd-hint" class="text-[10px] font-mono-num text-zinc-500 mt-0.5">≈ $566 USD/月</div>
+              </div>
+            </div>
+
+            <!-- Active Monthly Salary -->
+            <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+              <div class="flex items-center justify-between mb-0.5">
+                <label for="modA-salary-myr" class="text-[11px] text-zinc-400">6. 目前月薪 (Salary Benchmark)</label>
+                <div id="modA-salary-usd-hint" class="text-[10px] font-mono-num text-zinc-500">≈ $1,584 USD/月</div>
+              </div>
+              <input
+                id="modA-salary-myr"
+                type="number"
+                step="500"
+                min="1000"
+                value="7000"
+                class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#f5f5f7] focus:outline-none"
+              />
+            </div>
+
+            <!-- Real Trajectory Mode Selector & CAGR (拒絕年年往上平滑假象) -->
+            <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-semibold text-zinc-300">7. 報酬率軌跡模式 (Trajectory Mode)</span>
+                <span id="modA-trajectory-badge" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#d4af37]/15 text-[#e6c762]">真實 30 年實證</span>
+              </div>
+              <div class="grid grid-cols-3 gap-1" id="modA-trajectory-selector">
+                <button
+                  type="button"
+                  data-modA-trajectory="real1995"
+                  class="px-1.5 py-1 rounded text-[10px] font-medium bg-emerald-500/20 text-white border border-emerald-500/40 transition cursor-pointer text-center ring-1 ring-emerald-400"
+                  title="1995–2024 黃金 30 年 (年化 10.4% · 含 2000 泡沫、2008 次貸、2022 通膨)"
+                >
+                  <div class="font-bold text-[#e6c762]">1995–2024</div>
+                  <div class="text-[9px] text-zinc-300">黃金30年 (~10.4%)</div>
+                </button>
+                <button
+                  type="button"
+                  data-modA-trajectory="real2003"
+                  class="px-1.5 py-1 rounded text-[10px] font-medium bg-[#111217] hover:bg-[#161820] text-zinc-400 border border-white/10 transition cursor-pointer text-center"
+                  title="2003–2024 現代全球波段 (年化 9.8% · 2008 大回檔後重組)"
+                >
+                  <div class="font-bold">2003–2024</div>
+                  <div class="text-[9px]">現代全球 (~9.8%)</div>
+                </button>
+                <button
+                  type="button"
+                  data-modA-trajectory="flatCagr"
+                  class="px-1.5 py-1 rounded text-[10px] font-medium bg-[#111217] hover:bg-[#161820] text-zinc-400 border border-white/10 transition cursor-pointer text-center"
+                  title="平滑理論固定年化 (客製無波動)"
+                >
+                  <div class="font-bold">平滑理論</div>
+                  <div class="text-[9px]">固定年化 (CAGR)</div>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5 items-center">
+                <div>
+                  <label for="modA-cagr" class="block text-[10px] text-zinc-400 mb-0.5">年化報酬 (CAGR %)</label>
+                  <input
+                    id="modA-cagr"
+                    type="number"
+                    step="0.1"
+                    min="2.0"
+                    max="18.0"
+                    value="10.4"
+                    class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-xs font-mono-num font-bold text-[#e6c762] focus:outline-none"
+                  />
+                </div>
+                <div id="modA-trajectory-desc" class="text-[9.5px] text-zinc-400 leading-tight">
+                  真實波段：歷經 2000 科技泡沫、2008 次貸 (-37%)、2022 通膨 (-18%) 真實回檔。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            id="btn-send-to-modB"
+            type="button"
+            class="w-full py-2 px-3 rounded text-xs font-semibold bg-[#d4af37] hover:bg-[#e6c762] text-[#0a0b0e] transition cursor-pointer shrink-0 mt-1"
+          >
+            帶入「模組 B：30 年股災壓測 (Stress Lab)」→
+          </button>
+        </div>
+
+        <!-- Right 8 Columns: Output KPI Cards & Chart.js Growth Trajectory -->
+        <div class="lg:col-span-8 space-y-2.5 flex flex-col justify-between">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="fintech-card p-3.5 space-y-1.5">
+              <div class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">退休年份期末預估總資產 (Ending Wealth)</div>
+              <div class="flex items-baseline gap-2 flex-wrap">
+                <span id="modA-out-final-myr" class="text-xl sm:text-2xl font-bold text-[#f5f5f7] font-mono-num">RM 2,834,961</span>
+                <span id="modA-out-final-usd" class="text-xs font-mono-num text-zinc-400">≈ $641,394 USD</span>
+              </div>
+              <div id="modA-out-breakdown" class="text-[11px] text-zinc-400"></div>
+              <div class="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden mt-1">
+                <div id="modA-out-progress-bar" class="h-full bg-[#d4af37] transition-all duration-300" style="width: 100%"></div>
+              </div>
+              <div id="modA-out-progress-text" class="text-[11px]"></div>
+            </div>
+
+            <div class="fintech-card p-3.5 space-y-1.5">
+              <div class="text-[10px] font-mono text-[#e6c762] uppercase tracking-wider">4% SWR 安全提領現金流 (Monthly &amp; Annual Passive Cashflow)</div>
+              <div class="flex items-baseline gap-2 flex-wrap">
+                <span id="modA-out-monthly-myr" class="text-xl sm:text-2xl font-bold text-[#e6c762] font-mono-num">RM 9,450 / 月</span>
+                <span id="modA-out-monthly-usd" class="text-xs font-mono-num text-zinc-400">≈ $2,138 USD / 月</span>
+              </div>
+              <div id="modA-out-annual-both" class="text-[11px] text-zinc-300 font-mono-num"></div>
+              <div class="p-1.5 rounded bg-[#0a0b0e] border border-white/[0.06] text-[10px] text-zinc-400 leading-snug">
+                搭配「3 年生活費馬幣現金金庫 (3-Year Cash Vault)」，遇熊市年不賣股，確保 30 年金庫永續。
+              </div>
+            </div>
+          </div>
+
+          <!-- Golden Crossover Banner -->
+          <div id="modA-out-crossover-banner" class="fintech-card p-2.5 px-3 text-xs"></div>
+
+          <!-- Chart.js Canvas -->
+          <div class="fintech-card p-3 space-y-1">
+            <div class="flex flex-wrap items-center justify-between gap-1.5">
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs sm:text-sm font-bold text-[#f5f5f7]">
+                  資產累積真實軌跡圖 (DCA Accumulation Trajectory)
+                </h4>
+                <span id="modA-chart-mode-pill" class="text-[9.5px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
+                  真實歷史波段實證 (含 2008 / 2022 回檔)
+                </span>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-500">HOVER 查看當年市場漲跌幅與雙幣損益</span>
+            </div>
+            <div class="relative h-[230px] w-full">
+              <canvas id="modA-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CHAPTER 09: 互動實驗室（模組 B）— 4% 法則 + 3 年現金金庫 30 年歷史實證壓力測試
+         ====================================================================== -->
+    <section class="slide-panel space-y-4 pt-6 border-t border-white/[0.08]" data-slide-num="9" id="slide-9">
+      <!-- Compact Single-Row Editorial Header -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-2 pb-3 border-b border-white/[0.08]">
+        <div>
+          <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-1">
+            CHAPTER 09 · HISTORICAL WORST VS BEST COHORTS · 4% SWR &amp; 3-YEAR CASH VAULT
+          </div>
+          <h2 class="font-editorial text-2xl sm:text-3xl font-bold text-[#f5f5f7] leading-tight">
+            互動實驗室（模組 B）— 歷史最慘 vs 最好年代：為什麼「4% 法則 + 3 年金庫」能安心退休？
+          </h2>
+        </div>
+        <div class="text-xs text-zinc-400 font-mono shrink-0">
+          點選下方 4 大真實歷史梯隊切換壓測軌跡 (4 Historical Cohorts) ↓
+        </div>
+      </div>
+
+      <!-- Live 4-Cohort Interactive Switcher & Comparison Bar (2 Worst vs 2 Good/Best) -->
+      <div id="modB-cohort-compare-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Left 4 Columns: Controls + 3 Proof Pillars Why You Can Retire -->
+        <div class="lg:col-span-4 fintech-card p-4 flex flex-col justify-between space-y-3">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-white/[0.08] pb-2">
+              <h3 class="text-sm font-bold text-[#f5f5f7]">退休金庫提領參數 (Parameters)</h3>
+              <button
+                id="btn-pull-from-modA"
+                type="button"
+                class="text-xs font-mono text-[#e6c762] hover:underline cursor-pointer"
+              >
+                ← 同步模組 A (Sync Mod A)
+              </button>
+            </div>
+
+            <div class="p-3 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1.5">
+              <div class="text-xs text-zinc-400">1. 退休起始總資產 (Retirement Capital)</div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label for="modB-target-myr" class="block text-[10px] font-mono text-zinc-500 mb-0.5">馬幣總額 (MYR)</label>
+                  <input
+                    id="modB-target-myr"
+                    type="number"
+                    step="100000"
+                    min="100000"
+                    value="2500000"
+                    class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-sm font-mono-num font-bold text-[#e6c762] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label for="modB-target-usd" class="block text-[10px] font-mono text-zinc-500 mb-0.5">美金總額 (USD)</label>
+                  <input
+                    id="modB-target-usd"
+                    type="number"
+                    step="25000"
+                    min="25000"
+                    value="565611"
+                    class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-sm font-mono-num font-bold text-[#f5f5f7] focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+              <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+                <label for="modB-withdraw-rate" class="block text-[10px] text-zinc-400 mb-0.5">2. 提領率 (SWR %)</label>
+                <input
+                  id="modB-withdraw-rate"
+                  type="number"
+                  step="0.2"
+                  min="2.0"
+                  max="10.0"
+                  value="4.0"
+                  class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-sm font-mono-num font-bold text-[#e6c762] focus:outline-none"
+                />
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+                <label for="modB-inflation-rate" class="block text-[10px] text-zinc-400 mb-0.5">3. 通膨 (Inflation %)</label>
+                <input
+                  id="modB-inflation-rate"
+                  type="number"
+                  step="0.5"
+                  min="0.0"
+                  max="8.0"
+                  value="3.0"
+                  class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-sm font-mono-num font-bold text-[#f5f5f7] focus:outline-none"
+                />
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07]">
+                <label for="modB-vault-years" class="block text-[10px] text-zinc-400 mb-0.5">4. 金庫 (Vault Yrs)</label>
+                <input
+                  id="modB-vault-years"
+                  type="number"
+                  step="1"
+                  min="1"
+                  max="5"
+                  value="3"
+                  class="w-full bg-[#111217] border border-white/10 rounded px-2 py-1 text-sm font-mono-num font-bold text-[#e6c762] focus:outline-none"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Crisp Proof Pillars: Why You Can Safely Retire This Way -->
+          <div class="p-3 rounded-lg bg-[#0a0b0e] border border-white/[0.08] space-y-2 text-xs leading-snug">
+            <div class="font-mono text-[10px] text-[#e6c762] uppercase tracking-wider">
+              WHY YOU CAN SAFELY RETIRE · 為什麼這樣能安心退休？
+            </div>
+            <div class="border-l-2 border-[#e06c75] pl-2.5">
+              <strong class="text-[#f5f5f7]">1. 用「歷史最爛年」壓測出的底線 (Stress-Tested)：</strong>
+              <span class="text-zinc-400">4% SWR 以 1966 停滯通膨與 2000 連跌三年為基準，連最慘年代都撐得過。</span>
+            </div>
+            <div class="border-l-2 border-[#d4af37] pl-2.5">
+              <strong class="text-[#f5f5f7]">2. 金庫切斷「熊市賤賣」唯一死因 (No Forced Selling)：</strong>
+              <span class="text-zinc-400">下跌年 0 賣股、全由馬幣金庫提領，保住 100% 股數迎接反彈。</span>
+            </div>
+            <div class="border-l-2 border-[#d4af37] pl-2.5">
+              <strong class="text-[#f5f5f7]">3. 85% 正常與好年代越花越有錢 (Growing Wealth)：</strong>
+              <span class="text-zinc-400">大盤長期 ~8.5% 遠高於 4% 提領，在 1995 / 1982 梯隊退休 30 年資產翻 3–5 倍。</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 8 Columns: 3 KPI Cards & Full Survival Curve -->
+        <div class="lg:col-span-8 flex flex-col justify-between space-y-3">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="fintech-card p-3.5 space-y-0.5">
+              <div class="text-[10px] font-mono text-zinc-500 uppercase">首年每月退休金 (Year 1 Passive Withdrawal)</div>
+              <div id="modB-out-init-withdraw" class="text-base sm:text-lg font-bold text-[#f5f5f7] font-mono-num">RM 8,333/月</div>
+              <div id="modB-out-init-alloc" class="text-[11px] text-zinc-400 font-mono-num truncate"></div>
+            </div>
+
+            <div class="fintech-card-gold p-3.5 space-y-0.5">
+              <div class="text-[10px] font-mono text-[#e6c762] uppercase">30 年後【有金庫保護】期末資產 (With Vault)</div>
+              <div id="modB-out-final-vault" class="text-base sm:text-lg font-bold text-[#e6c762] font-mono-num">RM 3,240,000</div>
+              <div id="modB-out-protect-tag" class="text-[11px] text-zinc-300 truncate"></div>
+            </div>
+
+            <div class="fintech-card p-3.5 space-y-0.5">
+              <div class="text-[10px] font-mono text-[#e06c75] uppercase">30 年後【無金庫盲目賣股】(No Vault Baseline)</div>
+              <div id="modB-out-final-blind" class="text-base sm:text-lg font-bold text-[#e06c75] font-mono-num">第 18 年破產歸零</div>
+              <div id="modB-out-blind-tag" class="text-[11px] text-zinc-400 truncate"></div>
+            </div>
+          </div>
+
+          <div class="fintech-card p-4 flex-1 flex flex-col justify-between">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+              <h4 id="modB-chart-title" class="text-xs sm:text-sm font-bold text-[#f5f5f7]">
+                30 年退休資產存活曲線對比：「有金庫保護」vs「無金庫盲目賣股」
+              </h4>
+              <span id="modB-scenario-desc" class="text-[11px] text-[#e6c762] font-mono"></span>
+            </div>
+            <div class="relative h-[265px] w-full">
+              <canvas id="modB-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collapsible 30-Year Year-by-Year Breakdown Table -->
+      <details class="fintech-card group">
+        <summary class="px-5 py-3.5 cursor-pointer list-none flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-zinc-300 hover:text-[#e6c762] transition">
+          <span>LEDGER · 展開 30 年逐年提領與金庫護盤明細表 (Year 1 – Year 30 Breakdown)</span>
+          <span class="text-[#e6c762] group-open:rotate-180 transition-transform">▼ EXPAND 30-YEAR LEDGER</span>
+        </summary>
+        <div class="px-5 pb-5 pt-2 border-t border-white/[0.08]">
+          <div class="table-scroll-container">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="text-zinc-400 font-mono uppercase">
+                  <th class="px-3 py-3 whitespace-nowrap">年度 (Year)</th>
+                  <th class="px-3 py-3 whitespace-nowrap">市場漲跌 (Return)</th>
+                  <th class="px-3 py-3 whitespace-nowrap">啟動策略 (Action)</th>
+                  <th class="px-3 py-3 whitespace-nowrap">年提領 (Annual SWR)</th>
+                  <th class="px-3 py-3 whitespace-nowrap">月花用 (Monthly)</th>
+                  <th class="px-3 py-3 whitespace-nowrap">VWRA 市值 (Equity)</th>
+                  <th class="px-3 py-3 whitespace-nowrap">金庫現金 (Vault Cash)</th>
+                  <th class="px-3 py-3 whitespace-nowrap">期末總資產 vs 基準 (Ending vs Baseline)</th>
+                </tr>
+              </thead>
+              <tbody id="modB-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ======================================================================
+         MINIMALIST FOOTER NAVIGATION CONTROLS
+         ====================================================================== -->
+    <footer class="pt-8 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 text-xs">
+      <button
+        id="btn-prev-slide"
+        type="button"
+        class="px-4 py-2 rounded bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer font-mono"
+      >
+        ← PREV CHAPTER
+      </button>
+
+      <div class="text-center">
+        <div id="slide-progress-text" class="font-mono text-[#e6c762] tracking-wider">
+          SCROLLYTELLING EDITION · CHAPTER 01 / 08
+        </div>
+      </div>
+
+      <button
+        id="btn-next-slide"
+        type="button"
+        class="px-4 py-2 rounded bg-[#d4af37] hover:bg-[#e6c762] text-[#0a0b0e] font-semibold transition cursor-pointer font-mono"
+      >
+        NEXT CHAPTER →
+      </button>
+    </footer>
+
+  </main>
+
+  <!-- ========================================================================
+       HIGH-RES 300 DPI CHART LIGHTBOX MODAL
+       ======================================================================== -->
+  <div
+    id="chart-lightbox-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0a0b0e]/95 backdrop-blur-md p-4"
+  >
+    <div class="relative max-w-6xl w-full bg-[#111217] border border-white/15 rounded-xl overflow-hidden shadow-2xl">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
+        <span id="chart-lightbox-caption" class="text-xs sm:text-sm font-medium text-zinc-200"></span>
+        <button
+          id="chart-lightbox-close"
+          type="button"
+          class="px-3 py-1 rounded text-xs font-mono bg-white/[0.06] text-zinc-200 border border-white/10 hover:bg-white/10 cursor-pointer"
+        >
+          ESC · CLOSE
+        </button>
+      </div>
+      <div class="p-3 bg-[#0a0b0e] max-h-[84vh] overflow-auto flex justify-center">
+        <img id="chart-lightbox-img" src="" alt="High resolution empirical chart" class="max-w-full h-auto rounded" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="js/fx-service.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
