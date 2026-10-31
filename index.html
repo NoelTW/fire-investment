@@ -170,6 +170,17 @@
         </span>
         <button
           type="button"
+          id="btn-open-qr-modal"
+          title="手機掃碼或分享 QR Code (Mobile QR Code)"
+          class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-mono font-medium bg-[#111217] hover:bg-[#161820] text-[#e6c762] border border-[#d4af37]/40 hover:border-[#e6c762] transition cursor-pointer whitespace-nowrap"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+          </svg>
+          <span class="hidden sm:inline">QR CODE</span>
+        </button>
+        <button
+          type="button"
           data-toggle-mode
           class="hidden sm:inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer whitespace-nowrap"
         >
@@ -237,6 +248,16 @@
             class="px-4 py-2.5 rounded text-xs sm:text-sm font-medium bg-[#111217] hover:bg-[#161820] text-zinc-300 border border-white/10 transition cursor-pointer"
           >
             09 · 4% 金庫 30 年壓測 (Stress Lab)
+          </button>
+          <button
+            type="button"
+            data-trigger-qr
+            class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded text-xs sm:text-sm font-medium bg-[#111217] hover:bg-[#161820] text-[#e6c762] border border-[#d4af37]/40 hover:border-[#e6c762] transition cursor-pointer"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+            </svg>
+            <span>手機掃碼 (QR Code)</span>
           </button>
         </div>
       </div>
@@ -2265,6 +2286,78 @@
       </div>
       <div class="p-3 bg-[#0a0b0e] max-h-[84vh] overflow-auto flex justify-center">
         <img id="chart-lightbox-img" src="" alt="High resolution empirical chart" class="max-w-full h-auto rounded" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MOBILE SCAN QR CODE MODAL
+       ======================================================================== -->
+  <div
+    id="site-qr-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0a0b0e]/95 backdrop-blur-md p-4"
+  >
+    <div class="relative max-w-md w-full bg-[#111217] border border-white/15 rounded-2xl overflow-hidden shadow-2xl p-6 space-y-5">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#e6c762] font-mono text-xs font-bold">
+            QR
+          </span>
+          <h3 class="text-sm font-bold text-[#f5f5f7]">手機掃碼檢視 / 分享網站</h3>
+        </div>
+        <button
+          id="site-qr-close"
+          type="button"
+          class="p-1 text-zinc-400 hover:text-white transition cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- QR Card Container -->
+      <div class="flex flex-col items-center text-center space-y-4">
+        <!-- QR Code Frame with subtle glowing gold border -->
+        <div class="p-3 rounded-2xl bg-[#0a0b0e] border border-[#d4af37]/40 shadow-xl shadow-[#d4af37]/10 relative group">
+          <img
+            id="site-qr-img"
+            src="assets/qr/fire_investment_qr_gold.png"
+            alt="FIRE Investment Guide QR Code"
+            class="w-56 h-56 rounded-xl object-contain"
+          />
+          <div class="text-[10px] font-mono text-zinc-500 mt-2">
+            SCAN WITH CAMERA OR WECHAT
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <div class="text-xs font-bold text-[#e6c762] tracking-wide">
+            大馬財富階梯與退休金庫實證指南
+          </div>
+          <div class="text-[11px] font-mono text-zinc-400 break-all select-all px-2 py-1 bg-white/[0.04] rounded border border-white/5">
+            https://noeltw.github.io/fire-investment/
+          </div>
+        </div>
+
+        <!-- Style Toggle & Action Buttons -->
+        <div class="flex items-center gap-2 w-full pt-1">
+          <button
+            type="button"
+            id="qr-toggle-style-btn"
+            class="flex-1 py-2 rounded-lg text-xs font-mono font-medium bg-[#161820] hover:bg-white/10 text-zinc-300 border border-white/10 transition cursor-pointer"
+          >
+            切換黑白 / 金色
+          </button>
+          <button
+            type="button"
+            id="qr-copy-url-btn"
+            class="flex-1 py-2 rounded-lg text-xs font-mono font-bold bg-[#d4af37] hover:bg-[#e6c762] text-[#0a0b0e] transition cursor-pointer"
+          >
+            複製網址
+          </button>
+        </div>
       </div>
     </div>
   </div>

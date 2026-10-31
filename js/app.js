@@ -61,6 +61,9 @@
       // Lightbox Modal for 300-DPI Python Charts
       this.initLightbox();
 
+      // Mobile QR Code Modal
+      this.initQrModal();
+
       // Scroll Progress Bar & Active Section ScrollSpy
       this.initScrollSpy();
 
@@ -69,8 +72,13 @@
         const tag = (e.target && e.target.tagName) || "";
         if (["INPUT", "SELECT", "TEXTAREA"].includes(tag)) return;
         const modal = document.getElementById("chart-lightbox-modal");
+        const qrModal = document.getElementById("site-qr-modal");
         if (modal && !modal.classList.contains("hidden")) {
           if (e.key === "Escape") this.closeLightbox();
+          return;
+        }
+        if (qrModal && !qrModal.classList.contains("hidden")) {
+          if (e.key === "Escape") this.closeQrModal();
           return;
         }
         if (!this.onePageMode) {
@@ -280,6 +288,72 @@
       if (modal) {
         modal.classList.add("hidden");
         modal.classList.remove("flex");
+      }
+    },
+
+    initQrModal() {
+      const qrModal = document.getElementById("site-qr-modal");
+      const qrImg = document.getElementById("site-qr-img");
+      const openBtn = document.getElementById("btn-open-qr-modal");
+      const closeBtn = document.getElementById("site-qr-close");
+      const styleBtn = document.getElementById("qr-toggle-style-btn");
+      const copyBtn = document.getElementById("qr-copy-url-btn");
+
+      if (!qrModal) return;
+
+      const openModal = () => {
+        qrModal.classList.remove("hidden");
+        qrModal.classList.add("flex");
+      };
+
+      if (openBtn) openBtn.addEventListener("click", openModal);
+      document.querySelectorAll("[data-trigger-qr]").forEach((el) => {
+        el.addEventListener("click", openModal);
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => this.closeQrModal());
+      }
+      qrModal.addEventListener("click", (e) => {
+        if (e.target === qrModal) this.closeQrModal();
+      });
+
+      // Toggle between Gold and Classic High-Contrast QR Code
+      let isGold = true;
+      if (styleBtn && qrImg) {
+        styleBtn.addEventListener("click", () => {
+          isGold = !isGold;
+          qrImg.src = isGold
+            ? "assets/qr/fire_investment_qr_gold.png"
+            : "assets/qr/fire_investment_qr_classic.png";
+          styleBtn.textContent = isGold ? "切換黑白版" : "切換金色版";
+        });
+      }
+
+      // Copy URL button with feedback
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+          const url = "https://noeltw.github.io/fire-investment/";
+          try {
+            await navigator.clipboard.writeText(url);
+            copyBtn.textContent = "✓ 網址已複製！";
+            copyBtn.classList.add("bg-emerald-500", "text-black");
+            setTimeout(() => {
+              copyBtn.textContent = "複製網址";
+              copyBtn.classList.remove("bg-emerald-500", "text-black");
+            }, 2000);
+          } catch (err) {
+            copyBtn.textContent = "請手動複製";
+          }
+        });
+      }
+    },
+
+    closeQrModal() {
+      const qrModal = document.getElementById("site-qr-modal");
+      if (qrModal) {
+        qrModal.classList.add("hidden");
+        qrModal.classList.remove("flex");
       }
     },
   };
