@@ -976,8 +976,8 @@
             legend: {
               labels: {
                 color: "#a1a1aa",
-                font: { size: 10.5 },
-                boxWidth: 12,
+                font: { size: window.innerWidth < 640 ? 9.0 : 10.5 },
+                boxWidth: window.innerWidth < 640 ? 8 : 12,
               },
             },
             tooltip: {
@@ -1584,7 +1584,8 @@
             legend: {
               labels: {
                 color: "#a1a1aa",
-                font: { size: 11.5 },
+                font: { size: window.innerWidth < 640 ? 9.5 : 11.5 },
+                boxWidth: window.innerWidth < 640 ? 8 : 12,
               },
             },
             tooltip: {

@@ -352,4 +352,21 @@ input[type="range"].fintech-slider::-moz-range-thumb {
     width: 22px;
     height: 22px;
   }
+
+  /* Prevent text protrusion or overflow across mobile viewports */
+  p, h1, h2, h3, h4, span, div {
+    overflow-wrap: break-word;
+  }
+
+  /* Ensure chart frames and images stay strictly contained */
+  .chart-img-frame {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .chart-img-frame img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 }
