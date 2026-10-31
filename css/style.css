@@ -317,3 +317,39 @@ input[type="range"].fintech-slider::-moz-range-thumb {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.03em;
 }
+
+/* ==========================================================================
+   Mobile-First Touch & Responsive UX Polish
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Prevent tap zoom lag on iOS/Android */
+  button, select, input {
+    touch-action: manipulation;
+  }
+
+  /* Optimize font size to prevent iOS auto-zoom on input focus */
+  input[type="number"],
+  input[type="text"],
+  select {
+    font-size: 16px !important;
+  }
+
+  /* Smoother kinetic scrolling for horizontal cards & tables */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Increase touch targets for sliders and pills */
+  input[type="range"].fintech-slider {
+    height: 8px;
+  }
+  input[type="range"].fintech-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+  input[type="range"].fintech-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
+}
