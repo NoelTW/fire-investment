@@ -12,7 +12,7 @@
 (function () {
   const AppController = {
     currentSlide: 1,
-    totalSlides: 9,
+    totalSlides: 10,
     onePageMode: true, // Default: Flagship One-Page Scrollytelling Mode
 
     init() {
@@ -176,9 +176,11 @@
       // Update Progress Counter & Mode Toggle Button labels
       const counterEl = document.getElementById("slide-progress-text");
       if (counterEl) {
+        const curStr = String(this.currentSlide).padStart(2, "0");
+        const totStr = String(this.totalSlides).padStart(2, "0");
         counterEl.textContent = this.onePageMode
-          ? `SCROLLYTELLING EDITION · CHAPTER 0${this.currentSlide} / 0${this.totalSlides}`
-          : `DECK EDITION · CHAPTER 0${this.currentSlide} / 0${this.totalSlides}`;
+          ? `SCROLLYTELLING EDITION · CHAPTER ${curStr} / ${totStr}`
+          : `DECK EDITION · CHAPTER ${curStr} / ${totStr}`;
       }
 
       document.querySelectorAll("[data-toggle-mode]").forEach((btn) => {
