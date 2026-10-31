@@ -1909,10 +1909,10 @@
            Row 2: Left 5 Cols Alpha Hourly Wage Sim + Matrix × Right 7 Cols 4 Mathematical Proofs
          ====================================================================== -->
     <section class="slide-panel space-y-8 pt-8 border-t border-white/[0.08]" data-slide-num="7" id="slide-7">
-      <!-- Row 1: Primary 16:9 Gallery Frame -->
+      <!-- Row 1: Active vs Passive Paradigm & Interactive Simulator -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <!-- Left 4 Columns -->
-        <div class="lg:col-span-4 space-y-5">
+        <!-- Left 6 Columns: Paradigm & Stage Matrix -->
+        <div class="lg:col-span-6 space-y-5">
           <div>
             <div class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#e6c762] mb-2">
               CHAPTER 07 · LEVEL 3B–4+ TRANSITION · BETA (β) VS ALPHA (α)
@@ -1932,7 +1932,7 @@
           </div>
 
           <div class="divide-y divide-white/[0.08] border-y border-white/[0.08] text-xs leading-relaxed">
-            <div class="py-3.5 space-y-1">
+            <div class="py-3 space-y-1">
               <div class="flex items-center justify-between font-mono text-[11px]">
                 <span class="text-[#e6c762] uppercase tracking-wider">01 · MARKET BETA (β)</span>
                 <span class="text-zinc-400">~8.5% CAGR</span>
@@ -1943,7 +1943,7 @@
               </p>
             </div>
 
-            <div class="py-3.5 space-y-1">
+            <div class="py-3 space-y-1">
               <div class="flex items-center justify-between font-mono text-[11px]">
                 <span class="text-[#e06c75] uppercase tracking-wider">02 · ACTIVE ALPHA (α)</span>
                 <span class="text-[#e06c75]">88% 輸大盤 (SPIVA)</span>
@@ -1954,97 +1954,12 @@
               </p>
             </div>
 
-            <div class="py-3.5 space-y-1">
+            <div class="py-3 space-y-1">
               <div class="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">03 · CORE-SATELLITE (核心衛星框架)</div>
               <div class="font-semibold text-sm text-[#f5f5f7]">前兩階衝「本業 α + 股市 β」，L3B 才解鎖「衛星 α」</div>
               <p class="text-zinc-400">
                 跨過 RM 1.5M 並鎖上 3 年現金金庫後，才撥出 ≤8%–10% 衛星倉位追求能力圈 Alpha。
               </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right 8 Columns: Full Widescreen Chart 06 -->
-        <div class="lg:col-span-8">
-          <div
-            class="chart-img-frame"
-            data-zoom-chart
-            data-zoom-caption="圖表 6：Beta vs Alpha 財富階梯實證（左圖：不同資產規模下花 500 小時研究選股創造 +4% Alpha 的換算時薪；右圖：Stage 2 過早追 Alpha 翻車 vs Stage 3 解鎖核心+衛星配置之 20 年差距）"
-          >
-            <img
-              src="assets/charts/06_alpha_vs_beta_stages.png"
-              alt="Beta vs Alpha 研究時薪與財富階梯 20 年軌跡實證圖"
-              class="w-full h-auto block"
-            />
-            <div class="bg-[#111217] px-3 sm:px-4 py-2 sm:py-2.5 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 text-xs">
-              <span class="text-zinc-400 font-mono text-[10px] sm:text-xs leading-normal break-words">
-                FIG 06 · ALPHA RESEARCH HOURLY WAGE (RM 4/HR AT S1 VS RM 120+/HR AT S3) &amp; 20-YR TRAJECTORY
-              </span>
-              <span class="text-[#e6c762] font-mono text-[10px] sm:text-[11px] shrink-0">CLICK TO ENLARGE 300-DPI</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2: Architectural Sub-Band (Left 5 Cols Alpha ROI Sim + Matrix × Right 7 Cols 4 Mathematical Proofs) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-6 border-t border-white/[0.07]">
-        <!-- Left 5 Columns: Interactive Alpha Research Hourly Wage Simulator + Stage Matrix -->
-        <div class="lg:col-span-5 space-y-5 flex flex-col justify-between">
-          <div class="fintech-card p-5 space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">ALPHA HOURLY ROI SIMULATOR</span>
-              <span class="text-[10px] font-mono text-zinc-500">ASSUMING +4% EXCESS ALPHA</span>
-            </div>
-            <h3 class="text-base font-bold text-[#f5f5f7]">
-              互動試算：你的「主動選股研究時薪」划算嗎？ (Time ROI)
-            </h3>
-
-            <div class="space-y-3">
-              <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-zinc-400">當前可投資本金 (Investable Capital)</span>
-                  <span id="micro-alpha-cap-val" class="font-mono-num font-bold text-[#f5f5f7]">RM 250,000</span>
-                </div>
-                <input
-                  id="micro-alpha-cap-slider"
-                  type="range"
-                  min="50000"
-                  max="4000000"
-                  step="50000"
-                  value="250000"
-                  class="fintech-slider"
-                />
-                <div class="flex justify-between text-[10px] font-mono text-zinc-500 mt-1">
-                  <span>RM 50k (S1)</span>
-                  <span>RM 250k (S2)</span>
-                  <span class="text-[#e6c762]">RM 1.5M (S3 門檻)</span>
-                  <span>RM 4.0M</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-zinc-400">每週投入研究選股 / 盯盤時數 (Hours/Wk)</span>
-                  <span id="micro-alpha-hrs-val" class="font-mono-num font-semibold text-zinc-300">每週 10 小時 (每年 500 小時)</span>
-                </div>
-                <input
-                  id="micro-alpha-hrs-slider"
-                  type="range"
-                  min="2"
-                  max="25"
-                  step="1"
-                  value="10"
-                  class="fintech-slider"
-                />
-              </div>
-            </div>
-
-            <div class="p-3.5 rounded-lg bg-[#0a0b0e] border border-white/[0.08] space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="text-zinc-400">換算研究選股實質時薪 (Implied Wage)：</span>
-                <span id="micro-alpha-hourly-out" class="font-mono-num font-bold text-[#e6c762]">RM 20 / 小時</span>
-              </div>
-              <div id="micro-alpha-verdict"></div>
             </div>
           </div>
 
@@ -2090,49 +2005,137 @@
           </div>
         </div>
 
-        <!-- Right 7 Columns: 4 Hard Mathematical Proofs (2x2 Architectural Grid) -->
-        <div class="lg:col-span-7 fintech-card p-6 flex flex-col justify-between space-y-5">
-          <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-            <div>
-              <div class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">FIRST-PRINCIPLES PROOF</div>
-              <h3 class="text-lg font-bold text-[#f5f5f7] mt-0.5">
-                四大數學實證：為什麼必須等到「第三階段」才考慮 Alpha？
-              </h3>
+        <!-- Right 6 Columns: Interactive Alpha Research Hourly Wage Simulator -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="fintech-card p-6 space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-white/[0.08]">
+              <span class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">ALPHA HOURLY ROI SIMULATOR</span>
+              <span class="text-[10px] font-mono text-zinc-500">ASSUMING +4% EXCESS ALPHA</span>
             </div>
-            <span class="font-mono text-xs text-zinc-500">THRESHOLD: RM 1,500,000</span>
+            <h3 class="text-base sm:text-lg font-bold text-[#f5f5f7]">
+              互動試算：你的「主動選股研究時薪」划算嗎？ (Time ROI)
+            </h3>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              拖動滑桿即時計算：在不同的資產規模下，若你每年投入數百小時研究個股財報並成功創造 +4% 超額報酬，換算成「實質時薪」究竟是多少？
+            </p>
+
+            <div class="space-y-4 pt-1">
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-zinc-400">當前可投資本金 (Investable Capital)</span>
+                  <span id="micro-alpha-cap-val" class="font-mono-num font-bold text-[#f5f5f7]">RM 250,000</span>
+                </div>
+                <input
+                  id="micro-alpha-cap-slider"
+                  type="range"
+                  min="50000"
+                  max="4000000"
+                  step="50000"
+                  value="250000"
+                  class="fintech-slider"
+                />
+                <div class="flex justify-between text-[10px] font-mono text-zinc-500 mt-1">
+                  <span>RM 50k (S1)</span>
+                  <span>RM 250k (S2)</span>
+                  <span class="text-[#e6c762]">RM 1.5M (S3 門檻)</span>
+                  <span>RM 4.0M</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-zinc-400">每週投入研究選股 / 盯盤時數 (Hours/Wk)</span>
+                  <span id="micro-alpha-hrs-val" class="font-mono-num font-semibold text-zinc-300">每週 10 小時 (每年 500 小時)</span>
+                </div>
+                <input
+                  id="micro-alpha-hrs-slider"
+                  type="range"
+                  min="2"
+                  max="25"
+                  step="1"
+                  value="10"
+                  class="fintech-slider"
+                />
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#0a0b0e] border border-white/[0.08] space-y-2 mt-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-zinc-400">換算研究選股實質時薪 (Implied Wage)：</span>
+                <span id="micro-alpha-hourly-out" class="font-mono-num font-bold text-[#e6c762]">RM 20 / 小時</span>
+              </div>
+              <div id="micro-alpha-verdict"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Four Hard Mathematical Proofs & FIG 06 Full Widescreen Empirical Chart -->
+      <div class="fintech-card p-6 space-y-6 border border-white/10 mt-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/[0.08] gap-2">
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-[0.18em] text-[#e6c762]">FIRST-PRINCIPLES PROOF</div>
+            <h3 class="text-lg sm:text-xl font-bold text-[#f5f5f7] mt-0.5">
+              四大數學實證：為什麼必須等到「第三階段」才考慮 Alpha？
+            </h3>
+          </div>
+          <span class="font-mono text-xs text-[#e6c762] bg-[#d4af37]/10 px-2.5 py-1 rounded border border-[#d4af37]/30 shrink-0">
+            THRESHOLD: RM 1,500,000 (LEVEL 3B)
+          </span>
+        </div>
+
+        <!-- 4 Hard Mathematical Proofs Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs leading-relaxed">
+          <div class="p-3.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1.5">
+            <div class="font-mono text-[10px] text-[#e6c762] uppercase tracking-wider">PROOF 01 · TIME ROI (時間投報率)</div>
+            <div class="text-sm font-bold text-[#f5f5f7]">1. 研究時薪在 RM 1.5M 前不具規模經濟</div>
+            <p class="text-zinc-400">
+              年花 500 小時跑贏大盤 +4%：本金 RM 50k 時薪僅 RM 4/hr；突破 RM 1.5M 時薪達 RM 120+/hr 才划算。
+            </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
-            <div class="space-y-1.5 pb-4 border-b border-white/[0.07]">
-              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">PROOF 01 · TIME ROI (時間投報率)</div>
-              <div class="text-sm font-bold text-[#f5f5f7]">1. 研究時薪在 RM 1.5M 前不具規模經濟</div>
-              <p class="text-zinc-400">
-                年花 500 小時跑贏大盤 +4%：本金 RM 50k 時薪僅 RM 4/hr；突破 RM 1.5M 時薪達 RM 120+/hr 才划算。
-              </p>
-            </div>
+          <div class="p-3.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1.5">
+            <div class="font-mono text-[10px] text-[#e06c75] uppercase tracking-wider">PROOF 02 · ASYMMETRIC RISK (不對稱風險)</div>
+            <div class="text-sm font-bold text-[#f5f5f7]">2. 衝刺期翻車一次，黃金交叉延後 6 年</div>
+            <p class="text-zinc-400">
+              在 RM 400k 階段重押個股若遇 -42% 腰斬（需漲 +72% 回本），複利鏈斷裂將延後退休 5–7 年。
+            </p>
+          </div>
 
-            <div class="space-y-1.5 pb-4 border-b border-white/[0.07]">
-              <div class="font-mono text-[11px] text-[#e06c75] uppercase tracking-wider">PROOF 02 · ASYMMETRIC RISK (不對稱風險)</div>
-              <div class="text-sm font-bold text-[#f5f5f7]">2. 衝刺期翻車一次，黃金交叉延後 6 年</div>
-              <p class="text-zinc-400">
-                在 RM 400k 階段重押個股若遇 -42% 腰斬（需漲 +72% 回本），複利鏈斷裂將延後退休 5–7 年。
-              </p>
-            </div>
+          <div class="p-3.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1.5">
+            <div class="font-mono text-[10px] text-[#e6c762] uppercase tracking-wider">PROOF 03 · SAFETY FLOOR (防守安全底線)</div>
+            <div class="text-sm font-bold text-[#f5f5f7]">3. 鎖定「80% 核心 + 12% 金庫」才有容錯邊際</div>
+            <p class="text-zinc-400">
+              RM 1.5M 後以 92% 資產鎖定退休底線，拿 ≤8% 衛星倉位追 Alpha，即便腰斬僅影響總資產 4%。
+            </p>
+          </div>
 
-            <div class="space-y-1.5">
-              <div class="font-mono text-[11px] text-[#e6c762] uppercase tracking-wider">PROOF 03 · SAFETY FLOOR (防守安全底線)</div>
-              <div class="text-sm font-bold text-[#f5f5f7]">3. 鎖定「80% 核心 + 12% 金庫」才有容錯邊際</div>
-              <p class="text-zinc-400">
-                RM 1.5M 後以 92% 資產鎖定退休底線，拿 ≤8% 衛星倉位追 Alpha，即便腰斬僅影響總資產 4%。
-              </p>
-            </div>
+          <div class="p-3.5 rounded-lg bg-[#0a0b0e] border border-white/[0.07] space-y-1.5">
+            <div class="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">PROOF 04 · DOMAIN EDGE (能力圈護城河)</div>
+            <div class="text-sm font-bold text-[#f5f5f7]">4. 真 Alpha 來自深耕十年的產業能力圈</div>
+            <p class="text-zinc-400">
+              初期散戶僅能看二手新聞炒股；累積至第三階段具備十餘年產業人脈與洞見，方能捕捉真實超額報酬。
+            </p>
+          </div>
+        </div>
 
-            <div class="space-y-1.5">
-              <div class="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">PROOF 04 · DOMAIN EDGE (能力圈護城河)</div>
-              <div class="text-sm font-bold text-[#f5f5f7]">4. 真 Alpha 來自深耕十年的產業能力圈</div>
-              <p class="text-zinc-400">
-                初期散戶僅能看二手新聞炒股；累積至第三階段具備十餘年產業人脈與洞見，方能捕捉真實超額報酬。
-              </p>
+        <!-- FIG 06: Full Widescreen Chart Directly Underneath the 4 Proofs -->
+        <div class="pt-2">
+          <div
+            class="chart-img-frame"
+            data-zoom-chart
+            data-zoom-caption="圖表 6：Beta vs Alpha 財富階梯實證（左圖：不同資產規模下花 500 小時研究選股創造 +4% Alpha 的換算時薪；右圖：Stage 2 過早追 Alpha 翻車 vs Stage 3 解鎖核心+衛星配置之 20 年差距）"
+          >
+            <img
+              src="assets/charts/06_alpha_vs_beta_stages.png"
+              alt="Beta vs Alpha 研究時薪與財富階梯 20 年軌跡實證圖"
+              class="w-full h-auto block"
+            />
+            <div class="bg-[#111217] px-3 sm:px-4 py-2 sm:py-2.5 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 text-xs">
+              <span class="text-zinc-400 font-mono text-[10px] sm:text-xs leading-normal break-words">
+                FIG 06 · ALPHA RESEARCH HOURLY WAGE (RM 4/HR AT S1 VS RM 120+/HR AT S3) &amp; 20-YR TRAJECTORY
+              </span>
+              <span class="text-[#e6c762] font-mono text-[10px] sm:text-[11px] shrink-0">CLICK TO ENLARGE 300-DPI</span>
             </div>
           </div>
         </div>
